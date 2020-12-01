@@ -8,6 +8,7 @@
 %%===================================
 \documentclass[12pt]{report}
 \usepackage{ramsstyle}
+\usepackage{wrapfig}
 %%===================================
 %Write the various parts of your thesis as separate files and include them into the main file by the command \include{name of included file}. When you compile the LaTeX file, you may choose which subfiles to include by the command
 
@@ -24,9 +25,9 @@
 \tableofcontents
 \setcounter{page}{0}
 \pagenumbering{arabic}
-\include{chapter01}
-\include{chapter02}
-\include{chapter0n}
+\include{chapters/chapter01}
+\include{chapters/chapter02}
+\include{chapters/chapter0n}
 % Include more chapters as required.
 %%=========================================
 \appendix
