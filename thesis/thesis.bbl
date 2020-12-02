@@ -1,8 +1,37 @@
 \begin{thebibliography}{}
 
+\bibitem[\protect\astroncite{Dalgarno and Lee}{2010}]{Dalgarno2010}
+Dalgarno, B. and Lee, M. J.~W. (2010).
+\newblock What are the learning affordances of 3-d virtual environments?
+\newblock {\em British Journal of Educational Technology}, 41(1):10--32.
+
+\bibitem[\protect\astroncite{Moro et~al.}{2017}]{Moro2017}
+Moro, C., Štromberga, Z., Raikos, A., and Stirling, A. (2017).
+\newblock The effectiveness of virtual and augmented reality in health sciences
+  and medical anatomy.
+\newblock {\em Anatomical Sciences Education}, 10(6):549--559.
+
 \bibitem[\protect\astroncite{Oates}{2006}]{oates2006}
 Oates, B. (2006).
 \newblock {\em Researching Information Systems and Computing}.
 \newblock SAGE Publications.
+
+\bibitem[\protect\astroncite{{Sielhorst} et~al.}{2008}]{Sielhorst2008}
+{Sielhorst}, T., {Feuerstein}, M., and {Navab}, N. (2008).
+\newblock Advanced medical displays: A literature review of augmented reality.
+\newblock {\em Journal of Display Technology}, 4(4):451--467.
+
+\bibitem[\protect\astroncite{Singh and Kharb}{2013}]{Singh2013}
+Singh, V. and Kharb, P. (2013).
+\newblock A paradigm shift from teaching to learning gross anatomy:
+  meta-analysis of implications for instructional methods.
+\newblock {\em Journal of the Anatomical Society of India}, 62(1):84 -- 89.
+
+\bibitem[\protect\astroncite{Wish-Baratz et~al.}{2020}]{Wish2020}
+Wish-Baratz, S., Crofton, A.~R., Gutierrez, J., Henninger, E., and Griswold,
+  M.~A. (2020).
+\newblock {Assessment of Mixed-Reality Technology Use in Remote Online Anatomy
+  Education}.
+\newblock {\em JAMA Network Open}, 3(9):e2016271--e2016271.
 
 \end{thebibliography}
