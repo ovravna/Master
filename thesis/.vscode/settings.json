@@ -1,0 +1,54 @@
+{
+  "editor.fontSize": 18,
+  "workbench.colorTheme": "GitHub Light",
+  "editor.fontLigatures": true,
+  "editor.fontFamily": "JetBrains Mono",
+  "editor.wordWrap": "on",
+  "editor.wordWrapColumn": 60,
+  "vim.textwidth": 60,
+  "zenMode.fullScreen": false,
+
+  "latex-workshop.view.pdf.viewer": "browser",
+  "latex-workshop.intellisense.package.enabled": true,
+  "spellright.notificationClass": "warning",
+
+  "files.exclude": {
+    "**/*.{aux,out,blg,fdb_latexmk,fls,log,toc}": true,
+    "**/*.synctex.gz": true
+  },
+  "files.watcherExclude": {
+    "**/*.{aux,out,blg,fdb_latexmk,fls,log,toc}": true,
+    "**/*.synctex.gz": true
+  },
+
+  "openInExternalApp.openMapper": [
+    {
+      "extensionName": "pdf",
+      "apps": [
+        { 
+          "title": "Edge",
+          "openCommand": "msedge"
+        }
+      ]
+    }
+  ],
+
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["j"],
+      "after": ["g","j"]
+    },
+    {
+      "before": ["k"],
+      "after": ["g","k"]
+    },
+    {
+      "before": ["K"],
+      "after": ["C-y","C-y"]
+    },
+    {
+      "before": ["J"],
+      "after": ["C-e","C-e"]
+    },
+  ]
+}
