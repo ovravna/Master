@@ -7,8 +7,33 @@
 %%=========================================
 \section{Background}
 
+\subsection*{Augmented Reality}
+{
+    \color{BrickRed}
+    [TODO: Rewrite this shitty part]
+    Augmented Reality (AR) describes the use of technology to insert computer generated three-dimensional visuals into the real world in real-time, and the ability to blend interaction between real-world and computer-based objects. 
+}
+
+\noindent Ever since the infancy of AR technology, medical usage has been envisioned as a great potential. The idea of x-ray vision is seen both in science fiction and in genuine research dating all the way back to the 1930s when H. Steinhaus explored ways to visualize metal pieces inside the body \citep{Sielhorst2008}. There is now substantial interest in the use of AR within a wide array of medical fields as well as in industry and education. As an emerging technology there is still much research needed, and great leaps in hardware, software and sensor capabilities are bound to happen in the near future. Already AR shows promising results in both surgical settings and in education \citep{Singh2013}.
+
+\subsection*{Neuroanatomy}
+
+{
+    \color{BrickRed}
+    Some intro about Neuroanatomy.
+}
+
+Within the study of neuroanatomy, the use of macroscopical brain dissections have long been the conventual practice for teaching the structural organization of the nervous system. Requiring cadavers and the single use of their brain, this method is highly resource intensive and has limited scalability. In addition, there are deeply concerning ethical problems with the use of animals in research. 
+
 %%=========================================
 \subsection*{Problem Formulation / Motivation / Purpose?}
+
+In light of the problems with physical brain dissections it is natural that the use of digital tools, three-dimensional modeling and visualization has been seeing growing use for educational purposes. 
+According to \citep{Dalgarno2010} computer-aided learning generally increases understanding for anatomy. As anatomy in general, and neuroanatomy specifically are highly complex domains both visually and spatially, the ability to use the human senses in a real-world setting could result in greater intuition and understanding. With that in mind the use of augmented reality could be a natural way to virtualize the experience of a brain dissection, and further the unique capabilities of AR could enable innovative ways of learning. \citep{Moro2017} shows the possibility of greater immersion and engagement while using augmented reality in teaching anatomy to medical students. This has also recently been shown with promising result by  \citep{Wish2020}, where COVID-lockdown required from-home teaching, and the use of HoloAnatomy, an anatomy application for the HoloLens, performed significantly better than even conventional in-class lectures.
+The main problem with most academic implementations, like \citep{Wish2020}, of AR in medical education is the use of head-mounted display (HMD) devices like the HoloLens 2 and Magic Leap, which in the near to mid-term future will have limited practical use in education, as a result of the high price-tag and the still inadequate general use-case for these types of devices.
+This project will try to mend these challenges by having the lecturer using an HMD and having student view and interact with the lecture with an AR-based application running on their smartphone. This is possible because of the great leap in AR-performance seen in recent models of Android and especially iPhones, in combination with development platforms like Unity 3D, MRTK and Photon which enables multiplatform development and real-time collaboration between devices. In this pursuit we will use a high-resolution 3D model of rat brain captured and manually delineated by a collaboration between research groups at the University of Oslo and NTNU. 
+
+The aim of the project will be to create a seamless educational experience in Augmented Reality which can be valuable both on an HMD device and a modern smartphone. The focus will be on investigating its feasibility as an educational tool both in a lecture-type setting and for students to explore the brain anatomy independently. 
 
 
 %%=========================================
@@ -27,21 +52,21 @@
 
 %%=========================================
 \section{Objectives / Research Questions}
-What follow are the research questions which motivates this project: 
+What follow are the research questions which motivates this project: \\
 \noindent
 \textbf{Main RQ:} How can AR support teaching of rat brain anatomy and dissection for medical students?
 \begin{itemize}
     \item {
-        \textbf{RQ1:} How should interaction in be implemented in AR to accommodate medical professionals?
+        \textbf{Sub-RQ1:} How should interaction in be implemented in AR to accommodate medical professionals?
     }
     \item {
-        \textbf{RQ2:} How will a collaborative experience shared between an HMD and a smartphone compare to accommodate medical professionals?
+        \textbf{Sub-RQ2:} How will a collaborative experience shared between an HMD and a smartphone compare to accommodate medical professionals?
     }
     \item {
         \color{BrickRed}
-        \textbf{RQ3: }
+        \textbf{Sub-RQ3: }
         Something about macro + microscopic visualization:
-        How should microscopical data be visualized in a macroscopical model to best effect? (WIP)
+        Can microscopical data seamlessly be integrated into a macroscopical model? (WIP)
     }
 \end{itemize}
 
