@@ -5,7 +5,8 @@ Dalgarno, B. and Lee, M. J.~W. (2010).
 \newblock What are the learning affordances of 3-d virtual environments?
 \newblock {\em British Journal of Educational Technology}, 41(1):10--32.
 
-\bibitem[\protect\astroncite{Hawrylycz et~al.}{2011}]{WaxholmSpace2011}
+\bibitem[\protect\astroncite{Hawrylycz
+  et~al.}{2011}]{WaxholmSpaceAndMouseBrain2011}
 Hawrylycz, M., Baldock, R.~A., Burger, A., Hashikawa, T., Johnson, G.~A.,
   Martone, M., Ng, L., Lau, C., Larsen, S.~D., Nissanov, J., Puelles, L.,
   Ruffins, S., Verbeek, F., Zaslavsky, I., and Boline, J. (2011).
@@ -23,6 +24,20 @@ Oates, B. (2006).
 \newblock {\em Researching Information Systems and Computing}.
 \newblock SAGE Publications.
 
+\bibitem[\protect\astroncite{Papp et~al.}{2013}]{WaxholmWithSimpleAbstract2013}
+Papp, E., Kjonigsen, L., Lillehaug, S., Johnson, G., Witter, M., Leergaard, T.,
+  and Bjaalie, J. (2013).
+\newblock Volumetric waxholm space atlas of the rat brain for spatial
+  integration of experimental image data.
+\newblock In {\em Front. Neuroinform. Conference Abstract: Neuroinformatics
+  2013}.
+
+\bibitem[\protect\astroncite{Papp et~al.}{2014}]{WaxholmRatBrain2014}
+Papp, E.~A., Leergaard, T.~B., Calabrese, E., Johnson, G.~A., and Bjaalie,
+  J.~G. (2014).
+\newblock Waxholm space atlas of the sprague dawley rat brain.
+\newblock {\em NeuroImage}, 97:374 -- 386.
+
 \bibitem[\protect\astroncite{{Sielhorst} et~al.}{2008}]{Sielhorst2008}
 {Sielhorst}, T., {Feuerstein}, M., and {Navab}, N. (2008).
 \newblock Advanced medical displays: A literature review of augmented reality.
@@ -33,6 +48,13 @@ Singh, V. and Kharb, P. (2013).
 \newblock A paradigm shift from teaching to learning gross anatomy:
   meta-analysis of implications for instructional methods.
 \newblock {\em Journal of the Anatomical Society of India}, 62(1):84 -- 89.
+
+\bibitem[\protect\astroncite{Toga and Thompson}{2000}]{Toga2000_AtlasBasics}
+Toga, A.~W. and Thompson, P.~M. (2000).
+\newblock 40 - image registration and the construction of multidimensional
+  brain atlases.
+\newblock In BANKMAN, I.~N., editor, {\em Handbook of Medical Imaging},
+  Biomedical Engineering, pages 635 -- 653. Academic Press, San Diego.
 
 \bibitem[\protect\astroncite{Wish-Baratz et~al.}{2020}]{Wish2020}
 Wish-Baratz, S., Crofton, A.~R., Gutierrez, J., Henninger, E., and Griswold,
