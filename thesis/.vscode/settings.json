@@ -60,4 +60,9 @@
   "search-online.Google Translate Output Language": "English/英语",
   "search-online.Google Translate Input Language": "Norwegian/挪威语",
   "spellright.spellContext": "body strings",
+  "workbench.colorCustomizations": {
+  "[GitHub Light]": {
+    "editorInfo.foreground": "#fff"
+  }
+  },
 }

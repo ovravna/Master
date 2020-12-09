@@ -7,8 +7,25 @@
 
 \chapter{Background}
 
+\section{Glossary?}
+
 \section{Augmented Reality}
 (Jentoft, 2020) AR can be defined as a system that fulfills three basic features: a combination of real and virtual worlds, real-time interaction, and accurate 3D registration of virtual and real objects.
+
+\subsection*{AR, MR, XR, VR}\label{chap:armrxr}
+As a new field, this field suffers from naming disagreements. This is a confusing reality which needs to be addressed. There are differing view of what each acronym refers to, and even what they stand for. I will overlook most of this discussion, and simply explain what is meant by each acronym in the scope of this project.
+
+\paragraph*{AR}\label{para:ar} Augmented Reality, exercises which implement a see-through effect to display 3D visuals on top of the real-world. The idea of holograms is a good stand-in for the effect of AR. This is the term which will be most used in this project. 
+
+\paragraph*{MR}\label{para:mr} Mixed Reality, anything within the spectrum between reality and pure visual 3D graphics, which blends computer generated visuals and reality. While the term was not invented by Microsoft\footnotemark, it is a term strongly associated with them, and in this project the term MR will generally only be used as a reference to Microsoft's products or concepts. There term is also used by some as a subset of \nameref{para:ar}, so in conclusion it is a somewhat controversial term. 
+
+\footnotetext{In fact the term was coined by \citet{Milgram1994}, in this exact meaning.}
+% That is at least what Microsoft is pushig for 
+
+\paragraph*{XR}\label{para:xr} Extended Reality, much like \nameref{para:mr} this includes the whole spectrum of experiences blurring the line between the real and the virtual. However it does not have the Microsoft taint, nor the confusion of that term. And thus it is a more acceptable term, and it is what will be used here to describe the spectrum.
+
+\paragraph*{VR}\label{para:vr} Virtual Reality, is enclosed experiences which completely surrounds the user within a computer generated world. This is a generally uncontroversial term and will be used for applications running on devices like the Oculus Rift and the HTC Vive.
+
 
 \section{Graphics and Rendering}
 
@@ -88,9 +105,42 @@ Its a strain of laboratory rat.
 
 
 
+\section{Equipment}
+
+\subsection*{HoloLens 2}
+
+
+\section{Tools}\label{chap:tools}
+
+
+\subsection*{Unity}\label{chap:unity}
+Unity is a game engine for developing 2D and 3D games. It has grown to become the most popular game engine used by single developers and small development teams because of its ease of use and simple licensing terms for independent developers. Because of its popularity  and ease of use Unity has become a platform for 3D development within more widespread fields than video gaming, such as engineering, moviemaking and architecture. 
+Within this project the critical reason for choosing Unity for our 3D development is the exceptional support for the HoloLens product line. As seen in the \autoref{chap:mrtk}, Microsoft has poured resources into developing a "relatively" robust open framework for using Unity to develop for HoloLens. 
+Alternatives to using Unity are slim, but one could be to use Unreal Engine, an 3D game engine with great support for VR and AR in general, however the support for HoloLens specific tools like \nameref{chap:mrtk} is limited\footnote{Microsoft has a version of MRTK for Unreal, called \href{https://github.com/microsoft/MixedRealityToolkit-Unreal}{MRTK-Unreal}. It seems to be stale however, not having any updates in the last six months in the time of writing.}.
+% An alternative to using Unity wo
+
+\subsection*{Mixed Reality Toolkit}\label{chap:mrtk}
+Mixed Reality Toolkit (MRTK) is a open source, Microsoft-driven framework for Mixed Reality (MR) development. In practice it is Microsoft's SDK for HoloLens development, greatly simplifying development related to interaction, user interface and  [\dots]. As it is a framework for MR in general, it supports other platforms like Android, iOS and VR devices such as HTC Vive and Oculus Rift with OpenVR. 
+An alternative to using MRTK would be to us XRTK which is a community-driven fork of MRKT. Thought such a choice would be an exercise of free software principles, it also lends it self to better support for some devices, like the MagicLeap.
+
+\subsection*{Photon}\label{chap:photon}
+Not in use jet
+
+\subsection*{Blender}
+
+\subsection*{Git}
+Git flow, Gitmoji, GitKraken, Git gud 
+
+\subsection*{GitKraken Boards}
+Kanban and such \\
+Used both / separately for Nevrolens and Project thesis.
+
+
 
 
 \section{Related work}
+
+\subsection*{VRVisualization}\label{chap:vrvis}
 
 \subsection*{HoloAnatomy}
 
