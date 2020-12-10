@@ -3,11 +3,31 @@
 % !TEX spellcheck = en-US
 %%=========================================
 
-\chapter{What to put in appendixes}
-This is an example of an Appendix. You can write an Appendix in the same way as a chapter, with sections, subsections, and so on. An appendix may include list of code (in case you are programming), more details about results that you have presented in the report (could be a more complete  description of results, in case you decided to focus on the most important ones in the main report), supplementary information and descriptions you have found relating to the system you are analysing, such as drawings. You may discuss with your supervisor what are relevant information for appendixes.
+\chapter{A geometric model of the rat brain}
 
-%%=========================================
-\section{Introduction}
+This is a section from \citet{Elden2017}, the master thesis about \nameref{chap:vrvis} the VR application this project is loosely inspired by. The section explains how Elden extracted a geometric model of the rat brain from the medical models which is high fidelity volumetric data.
 
-%%=========================================
-\subsection{More Details}
+\section*{5.2 Exporting segments of a rat brain atlas as geometry
+for the Rat Brain model}
+The geometric meshes used for the rat brain model were extracted from
+a volumetric and segmented atlas. IKT-SNAP was used to export each
+segment of the brain as an STL file. These geometric meshes were then
+opened in Blender3
+to be converted to OBJ or FBX files. 3DS Max imported
+the models and performed all modifications made to the geometry and
+structure.
+ITK-SNAP requires three files to segment and label the models; the
+atlas and a segmentation file, both stored as NII files, and a LABEL file
+for the labels. When all files are loaded the program lets the user select a
+segment to export and generate a geometric hull along the boundary of the
+segment. Due to instability experienced with 3DS Max using all 16 GB of
+RAM available on the computer used for development, Blender was used
+to first convert the files to FBX files. These FBX files caused no issues when
+imported into 3DS Max. Since these meshes were too detailed, they needed
+to be reduced and transformed in 3DS Max. The meshes were reduced
+such that the entire model consisted of 4.5 million triangles. Most of the
+meshes had to be transformed such that each segment was where it should
+be inside the model. For some reason the exported meshes were of several
+relative scales and heights and a lot of manual work went into moving
+and scaling the meshes to match the volumetric model seen in ITK-SNAP.
+Properly processed, the model was exported as an FBX file and sent to UE4.

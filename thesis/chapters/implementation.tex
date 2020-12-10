@@ -1,5 +1,5 @@
 % !TEX encoding = UTF-8 Unicode
-% !TEX root = thesis.tex
+% !TEX root = ../thesis.tex
 % !TEX spellcheck = en-US
 %%=========================================
 
@@ -16,9 +16,58 @@
 %
 
 
-The first meeting initializing the project happened at VRLab Dragvoll in early September, here I was introduced to the general background and the problem description of how Witter and others envisioned the use of AR for neuroanatomical education. It was explained how cadavers for education are difficult to acquire and [\dots]. 
-Another problem we discussed was related to the difference in medium between VR and AR. While the application \nameref{chap:vrvis} did have many of the features envisioned, the fact that is was implemented in VR was problematic for the envisioned use cases. Being completely enclosed visually limits its use case in lectures and in any use case with collaboration in a physical space. Generally the loss of spatial awareness and eye contact as a result of using VR headsets was though of as an impediment for using VR for such an application. 
-Thus, we had an outline of a neuroanatomical education tool in AR using the HoloLens and 
+The first meeting initializing the project took place at VRLab Dragvoll in early September, here I was introduced to the general background and the problem description of how Witter and others envisioned the use of AR for neuroanatomical education. It was explained how cadavers for education are difficult to acquire and [\dots]. 
+Another problem we discussed was related to the difference in medium between VR and AR. While the application \nameref{chap:vrvis} did have many of the features envisioned, and could have been a basis for further development. The fact that is was implemented in VR was problematic for the envisioned use cases. Being completely enclosed visually limits its use case in lectures and in any use case with collaboration in a physical space. Generally the loss of spatial awareness and eye contact as a result of using VR headsets was though of as an impediment for using VR for such an application. 
+% something about the data set?
+Thus, we had an outline of a neuroanatomical education tool in AR using the HoloLens 2 and concluded with some questions and requirements for the project:
+
+\begin{enumerate}\label{mennoslist}
+    \item Can the current VR dataset\footnotemark be used in the HoloLens 2 AR environment?
+    \item If not, which steps need to be taken to use the segmented WHS rat brain to develop a suitable 3D model that can be used in AR?
+    \item Develop an optimal user interface for a single person to explore the rat brain as if the user is doing a dissection of a real brain.
+    \item Develop/test ways to make this a multiuser/shareable tool adequate in a teaching environment.
+    \item Explore ways to integrate microscopical data into the AR representation.
+    \item Describe/explore the feasibility to implement the system for Human neuroanatomy education.
+\end{enumerate}
+
+\footnotetext{Referring to \nameref{chap:vrvis}.}
+
+Here items 1-4 were deemed critical for the project, while 5 and 6 were dependent on the progress made.
+
+This meeting together with the list formed a clear problem description and can be seen as the initial discovery process of the project. Though the following period of exploring the newly arrived HoloLens 2 and its capabilities, we formed a set of \textit{system requirements}. 
+System requirements are descriptions of how a system should operate, what it should be able to do and the constraints of its operation. The requirements must reflect the stakeholders needs for the system \citep{PUboka}. System requirements are generally split into functional requirements, which describe specifics of what the system (and its sub-systems) should do, and non-functional requirements, which generally are descriptions of the user experience of the system as a whole. 
+What follows are the system requirements decided on for the application: 
+
+\subsection*{Functional Requirements}
+\begin{enumerate}
+    \item {
+        \textbf{Implement a brain dissection tool in AR}\\
+         
+    }
+    \item {
+        \textbf{The application must run in HoloLens 2 and a mobile platform}\\
+         Android and/or iOS
+    }
+
+    \item {
+        \textbf{Collaboration}\\
+         
+    }
+
+\end{enumerate}
+
+\subsection*{Non-Functional Requirements}
+
+\begin{enumerate}
+    \item 
+\end{enumerate}
+
+% and non-functional requirements, which describe  
+
+
+
+
+
 
 
 
@@ -26,14 +75,15 @@ Thus, we had an outline of a neuroanatomical education tool in AR using the Holo
 
 \section{Software Process}
 % https://www.wikipendium.no/TDT4140_Programvareutvikling/nb/#kapittel-2-software-processes
-Incremental development etc. \#agile
+
+% Incremental development etc. \#agile
+\large{Where everything I learned in PU should shine!}
 
 Even though I have developed the Nevrolens application by myself, I have strived to use best practices for a software development workflow. These practices have generally grown out of the the needs of a multi-developer setting, to simplify the needs for collaboration and version control. Though their value possibly increases exponentially by the number of team members, I have found value in the structure and clarity I find in the workflow. 
 My workflow consist of 
 
 
 
-\large{Where everything I learned in PU should shine!}
 
 \section{Validation / Testing}
 

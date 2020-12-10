@@ -57,6 +57,24 @@
       "after": ["C-e","C-e"]
     },
   ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": ["j"],
+      "after": ["g","j"]
+    },
+    {
+      "before": ["k"],
+      "after": ["g","k"]
+    },
+    {
+      "before": ["K"],
+      "after": ["C-y","C-y"]
+    },
+    {
+      "before": ["J"],
+      "after": ["C-e","C-e"]
+    },
+  ],
   "search-online.Google Translate Output Language": "English/英语",
   "search-online.Google Translate Input Language": "Norwegian/挪威语",
   "spellright.spellContext": "body strings",

@@ -5,6 +5,13 @@ Dalgarno, B. and Lee, M. J.~W. (2010).
 \newblock What are the learning affordances of 3-d virtual environments?
 \newblock {\em British Journal of Educational Technology}, 41(1):10--32.
 
+\bibitem[\protect\astroncite{Elden}{2017}]{Elden2017}
+Elden, M.~K. (2017).
+\newblock Implementation and initial assessment of vr for scientific
+  visualisation: Extending unreal engine 4 to visualise scientific data on the
+  htc vive.
+\newblock Master's thesis, University of Oslo.
+
 \bibitem[\protect\astroncite{Hawrylycz
   et~al.}{2011}]{WaxholmSpaceAndMouseBrain2011}
 Hawrylycz, M., Baldock, R.~A., Burger, A., Hashikawa, T., Johnson, G.~A.,
@@ -54,6 +61,11 @@ Singh, V. and Kharb, P. (2013).
 \newblock A paradigm shift from teaching to learning gross anatomy:
   meta-analysis of implications for instructional methods.
 \newblock {\em Journal of the Anatomical Society of India}, 62(1):84 -- 89.
+
+\bibitem[\protect\astroncite{Sommerville}{2011}]{PUboka}
+Sommerville, I. (2011).
+\newblock {\em Software Engineering}.
+\newblock Pearson Education, Inc., 9th edition.
 
 \bibitem[\protect\astroncite{Toga and Thompson}{2000}]{Toga2000_AtlasBasics}
 Toga, A.~W. and Thompson, P.~M. (2000).

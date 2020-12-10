@@ -1,5 +1,5 @@
 % !TEX encoding = UTF-8 Unicode
-%!TEX root = thesis.tex
+% !TEX root = ../thesis.tex
 % !TEX spellcheck = en-US
 %%=========================================
 
@@ -12,7 +12,7 @@
 \section{Augmented Reality}
 (Jentoft, 2020) AR can be defined as a system that fulfills three basic features: a combination of real and virtual worlds, real-time interaction, and accurate 3D registration of virtual and real objects.
 
-\subsection*{AR, MR, XR, VR}\label{chap:armrxr}
+\subsection*{Disambiguation of some acronyms}\label{chap:armrxr}
 As a new field, this field suffers from naming disagreements. This is a confusing reality which needs to be addressed. There are differing view of what each acronym refers to, and even what they stand for. I will overlook most of this discussion, and simply explain what is meant by each acronym in the scope of this project.
 
 \paragraph*{AR}\label{para:ar} Augmented Reality, exercises which implement a see-through effect to display 3D visuals on top of the real-world. The idea of holograms is a good stand-in for the effect of AR. This is the term which will be most used in this project. 
@@ -114,6 +114,13 @@ Its a strain of laboratory rat.
 
 
 \subsection*{Unity}\label{chap:unity}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{fig/unity_example.png}
+    \caption{Unity 2019.4.13f1 running Nevrolens}
+\end{figure}
+
 Unity is a game engine for developing 2D and 3D games. It has grown to become the most popular game engine used by single developers and small development teams because of its ease of use and simple licensing terms for independent developers. Because of its popularity  and ease of use Unity has become a platform for 3D development within more widespread fields than video gaming, such as engineering, moviemaking and architecture. 
 Within this project the critical reason for choosing Unity for our 3D development is the exceptional support for the HoloLens product line. As seen in the \autoref{chap:mrtk}, Microsoft has poured resources into developing a "relatively" robust open framework for using Unity to develop for HoloLens. 
 Alternatives to using Unity are slim, but one could be to use Unreal Engine, an 3D game engine with great support for VR and AR in general, however the support for HoloLens specific tools like \nameref{chap:mrtk} is limited\footnote{Microsoft has a version of MRTK for Unreal, called \href{https://github.com/microsoft/MixedRealityToolkit-Unreal}{MRTK-Unreal}. It seems to be stale however, not having any updates in the last six months in the time of writing.}.
@@ -123,10 +130,43 @@ Alternatives to using Unity are slim, but one could be to use Unreal Engine, an 
 Mixed Reality Toolkit (MRTK) is a open source, Microsoft-driven framework for Mixed Reality (MR) development. In practice it is Microsoft's SDK for HoloLens development, greatly simplifying development related to interaction, user interface and  [\dots]. As it is a framework for MR in general, it supports other platforms like Android, iOS and VR devices such as HTC Vive and Oculus Rift with OpenVR. 
 An alternative to using MRTK would be to us XRTK which is a community-driven fork of MRKT. Thought such a choice would be an exercise of free software principles, it also lends it self to better support for some devices, like the MagicLeap.
 
-\subsection*{Photon}\label{chap:photon}
-Not in use jet
+
 
 \subsection*{Blender}
+
+Blender is a 3D modeling application, it is free open source software and is has a wide set of functionalities for 3D modeling, animation, rendering and optimization. Till now this project has only made use of one tool in Blender, \textit{decimation}, the process of simplifying the polygon count of a 3D model. This has been done by scripting, simply because Blender does not have a built-in way to apply a modifier on multiple objects\footnote{Or at least I didn't find any such solution.}. \autoref{item:blenderscript} showcases my use of Blender in its entirety.
+
+
+\begin{lstlisting}[language=python, label={item:blenderscript}, caption={Blender script applying a decimate modifier to all relevant objects in a scene.}]
+import bpy # importing the blender python library
+
+def decimate(ratio, replace = True):
+    # Finds all objects and filters irrelevant objects from the FBX 
+    brainparts = [n for n in bpy.data.objects \
+        if n.name not in ("Camera", "Light")]
+
+    for part in brainparts:
+        mod = 0
+        # Finds all decimate modifiers on each brainpart
+        decimate_mods = [n for n in part.modifiers \ 
+           if n.type == 'DECIMATE']
+        if decimate_mods and not replace:
+            mod = decimate_mods[0]
+        else:
+            if replace: 
+                # Removes all decimate modifiers from the brainpart
+                for m in decimate_mods:
+                    part.modifiers.remove(m)
+            mod = part.modifiers.new(type='DECIMATE', name='Decimate')
+            mod.decimate_type = 'COLLAPSE'
+        # Sets the specifies strength to the decimate operation. 
+        mod.ratio = ratio
+# Calls function with given decimate strength.
+decimate(0.08)
+\end{lstlisting}
+
+\subsection*{Photon}\label{chap:photon}
+Photon is the state of the art networking library for Unity. It can manage everything from voice chat to interaction over network. This has not jet been used in the project, but will be referred to in \nameref{chap:futurework}. 
 
 \subsection*{Git}
 Git flow, Gitmoji, GitKraken, Git gud 
