@@ -41,25 +41,38 @@ What follows are the system requirements decided on for the application:
 \subsection*{Functional Requirements}
 \begin{enumerate}
     \item {
-        \textbf{Implement a brain dissection tool in AR}\\
-         
+        \textbf{Implement a brain dissection tool in AR.}\\
+        The app should render a brain at sufficient quality for educational use, and have the tools for creating a dissection experience in AR.
+        
     }
     \item {
-        \textbf{The application must run in HoloLens 2 and a mobile platform}\\
-         Android and/or iOS
+        \textbf{The application must run in HoloLens 2 and at least one mobile platform}\\
+        The ability to run a version for the app on multiple platforms is essential for the purpose of this project. While the main platforms are HoloLens and mobile, others may also be implemented in the future. 
     }
 
     \item {
-        \textbf{Collaboration}\\
-         
+        \textbf{Implement cross-platform collaboration over network}\\
+        For the application to have value above a single user it is important that it can be used with a HoloLens and a more accessible platforms in a collaborative manner. 
     }
+
 
 \end{enumerate}
 
 \subsection*{Non-Functional Requirements}
 
 \begin{enumerate}
-    \item 
+    \item {
+        \textbf{Medical students should find educational use for the app.}\\
+        It is critical that there is educational value in the application. 
+    }
+    \item {
+        \textbf{The application should be usable without outside guidance.}\\
+        The app should have a clear and understandable design, such that a new user should be able to navigate the app by them self, even with minimal experience with AR.
+    }
+    \item {
+        \textbf{All relevant usability criteria for a mixed reality app should be met.}\\
+We should work to not fall under the 'meets' criteria on any relevant metric in the App quality criteria\footnote{https://docs.microsoft.com/en-us/windows/mixed-reality/develop/platform-capabilities-and-apis/app-quality-criteria}. This includes criteria on; FPS, spatial anchoring and view comfort. 
+    }
 \end{enumerate}
 
 % and non-functional requirements, which describe  

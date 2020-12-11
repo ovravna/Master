@@ -19,11 +19,11 @@
   "spellright.notificationClass": "warning",
 
   "files.exclude": {
-    "**/*.{aux,out,blg,fdb_latexmk,fls,log,toc}": true,
+    "**/*.{aux,out,blg,fdb_latexmk,fls,toc}": true,
     "**/*.synctex.gz": true
   },
   "files.watcherExclude": {
-    "**/*.{aux,out,blg,fdb_latexmk,fls,log,toc}": true,
+    "**/*.{aux,out,blg,fdb_latexmk,fls,toc}": true,
     "**/*.synctex.gz": true
   },
 
