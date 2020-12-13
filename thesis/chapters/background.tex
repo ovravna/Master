@@ -111,6 +111,20 @@ Its a strain of laboratory rat.
 
 \subsection*{HoloLens 2}
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{fig/hololens2}
+\end{figure}
+
+HoloLens 2 is the second iteration of Microsoft immersive headset line. It uses an ARM-based computing unit, running a custom holographic version of Windows 10 for ARM. This enables the HoloLens 2 to produce high quality graphics while being very power efficient. It was announced in early 2019, with a limited release on November 7, 2019. It is however jet, as of writing, not publicly available and could be considered a limited industrial product.
+
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{fig/hololens2specs}
+\end{figure}
+
+
+This project mainly focuses on developing for the HoloLens 2
+
 
 \section{Tools}\label{chap:tools}
 
@@ -170,10 +184,15 @@ decimate(0.08)
 \subsection*{Photon}\label{chap:photon}
 Photon is the state of the art networking library for Unity. It can manage everything from voice chat to interaction over network. This has not jet been used in the project, but will be referred to in \nameref{chap:futurework}. 
 
-\subsection*{Git}
-Git flow, Gitmoji, GitKraken, Git gud 
+\subsection*{Git}\label{chap:git}
+% Git flow, Gitmoji, GitKraken, Git gud 
+Git is a distributed version control system. Together with hosting on NTNUs self-managed GitLab it enables version control and cloud back-up of the project. While this is the most conventional version control system for any software project, using Git with Unity can be frustrating. 
+% There are two main problems with this approach; file sizes and binary changes.
+Git is design for projects with only (mostly) small, human-readable text files, like a code base. A Unity project often as huge files, which Git does not support, and relevant changes can happen in binary files, which makes merging impossible. Git LFS, gitignore and setting in Unity to disable binary files...
 
-\subsection*{GitKraken Boards}
+
+
+\subsection*{GitKraken}\label{chap:gitkraken}
 Kanban and such \\
 Used both / separately for Nevrolens and Project thesis.
 
@@ -183,7 +202,12 @@ Used both / separately for Nevrolens and Project thesis.
 \section{Related work}
 
 \subsection*{VRVisualizer}\label{chap:vrvis}
-% VRVisualizer is the name of the research product of the master thesis \citet{Elden2017}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{fig/vrvis_ratbrain.jpg}
+    \caption{Cutting operation in VRVisualizer on HTC Vive}
+\end{figure}
+VRVisualizer is the name of the research product from the master thesis \citet{Elden2017}. It is a VR application running on the HTC Vive. While its features are similar to the goals of this project, the focus of Eldens project was to develop universal guidelines for scientific visualization in VR. That is far from this projects goals and thus its feature set, relating to interaction and exploration, is quite superficial.
 
 \subsection*{HoloAnatomy}
 
