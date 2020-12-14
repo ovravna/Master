@@ -10,7 +10,12 @@
 \section{Glossary?}
 
 \section{Augmented Reality}
-(Jentoft, 2020) AR can be defined as a system that fulfills three basic features: a combination of real and virtual worlds, real-time interaction, and accurate 3D registration of virtual and real objects.
+% (Jentoft, 2020) AR can be defined as a system that fulfills three basic features: a combination of real and virtual worlds, real-time interaction, and accurate 3D registration of virtual and real objects.
+
+
+% \subsection*{Augmented Reality}
+Augmented Reality (AR) describes the use of computer technology to generate an audio-visual experience combining real-world impressions with computer generated graphics, and, \textit{essentially}, the ability to interact seamlessly within both domains. Ever since its infancy medical usage of AR technology has been envisioned as a great potential. The idea of x-ray vision is seen both in science fiction and in genuine research dating all the way back to the 1930s when H. Steinhaus explored ways to visualize metal pieces inside the body \citep{Sielhorst2008}. There is now substantial interest in the use of AR within a wide array of medical fields as well as in industry and education. As an emerging technology there is still much research needed, and great leaps in hardware, software and sensor capabilities are bound to happen in the near future. Already AR shows promising results in both surgical settings and in education \citep{Singh2013}.
+
 
 \subsection*{Disambiguation of some acronyms}\label{chap:armrxr}
 As a new field, this field suffers from naming disagreements. This is a confusing reality which needs to be addressed. There are differing view of what each acronym refers to, and even what they stand for. I will overlook most of this discussion, and simply explain what is meant by each acronym in the scope of this project.
@@ -39,32 +44,43 @@ As a new field, this field suffers from naming disagreements. This is a confusin
 % Three-dimensional graphics 
 % The conversional rendering pipe-line
 
-\section{Neuro stuff}
+\section{Neuroanatomy}
+
+The study of neuroanatomy is concerned with the structural organization of the nervous system. This primarily means the brain and its structures, and is what this project will focus exclusively on.
+Within the study of neuroanatomy, the use of macroscopical brain dissections have long been the conventual practice for teaching the organization of the structures in the brain. Requiring cadavers and the single use of their brain, this method is highly resource intensive and has limited scalability. In addition, there are deeply concerning ethical challenges with the use of animals in research, which will be discussed further in \autoref{chap:ethics}. 
 
 \subsection*{Ethics of dissection}\label{chap:ethics}
 
 \subsection*{The Waxholm Space Atlas of the Sprague Dawley Rat Brain}\label{chap:ratbrain}
 
-{
-    \color{BrickRed}
-https://www.nitrc.org/projects/whs-sd-atlas
-\begin{itemize}
-    \item What is a atlas
-    \item WHS and ratbrain is open, used and developed by NTNU St Olavs and UiO 
-    \item Waxholm Space Atlas of the Sprague Dawley Rat Brain 
-    \item Discuss difference between graphical 3D model and 3D atlas
-\end{itemize}
-}
+% {
+%     \color{BrickRed}
+% https://www.nitrc.org/projects/whs-sd-atlas
+% \begin{itemize}
+%     \item What is a atlas
+%     \item WHS and ratbrain is open, used and developed by NTNU St Olavs and UiO 
+%     \item Waxholm Space Atlas of the Sprague Dawley Rat Brain 
+%     \item Discuss difference between graphical 3D model and 3D atlas
+% \end{itemize}
+% }
 
 
 %  In this pursuit we will also make use of high-resolution 3D imagery of a rat brain (see \autoref{chap:ratbrain}).  
 
-This project makes use of high-resolution 3D-models of a rat brain. This brain model has been captured and manually delineated\footnotemark[1] by a collaboration between research groups at the University of Oslo and NTNU, and is in fact a highly accurate volumetric representations of the rat brain. This model is an open access community resource, intended as a free tool for education and research\footnotemark[2]. Within the convectional rasterization rendering pipe-line of Nevrolens, a polygonal asset derived from this volumetric model is naturally used. 
+This project makes use of high-resolution 3D-models of a rat brain. This brain model has been captured and manually delineated\footnotemark[1] by a collaboration between research groups at the University of Oslo and NTNU, and is in fact a highly accurate volumetric representations of the rat brain. This model is an open access community resource, intended as a free tool for education and research\footnotemark[2]. Within the convectional rasterization rendering pipe-line of Nevrolens, a geometric asset derived from this volumetric model is naturally used. 
 
 \footnotetext[1]{Delineation refers to the process of clearly defining different structures in the brain into separate namable parts.}
 \footnotetext[2]{https://www.nitrc.org/projects/whs-sd-atlas}
 
-The model is simply referred to as \textit{The Waxholm Space Atlas of the Sprague Dawley Rat Brain}. What follows is a brief explanation of each confusing part of the this name. 
+The model is referred to as \textit{The Waxholm Space Atlas of the Sprague Dawley Rat Brain}. That means a atlas of the \textit{Sprague Dawley} rat breed defined in Waxholm Space. I will briefly explain what a brain atlas is and what Waxholm space is. 
+
+
+\subsubsection*{Brain Atlas}\label{chap:atlas}
+
+A brain atlas is a composite representation based on one or more datasets of a given brain. An atlas generally has the function of highlighting some specified aspects and relations in the brain, and is a convectional tool in neuroscientific research \citep{Toga2000_AtlasBasics}. The convectional atlas is based on micrometer scale sliced sections in the brain, effectively creating two-dimensional layers through the brain. While functional, this "turns the brain into a book". Three-dimensional digital atlas are however relative newcomer on the neuro-imagery scene, by employing magnetic resonance imaging (MRI) and diffusion tensor imaging (DTI) the resulting atlases are complete volumetric representation of the subject brain \citep{WaxholmRatBrain2014}. 
+
+This volumetric model is the basis for the delineated 3D-model used in Nevrolens.
+
 
 \subsubsection*{Waxholm Space}\label{chap:whs}
 \begin{wrapfigure}{R}{0.40\textwidth} 
@@ -93,17 +109,6 @@ The coordinate system for WHS is defined as a continuous Cartesian system with t
 \noindent
 \autoref{fig:waxholmspace} visualizes the axes through origin of WHS in the brain of a rat. Within the scope of this project WHS will be the local space of the rat brain model implemented in Nevrolens.
 
-\subsubsection*{Brain Atlas}\label{chap:atlas}
-
-A brain atlas is a composite representation based on one or more datasets of a given brain. An atlas generally has the function of highlighting some specified aspects and relations in the brain, and is a convectional tool in neuroscientific research \citep{Toga2000_AtlasBasics}. The convectional atlas is based on micrometer scale sliced sections in the brain, effectively creating two-dimensional layers through the brain. While functional, this "turns the brain into a book". Three-dimensional digital atlas are however relative newcomer on the neuro-imagery scene, by employing magnetic resonance imaging (MRI) and diffusion tensor imaging (DTI) the resulting atlases are complete volumetric representation of the subject brain \citep{WaxholmRatBrain2014}. 
-
-This volumetric model is the basis for the delineated 3D-model used in Nevrolens.
-
-
-\subsubsection*{Sprague Dawley}
-
-Its a strain of laboratory rat.
-
 
 
 
@@ -122,8 +127,7 @@ HoloLens 2 is the second iteration of Microsoft immersive headset line. It uses 
     \includegraphics[width=\textwidth]{fig/hololens2specs}
 \end{figure}
 
-
-This project mainly focuses on developing for the HoloLens 2
+This project mainly focuses on developing for the HoloLens 2.
 
 
 \section{Tools}\label{chap:tools}
@@ -131,7 +135,7 @@ This project mainly focuses on developing for the HoloLens 2
 
 \subsection*{Unity}\label{chap:unity}
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{fig/unity_example.png}
     \caption{Unity 2019.4.13f1 running Nevrolens}
@@ -184,6 +188,9 @@ decimate(0.08)
 \subsection*{Photon}\label{chap:photon}
 Photon is the state of the art networking library for Unity. It can manage everything from voice chat to interaction over network. This has not jet been used in the project, but will be referred to in \nameref{chap:futurework}. 
 
+\subsection*{Windows Device Portal}\label{chap:wdp}
+
+
 \subsection*{Git}\label{chap:git}
 % Git flow, Gitmoji, GitKraken, Git gud 
 Git is a distributed version control system. Together with hosting on NTNUs self-managed GitLab it enables version control and cloud back-up of the project. While this is the most conventional version control system for any software project, using Git with Unity can be frustrating. 
@@ -208,6 +215,18 @@ Used both / separately for Nevrolens and Project thesis.
     \caption{Cutting operation in VRVisualizer on HTC Vive}
 \end{figure}
 VRVisualizer is the name of the research product from the master thesis \citet{Elden2017}. It is a VR application running on the HTC Vive. While its features are similar to the goals of this project, the focus of Eldens project was to develop universal guidelines for scientific visualization in VR. That is far from this projects goals and thus its feature set, relating to interaction and exploration, is quite superficial.
+
+
+\subsection*{ITK-Snap}
+
+ITK-Snap is a interactive computer application for navigating medical imagery. It is a convectional tool used to display, segment and label 3D neuroanatomical data. It supports a wide array of visual tools which helps in learning about the brain.
+However, the fact that it is purely displayed on a two dimensional monitor, means it limits the opportunity of spatial understanding.
+
+\begin{figure}[h]
+    \includegraphics[width=0.5\textwidth]{fig/itk_snap}
+    \includegraphics[width=0.5\textwidth]{fig/itk_snap_example}
+    \caption{ITK-Snap}
+\end{figure}
 
 \subsection*{HoloAnatomy}
 

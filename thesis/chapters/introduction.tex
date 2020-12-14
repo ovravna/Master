@@ -4,46 +4,42 @@
 %%=========================================
 \chapter{Introduction}
 
-{
-    \color{BrickRed}
-    I feel I need the two following sections before the Motivation sections, as they are quick introductions to the basics. But maybe there is a better way?
-}
+% {
+%     \color{BrickRed}
+%     I feel I need the two following sections before the Motivation sections, as they are quick introductions to the basics. But maybe there is a better way?
+% }
 %%=========================================
 
-\subsection*{Augmented Reality}
-Augmented Reality (AR) describes the use of computer technology to generate an audio-visual experience combining real-world impressions with computer generated graphics, and, \textit{essentially}, the ability to interact seamlessly within both domains. Ever since its infancy medical usage of AR technology has been envisioned as a great potential. The idea of x-ray vision is seen both in science fiction and in genuine research dating all the way back to the 1930s when H. Steinhaus explored ways to visualize metal pieces inside the body \citep{Sielhorst2008}. There is now substantial interest in the use of AR within a wide array of medical fields as well as in industry and education. As an emerging technology there is still much research needed, and great leaps in hardware, software and sensor capabilities are bound to happen in the near future. Already AR shows promising results in both surgical settings and in education \citep{Singh2013}.
 
-\subsection*{Neuroanatomy}
-The study of neuroanatomy is concerned with the structural organization of the nervous system. This primarily means the brain and its structures, and is what this project will focus exclusively on.
-Within the study of neuroanatomy, the use of macroscopical brain dissections have long been the conventual practice for teaching the organization of the structures in the brain. Requiring cadavers and the single use of their brain, this method is highly resource intensive and has limited scalability. In addition, there are deeply concerning ethical challenges with the use of animals in research, which will be discussed further in \autoref{chap:ethics}. 
-
-\section{Motivation 2}
+\section{Motivation}
 
 % Computer based learning has been shown to increase understating 
-Neuroanatomy is a spatially complex field of study, requiring
+% Neuroanatomy is a spatially complex field of study, requiring
+
+Augmented reality is a technology which has experienced great leaps in recent years, and this growth has inspired many visons of medical potentials for this young technology. 
+Within medical education there are many fields where visual understanding is critical, one of being neuroanatomy. Neuroanatomy is a highly complex domain both visually and spatially, the ability to use the human senses in a real-world setting could result in greater intuition and understanding. With that in mind the use of augmented reality could be a natural way to virtualize the experience of a brain dissection, and further the unique capabilities of AR could enable innovative ways of learning. \citep{Moro2017} shows the possibility of greater immersion and engagement while using augmented reality in teaching anatomy to medical students. This has also recently been shown with promising result by  \citep{Wish2020}, where COVID-lockdown required from-home teaching, and the use of HoloAnatomy, an anatomy application for the HoloLens, performed significantly better than even conventional in-class lectures.
+
+
+
+% With this growth, the medical potential of the technology has seen an equal rise.
+% inspired in medical professionals.
+% With this [\dots], the envisioned medical potential of it use has 
+% The technological growth has come spured 
+% Growing hand in hand with this technology has 
+% Jointly with this technological growth 
 
 %%=========================================
-\section{Motivation}
-% This chapter should explain what the problem is, and why it should be fixed
-% Very quick intro
-% The problem
-% The possibility of a solution
-% Maybe rewrite the whole thing with this in mind?
+% \section{Motivation}
+% % This chapter should explain what the problem is, and why it should be fixed
+% % Very quick intro
+% % The problem
+% % The possibility of a solution
+% % Maybe rewrite the whole thing with this in mind?
 
-In light of the problems with physical brain dissections it is natural that the use of digital tools, three-dimensional modeling and visualization has been seeing growing use for educational purposes. 
+% In light of the problems with physical brain dissections it is natural that the use of digital tools, three-dimensional modeling and visualization has been seeing growing use for educational purposes. 
 
-%%=========================================
-According to \citep{Dalgarno2010} computer-aided learning generally increases understanding for anatomy. As anatomy in general, and neuroanatomy specifically are highly complex domains both visually and spatially, the ability to use the human senses in a real-world setting could result in greater intuition and understanding. With that in mind the use of augmented reality could be a natural way to virtualize the experience of a brain dissection, and further the unique capabilities of AR could enable innovative ways of learning. \citep{Moro2017} shows the possibility of greater immersion and engagement while using augmented reality in teaching anatomy to medical students. This has also recently been shown with promising result by  \citep{Wish2020}, where COVID-lockdown required from-home teaching, and the use of HoloAnatomy, an anatomy application for the HoloLens, performed significantly better than even conventional in-class lectures.
-
-%%=========================================
-The main problem with most academic implementations, like \citep{Wish2020}, of AR in medical education is the use of head-mounted display (HMD) devices like the HoloLens 2 and Magic Leap, which in the near to mid-term future will have limited practical use in education, as a result of the high price-tag, combined with the still inadequate general use-case for these types of devices.
-This project will try to mend these challenges by having the lecturer using an HMD and having student view and interact with the lecture in an AR-based application running on their smartphone. 
-%%=========================================
-This is possible because of the great leap in AR-performance seen in recent models of Android and especially iPhones, in combination with development platforms like \nameref{chap:unity}, \nameref{chap:mrtk} and \nameref{chap:photon} (see \autoref{chap:tools}) which enables multiplatform development and real-time collaboration between devices. 
-% In this pursuit we will also make use of high-resolution 3D imagery of a rat brain (see \autoref{chap:ratbrain}).  
 % %%=========================================
-\todo[inline]{Introduce Nevrolens and WHS brain}
-The aim of the project will be to create a seamless educational experience in Augmented Reality which can be valuable both on an HMD device and a modern smartphone. The focus will be on investigating its feasibility as an educational tool both in a lecture-type setting and for students to explore the brain anatomy independently. 
+% According to \citep{Dalgarno2010} computer-aided learning generally increases understanding for anatomy. As anatomy in general, and neuroanatomy specifically are highly complex domains both visually and spatially, the ability to use the human senses in a real-world setting could result in greater intuition and understanding. With that in mind the use of augmented reality could be a natural way to virtualize the experience of a brain dissection, and further the unique capabilities of AR could enable innovative ways of learning. \citep{Moro2017} shows the possibility of greater immersion and engagement while using augmented reality in teaching anatomy to medical students. This has also recently been shown with promising result by  \citep{Wish2020}, where COVID-lockdown required from-home teaching, and the use of HoloAnatomy, an anatomy application for the HoloLens, performed significantly better than even conventional in-class lectures.
 
 %%==========================================
 
@@ -51,26 +47,36 @@ The aim of the project will be to create a seamless educational experience in Au
 % Define the problem
 
 
+%%=========================================
+The main problem with most academic implementations, like \citep{Wish2020}, of AR in medical education is the use of head-mounted display (HMD) devices like the HoloLens 2 and Magic Leap, which in the near to mid-term future will have limited practical use in education, as a result of the high price-tag, combined with the still inadequate general use-case for these types of devices.
+This project will try to mend these challenges by having the lecturer using an HMD and having student view and interact with the lecture in an AR-based application running on their smartphone. 
+%%=========================================
+This is possible because of the great leap in AR-performance seen in recent models of Android and especially iPhones, in combination with development platforms like \nameref{chap:unity}, \nameref{chap:mrtk} and \nameref{chap:photon} which enables multiplatform development and real-time collaboration between devices. 
+% In this pursuit we will also make use of high-resolution 3D imagery of a rat brain (see \autoref{chap:ratbrain}).  
+% %%=========================================
+% \todo[inline]{Introduce Nevrolens and WHS brain}
+The aim of the project will be to create a seamless educational experience in Augmented Reality which can be valuable both on an HMD device and a modern smartphone. The focus will be on investigating its feasibility as an educational tool both in a lecture-type setting and for students to explore the brain anatomy independently. 
+
 
 %%=========================================
-\subsection*{What Remains to be Done?}
+% \subsection*{What Remains to be Done?}
 
 %%=========================================
-\section{Objectives / Research Questions}
+\section{Research Questions}
 What follow are the research questions which motivates this project: \\
 
 \noindent
 % \paragraph*{Main RQ:} How can AR support teaching of rat brain anatomy and dissection for medical students?
 
 \begin{enumerate}[label=\textbf{Main-RQ:}, left=\parindent]
-    \item How can AR support teaching of rat brain anatomy and dissection for medical students?
+    \item \label{mainrq} How can AR support teaching of neuroanatomy and dissection for medical students?
 \end{enumerate}
 
 \begin{enumerate}[label=\textbf{Sub-RQ\arabic*:}, left=\parindent, labelindent=1em]
 
-    \item How should interaction in be implemented in AR to accommodate medical professionals?
-    \item How will a collaborative experience shared between an HMD and a smartphone compare to accommodate medical professionals?
-    \item Can understanding be increased by integrating microscopical data into a macroscopical model?
+    \item \label{subrq1} How should interaction in be implemented in AR to accommodate medical students and educators?
+    \item \label{subrq2} How will a collaborative experience shared between an HMD and a smartphone compare to accommodate medical users?
+    \item \label{subrq3} Can understanding be increased by integrating microscopical data into a macroscopical model?
 
 \end{enumerate}
 
@@ -112,7 +118,7 @@ What follow are the research questions which motivates this project: \\
 
 The research questions were derived through discussing the needs of the intended users with neuroscientists at the Kavli Institute. It was then narrowed down by a literature review, finding a lack of satisfactory substitutions for real brain dissections and especially finding no attempt at a practical multiplatform application for a more scalable use for students. The projects research question falls under the strategy of Design and Creation as the main goal is to develop a useful application for medical education. The focus on a smartphone solution was further motivated by the COVID-pandemic making from-home learning quite essential and making the passing around of HMD devices an unwanted scenario. As part of an agile software development model the gathering of qualitative data from observations and interviews within the scope of user testing will be essential. 
 
-\subsection*{Development method}
+% \subsection*{Development method}
 
 \section{Contributions}
 %% write about macro vs micro stuff
