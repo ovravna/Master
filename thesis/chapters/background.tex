@@ -7,7 +7,7 @@
 
 \chapter{Background}
 
-\section{Glossary?}
+% \section{Glossary?}
 
 \section{Augmented Reality}
 % (Jentoft, 2020) AR can be defined as a system that fulfills three basic features: a combination of real and virtual worlds, real-time interaction, and accurate 3D registration of virtual and real objects.
@@ -22,10 +22,8 @@ As a new field, this field suffers from naming disagreements. This is a confusin
 
 \paragraph*{AR}\label{para:ar} Augmented Reality, exercises which implement a see-through effect to display 3D visuals on top of the real-world. The idea of holograms is a good stand-in for the effect of AR. This is the term which will be most used in this project. 
 
-\paragraph*{MR}\label{para:mr} Mixed Reality, anything within the spectrum between reality and pure visual 3D graphics, which blends computer generated visuals and reality. While the term was not invented by Microsoft\footnotemark, it is a term strongly associated with them, and in this project the term MR will generally only be used as a reference to Microsoft's products or concepts. There term is also used by some as a subset of \nameref{para:ar}, so in conclusion it is a somewhat controversial term. 
+\paragraph*{MR}\label{para:mr} Mixed Reality, anything within the spectrum between reality and pure visual 3D graphics, which blends computer generated visuals and reality. While the term has been in use since it was coined by \citet{Milgram1994}, it has in recent years been strongly associated with Microsoft, and in this project the term MR will generally only be used as a reference to Microsoft's products or concepts. The term is also used by some as a subset of \nameref{para:ar}, so in conclusion it is a somewhat controversial term. 
 
-\footnotetext{In fact the term was coined by \citet{Milgram1994}, in this exact meaning.}
-% That is at least what Microsoft is pushig for 
 
 \paragraph*{XR}\label{para:xr} Extended Reality, much like \nameref{para:mr} this includes the whole spectrum of experiences blurring the line between the real and the virtual. However it does not have the Microsoft taint, nor the confusion of that term. And thus it is a more acceptable term, and it is what will be used here to describe the spectrum.
 
@@ -34,22 +32,33 @@ As a new field, this field suffers from naming disagreements. This is a confusin
 
 \section{Graphics and Rendering}
 
-\subsection*{Rasterization, Polygons and 3D models}
+Three dimensional data can be stored and visualized in a number of ways, and the way a graphical application like Nevrolens does it is very different from the ways of medical applications. Within medicine volumetric data is common, as it is just as important what's inside the model as what's outside. In convectional graphics 3D models are built up of 2D polygons which added up forms a 3D structure, this reduces rendering time while keeping the outside structure of the model intact. \autoref{fig:lowpolyratbrain} show a model with about 15 thousand polygons. 
 
-{
-    \color{BrickRed}
-    I feel that there is some misunderstanding about what a 3D model is.
-    Maybe go in-depth about what I mean by 3D model. I have probably already used the term for different things.
-}
+The process of generating polygonal models from volumetric models is quite complex, \citet{Elden2017} writes about this process in some detail, which can be found in \autoref{chap:elden}. This is the model I have used in Nevrolens though the model had to be simplified further to about 300,000 triangles, to run decently on the HoloLens 2.  
+
+\begin{figure}[h]\label{fig:lowpolyratbrain}
+    \includegraphics[width=\textwidth]{fig/ratbrain_lowpoly}
+    \caption{Wireframe view of the low resolution rat brain in Microsoft 3D Viewer. The triangles are clearly distinguishable, in total there is 14,912 triangles in this model. }
+\end{figure}
+
+
+
+% \subsection*{Rasterization, Polygons and 3D models}
+
+% {
+%     \color{BrickRed}
+%     I feel that there is some misunderstanding about what a 3D model is.
+%     Maybe go in-depth about what I mean by 3D model. I have probably already used the term for different things.
+% }
 % Three-dimensional graphics 
 % The conversional rendering pipe-line
 
 \section{Neuroanatomy}
 
 The study of neuroanatomy is concerned with the structural organization of the nervous system. This primarily means the brain and its structures, and is what this project will focus exclusively on.
-Within the study of neuroanatomy, the use of macroscopical brain dissections have long been the conventual practice for teaching the organization of the structures in the brain. Requiring cadavers and the single use of their brain, this method is highly resource intensive and has limited scalability. In addition, there are deeply concerning ethical challenges with the use of animals in research, which will be discussed further in \autoref{chap:ethics}. 
+Within the study of neuroanatomy, the use of macroscopical brain dissections have long been the conventual practice for teaching the organization of the structures in the brain. Requiring cadavers and the single use of their brain, this method is highly resource intensive and has limited scalability. In addition, there are deeply concerning ethical challenges with the use of animals in research. 
 
-\subsection*{Ethics of dissection}\label{chap:ethics}
+% \subsection*{Ethics of dissection}\label{chap:ethics}
 
 \subsection*{The Waxholm Space Atlas of the Sprague Dawley Rat Brain}\label{chap:ratbrain}
 
@@ -83,7 +92,7 @@ This volumetric model is the basis for the delineated 3D-model used in Nevrolens
 
 
 \subsubsection*{Waxholm Space}\label{chap:whs}
-\begin{wrapfigure}{R}{0.40\textwidth} 
+\begin{wrapfigure}{r}{0.40\textwidth} 
     \centering
     \includegraphics[width=0.30\textwidth]{fig/waxholmspace}
     \caption{\raggedright WHS \citep{WaxholmRatBrain2014}}
@@ -118,13 +127,14 @@ The coordinate system for WHS is defined as a continuous Cartesian system with t
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{fig/hololens2}
+    \includegraphics[width=0.4\textwidth]{fig/hololens2}
 \end{figure}
 
 HoloLens 2 is the second iteration of Microsoft immersive headset line. It uses an ARM-based computing unit, running a custom holographic version of Windows 10 for ARM. This enables the HoloLens 2 to produce high quality graphics while being very power efficient. It was announced in early 2019, with a limited release on November 7, 2019. It is however jet, as of writing, not publicly available and could be considered a limited industrial product.
 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{fig/hololens2specs}
+    \caption{Specifications for the HoloLens 2}
 \end{figure}
 
 This project mainly focuses on developing for the HoloLens 2.
@@ -190,20 +200,27 @@ Photon is the state of the art networking library for Unity. It can manage every
 
 \subsection*{Windows Device Portal}\label{chap:wdp}
 
+Windows Device Portal is an web-based application for managing devices running Window, like HoloLens. The HoloLens 2 hosts this application if it's connected to a network, so you can easily log in on the device and manage files, profile application or stream video from it.
+
 
 \subsection*{Git}\label{chap:git}
 % Git flow, Gitmoji, GitKraken, Git gud 
 Git is a distributed version control system. Together with hosting on NTNUs self-managed GitLab it enables version control and cloud back-up of the project. While this is the most conventional version control system for any software project, using Git with Unity can be frustrating. 
 % There are two main problems with this approach; file sizes and binary changes.
-Git is design for projects with only (mostly) small, human-readable text files, like a code base. A Unity project often as huge files, which Git does not support, and relevant changes can happen in binary files, which makes merging impossible. Git LFS, gitignore and setting in Unity to disable binary files...
+Git is design for projects with only (mostly) small, human-readable text files, like a code base. A Unity project often as huge files, which Git does not support, and relevant changes can happen in binary files, which makes merging impossible. To mitigate this problems the use of Git LFS was needed. It is an extension for Git which enables storages of larger files. Together with enabling only human readable settings in Unity and a long gitignore file, Git with Unity was manageable.
+A good alternative to this use of Git is \textit{Unity Collab}, which is Unity's answer to version control, it lack many features found in Git, but would probably be just fine for a projx|ect of this scope with a single programmer. However, I like Git very much and find the feature-set of Git to be very helpful. 
 
 
 
 \subsection*{GitKraken}\label{chap:gitkraken}
-Kanban and such \\
-Used both / separately for Nevrolens and Project thesis.
-
-
+% Kanban and such \\
+% Used both / separately for Nevrolens and Project thesis.
+GitKraken is a graphical Git management tool. What's more relevant here is its Kanban feature, or GitKraken Boards as their called. This enables synchronization of Kanban tickets and feature branches in Git, and generally makes my life easier.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig/gitkraken}
+    \caption{Git log in GitKraken, on the left you can see synchronized Kanban tickets}
+\end{figure}
 
 
 \section{Related work}
@@ -219,20 +236,22 @@ VRVisualizer is the name of the research product from the master thesis \citet{E
 
 \subsection*{ITK-Snap}
 
-ITK-Snap is a interactive computer application for navigating medical imagery. It is a convectional tool used to display, segment and label 3D neuroanatomical data. It supports a wide array of visual tools which helps in learning about the brain.
+ITK-Snap is an open-source interactive computer application for navigating medical imagery. It is a convectional tool used to display, segment and label 3D neuroanatomical data. It supports a wide array of visual tools which helps in learning about the brain.
 However, the fact that it is purely displayed on a two dimensional monitor, means it limits the opportunity of spatial understanding.
 
 \begin{figure}[h]
     \includegraphics[width=0.5\textwidth]{fig/itk_snap}
     \includegraphics[width=0.5\textwidth]{fig/itk_snap_example}
-    \caption{ITK-Snap}
+    \caption{ITK-Snap, Waxholm Space Rat Brain (left), Human brain (right)}
 \end{figure}
 
 \subsection*{HoloAnatomy}
 
-\subsection*{Insight Heart}
+HoloAnatomy is a application running on HoloLens, which aims to be a educational tool for anatomy including basic neuroanatomy. \citet{Wish2020} has shown great promise in use of this application for education. While this application is really promising, it lacks some features we would like to focus on. There is no use of mobile devices for collaborative learning. And HoloAnatomy focuses on the macroscopic image of anatomy, and does not go into microscopic detail, which is something this project aims to do. Further, at NTNU and the Kavli Institute research and education using rat brains is normal an thus visualizing it it AR is also a focus.
 
-\subsection*{SphenoBlock?}
-
-\subsection*{Noe HoloCare stuff?}
-
+\begin{figure}[h]
+    \includegraphics[width=0.5\textwidth]{fig/holoanatomy1}
+    \includegraphics[trim={0 1.76cm 0 0},clip,width=0.5\textwidth]{fig/holoanatomy2}
+    \caption{HoloAnatomy}
+    
+\end{figure}

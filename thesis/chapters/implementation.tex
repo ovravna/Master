@@ -112,21 +112,14 @@ While the project aims for an agile approach, the sprint cycle core to the agile
 % this enables me as a developer to test the product rapidly against users. 
 % , this means having rules for branch naming, creating merge requests when merging to the `master`-branch, and 
 
+\section{Development}
+
+\subsection*{Rat brain model}
+The rat brain model used in Nevrolens is, as of now, the same model as in \nameref{chap:vrvis} by \citet{Elden2017}. The original polygonal model created by Elden had a polygon count of around 16 million, he reduced this to around 3 million to run on a workstation computer with HTC Vive. The HoloLens 2 did not manage run smoothly with even that resolution, so I had to reduce it further to about 300,000 polygons.
+
+\subsection*{Porting to Android}
+The application was originally developed for HoloLens 2, but other platforms were always in mind and because of the use of \nameref{chap:mrtk}, deploying to other platform was relatively easy, within the documentation for MRTK, there was guides for how to build for Android. Interaction on Android is more complicated though. Because all interaction happens on screen additional effort has to be laid down to implement a good user experience on smartphone.  
 
 
-
-
-
-\section{Nevrolens}\label{nevrolens}
-Nevrolens is the name I've given the application which is the research product of this project. It's an artistic (read; incompetent) combination of the Norwegian word Nevroanatomi and HoloLens. It is a AR application running on HoloLens 1, HoloLens 2 and Android. 
-
-The application is focused on delivering a single user experience, with features as cutting planes, scaling, moving brain parts and transparent brain parts. 
-
-\begin{figure}[h]
-    \includegraphics[width=0.5\textwidth]{fig/nevrolens/twohandedzoom.jpg}
-    \includegraphics[width=0.5\textwidth]{fig/nevrolens/clipping.jpg}
-    \includegraphics[width=0.5\textwidth]{fig/nevrolens/palmmenu.jpg}
-    \includegraphics[width=0.5\textwidth]{fig/nevrolens/brainpartsout.jpg}
-\end{figure}
 
 
