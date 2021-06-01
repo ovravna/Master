@@ -1,5 +1,5 @@
 % !TEX encoding = UTF-8 Unicode
-%!TEX root = thesis.tex
+%!TEX root = ../thesis.tex
 % !TEX spellcheck = en-US
 %%=========================================
 \chapter{Conclusion}
@@ -72,9 +72,6 @@ A general focus when continuing this project should be gathering more user data 
 
 \section{Future Work}
 
-
-
-
 % Add newer data set WHS rat brain v4
 
 % Add human brain
@@ -86,6 +83,43 @@ A general focus when continuing this project should be gathering more user data 
 % Photon Voice
 
 % Improve Android app => menus with android UI should be possible
+
+% More microscopicaldata Sub RQ3
+
+% Desktop or WebGL view app
+
+
+This section will lay down suggestions for how to further the project. These are based on the authors experience with the research project and on discussions with the neuro specialists and medical students testing the application.
+
+\subsubsection*{Import new data sets}
+
+As described in \autoref{chap:ratbrain} the WHS rat brain is under continuous development and the the near future there will be released a forth version of the brain model, with improved delineation. It is a high priority wish from the Kavli Institute to use this brain model in the application.
+
+To import a WHS brain model as a geometric model is a complicated process, which has been explained by Elden in \autoref{chap:elden}.
+The process of exchanging the geometric model used now with a new one however is trivial, but time consuming. A considerable improvement to the application would be the ability to drop in a new model, preferable at run time such that the application wouldn't need to be build and deploy for each model change.
+This would enable future WHS versions to easily be added and even other models like human brains could be switched between.  
+
+Another essential feature to reduce the need for new builds is to enable configuration in-app. The application uses three different text files which saves the configuration of clustering, infoboard and labels, all of these should either be possible to upload at run time or configuration with settings UI in-app.
+
+\subsubsection*{Improve networking}
+A critical improvement to the application would be to have the initial scene of the application give the user an option of creating a room, joining an existing room or playing offline.
+The application as of now will automatically behind the scene, join the existing room or create one if there is none. This gives users less control but more frictionless when testing collaborative features. In a full scale application the user control would probably be preferable.
+
+The networking solution in the application has a considerable amount of bugs and unexpected behavior, this is probably something that is difficult to completely circumvent, but an effort to restructure or fix this should be done.
+
+%todo Microsoft Mesh?
+
+\subsubsection*{Voice chat}
+
+When collaborating in-app remotely the ability to talk to each other would be a great feature, which for a full scale application would be a high priority. 
+
+\subsubsection*{Platform specific input and UI}
+There are few limitations in which platforms the application can run on. However, each platform comes with it's own needs for specific input types and UI. The application has been always been developed with HoloLens 2 as the highest priority and that can be seen in most choices taken conserving UI and input handling. Increasing the user experience on Android and even Windows or WebGL\footnote{The application is buildable for both, but needs input handling to be usable.} should be a priority. Feedback from user testers gave indication that the augmented reality in the android version did not provide an improved user experience and thus disabling camera and spatial features in Android could be seen as an improvement, which could be extended to a desktop application.
+A future version of the application running on the web, with WebGL, would probably be possible and further the goal of accessibility.
+
+
+
+
 
 
 

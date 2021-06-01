@@ -10,7 +10,7 @@
    
   "editor.tabCompletion": "off",
 
-  "latex-workshop.view.pdf.viewer": "browser",
+  "latex-workshop.view.pdf.viewer": "tab",
   "latex-workshop.intellisense.package.enabled": true,
   "latex-workshop.view.outline.labels.enabled": false,
   "latex-workshop.view.outline.numbers.enabled": false,
