@@ -32,15 +32,45 @@ As a new field, this field suffers from naming disagreements. This is a confusin
 
 \section{Graphics and Rendering}
 
-Three dimensional data can be stored and visualized in a number of ways, and the way a graphical application like Nevrolens does it is very different from the ways of medical applications. Within medicine volumetric data is common, as it is just as important what's inside the model as what's outside. In convectional graphics 3D models are built up of 2D polygons which added up forms a 3D structure, this reduces rendering time while keeping the outside structure of the model intact. \autoref{fig:lowpolyratbrain} show a model with about 15 thousand polygons. 
+\subsection*{Models old}
+
+Three dimensional data can be stored and visualized in a number of ways, and the way a graphical application like Nevrolens does it is very different from the ways of medical applications. Within medicine volumetric data is common, as it is just as important what's inside the model as what's outside. In conventional graphics 3D models are built up of 2D polygons which added up forms a 3D structure, this reduces rendering time while keeping the outside structure of the model intact. \autoref{fig:lowpolyratbrain} show a model with about 15 thousand polygons. 
 
 The process of generating polygonal models from volumetric models is quite complex, \citet{Elden2017} writes about this process in some detail, which can be found in \autoref{chap:elden}. This is the model I have used in Nevrolens though the model had to be simplified further to about 300,000 triangles, to run decently on the HoloLens 2.  
 
-\begin{figure}[h]\label{fig:lowpolyratbrain}
+\begin{figure}[ht]\label{fig:lowpolyratbrain}
     \includegraphics[width=\textwidth]{fig/ratbrain_lowpoly}
     \caption{Wireframe view of the low resolution rat brain in Microsoft 3D Viewer. The triangles are clearly distinguishable, in total there is 14,912 triangles in this model. }
 \end{figure}
 
+
+
+\subsection*{Models}
+
+% surface vs volume model
+
+\subsection*{Colors}
+
+% rgb hsv
+
+\begin{wrapfigure}{r}{0.45\textwidth}
+    \begin{center}
+        \includegraphics[width=0.42\textwidth]{fig/hsv_illustration}
+    \end{center}
+    \caption{HSV color model represented cylindrically.}
+\end{wrapfigure}
+
+Within computer graphics colors are generally encoded by extracting the primary color values in separate channels, this is called RGB (Red, green, blue) and is the basis for most color models used on computers.
+This is naturally used widely in this project, and will not be explained further. There is however another less common color model used in this project which has some useful properties worth exploring. 
+This is the HSV color model. The different channels are hue, saturation, and value. The hue is simply the color based on a traditional color wheel, this means that the color will periodically repeat starting with red on hue=0, green on hue=0.33 and green on hue=0.67. The saturation is how "colorful" the color is, there 0 is a gray-scale and 1 is completely colored. The value is sometimes also called light or brightness, where 0 is black and 1 is again completely colored.
+% This color model is designed to be more intuitive for human use and also 
+
+
+\subsection*{Transformation}
+
+
+
+% todo affine transformation
 
 
 % \subsection*{Rasterization, Polygons and 3D models}
@@ -123,16 +153,16 @@ The coordinate system for WHS is defined as a continuous Cartesian system with t
 
 \section{Equipment}
 
-\subsection*{HoloLens 2}
+\subsection*{HoloLens 2}\label{chap:hololens2}
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.4\textwidth]{fig/hololens2}
 \end{figure}
 
 HoloLens 2 is the second iteration of Microsoft immersive headset line. It uses an ARM-based computing unit, running a custom holographic version of Windows 10 for ARM. This enables the HoloLens 2 to produce high quality graphics while being very power efficient. It was announced in early 2019, with a limited release on November 7, 2019. It is however jet, as of writing, not publicly available and could be considered a limited industrial product.
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \includegraphics[width=\textwidth]{fig/hololens2specs}
     \caption{Specifications for the HoloLens 2}
 \end{figure}
@@ -145,7 +175,7 @@ This project mainly focuses on developing for the HoloLens 2.
 
 \subsection*{Unity}\label{chap:unity}
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{fig/unity_example.png}
     \caption{Unity 2019.4.13f1 running Nevrolens}
@@ -162,38 +192,11 @@ An alternative to using MRTK would be to us XRTK which is a community-driven for
 
 
 
-\subsection*{Blender}
+\subsection*{Blender}\label{chap:blender}
 
 Blender is a 3D modeling application, it is free open source software and is has a wide set of functionalities for 3D modeling, animation, rendering and optimization. Till now this project has only made use of one tool in Blender, \textit{decimation}, the process of simplifying the polygon count of a 3D model. This has been done by scripting, simply because Blender does not have a built-in way to apply a modifier on multiple objects\footnote{Or at least I didn't find any such solution.}. \autoref{item:blenderscript} showcases my use of Blender in its entirety.
 
 
-\begin{lstlisting}[language=python, label={item:blenderscript}, caption={Blender script applying a decimate modifier to all relevant objects in a scene.}]
-import bpy # importing the blender python library
-
-def decimate(ratio, replace = True):
-    # Finds all objects and filters irrelevant objects from the FBX 
-    brainparts = [n for n in bpy.data.objects \
-        if n.name not in ("Camera", "Light")]
-
-    for part in brainparts:
-        mod = 0
-        # Finds all decimate modifiers on each brainpart
-        decimate_mods = [n for n in part.modifiers \ 
-           if n.type == 'DECIMATE']
-        if decimate_mods and not replace:
-            mod = decimate_mods[0]
-        else:
-            if replace: 
-                # Removes all decimate modifiers from the brainpart
-                for m in decimate_mods:
-                    part.modifiers.remove(m)
-            mod = part.modifiers.new(type='DECIMATE', name='Decimate')
-            mod.decimate_type = 'COLLAPSE'
-        # Sets the specifies strength to the decimate operation. 
-        mod.ratio = ratio
-# Calls function with given decimate strength.
-decimate(0.08)
-\end{lstlisting}
 
 \subsection*{Photon Unity Networking 2}\label{chap:pun}
 Photon Unity Networking 2 (PUN) is the state of the art networking library for Unity. It can manage everything from voice chat to interaction over network. This has not jet been used in the project, but will be referred to in \nameref{chap:futurework}. 
@@ -208,7 +211,7 @@ Windows Device Portal is an web-based application for managing devices running W
 Git is a distributed version control system. Together with hosting on NTNUs self-managed GitLab it enables version control and cloud back-up of the project. While this is the most conventional version control system for any software project, using Git with Unity can be frustrating. 
 % There are two main problems with this approach; file sizes and binary changes.
 Git is design for projects with only (mostly) small, human-readable text files, like a code base. A Unity project often as huge files, which Git does not support, and relevant changes can happen in binary files, which makes merging impossible. To mitigate this problems the use of Git LFS was needed. It is an extension for Git which enables storages of larger files. Together with enabling only human readable settings in Unity and a long gitignore file, Git with Unity was manageable.
-A good alternative to this use of Git is \textit{Unity Collab}, which is Unity's answer to version control, it lack many features found in Git, but would probably be just fine for a projx|ect of this scope with a single programmer. However, I like Git very much and find the feature-set of Git to be very helpful. 
+A good alternative to this use of Git is \textit{Unity Collab}, which is Unity's answer to version control, it lack many features found in Git, but would probably be just fine for a project of this scope with a single programmer. However, I like Git very much and find the feature-set of Git to be very helpful. 
 
 
 
@@ -216,7 +219,7 @@ A good alternative to this use of Git is \textit{Unity Collab}, which is Unity's
 % Kanban and such \\
 % Used both / separately for Nevrolens and Project thesis.
 GitKraken is a graphical Git management tool. What's more relevant here is its Kanban feature, or GitKraken Boards as their called. This enables synchronization of Kanban tickets and feature branches in Git, and generally makes my life easier.
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{fig/gitkraken}
     \caption{Git log in GitKraken, on the left you can see synchronized Kanban tickets}
@@ -226,7 +229,7 @@ GitKraken is a graphical Git management tool. What's more relevant here is its K
 \section{Related work}
 
 \subsection*{VRVisualizer}\label{chap:vrvis}
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{fig/vrvis_ratbrain.jpg}
     \caption{Cutting operation in VRVisualizer on HTC Vive}
@@ -239,7 +242,7 @@ VRVisualizer is the name of the research product from the master thesis \citet{E
 ITK-Snap is an open-source interactive computer application for navigating medical imagery. It is a convectional tool used to display, segment and label 3D neuroanatomical data. It supports a wide array of visual tools which helps in learning about the brain.
 However, the fact that it is purely displayed on a two dimensional monitor, means it limits the opportunity of spatial understanding.
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \includegraphics[width=0.5\textwidth]{fig/itk_snap}
     \includegraphics[width=0.5\textwidth]{fig/itk_snap_example}
     \caption{ITK-Snap, Waxholm Space Rat Brain (left), Human brain (right)}
@@ -249,7 +252,7 @@ However, the fact that it is purely displayed on a two dimensional monitor, mean
 
 HoloAnatomy is a application running on HoloLens, which aims to be a educational tool for anatomy including basic neuroanatomy. \citet{Wish2020} has shown great promise in use of this application for education. While this application is really promising, it lacks some features we would like to focus on. There is no use of mobile devices for collaborative learning. And HoloAnatomy focuses on the macroscopic image of anatomy, and does not go into microscopic detail, which is something this project aims to do. Further, at NTNU and the Kavli Institute research and education using rat brains is normal an thus visualizing it it AR is also a focus.
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \includegraphics[width=0.5\textwidth]{fig/holoanatomy1}
     \includegraphics[trim={0 1.76cm 0 0},clip,width=0.5\textwidth]{fig/holoanatomy2}
     \caption{HoloAnatomy}

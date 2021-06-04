@@ -77,6 +77,63 @@ We should work to not fall under the 'meets' criteria on any relevant metric in 
 
 % and non-functional requirements, which describe  
 
+\section{Development phase}
+
+\subsection*{Initializing application, importing model and simplifying it}
+
+\begin{wrapfigure}{r}{0.45\textwidth} 
+    \centering
+    \includegraphics[width=0.45\textwidth]{fig/hololens2polycount}
+    \caption{Figure showing frame rate as a function of polygon count on HoloLens 2. \\ Credit: \href{https://community.fologram.com/t/hololens-2-polygon-count-and-frame-rate/49}{Fologram}}
+    \vspace{20pt}
+    \label{fig:polycount}
+\end{wrapfigure}
+
+The first phase of development started by acquiring the surface model of the WHS rat brain created by \citet{Elden2017}. This was done by simply moving the FBX files from the \nameref{chap:vrvis} application and to a new Unity project. After initializing MRTK by following their \href{https://microsoft.github.io/MixedRealityToolkit-Unity/version/releases/2.2.0/Documentation/GettingStartedWithTheMRTK.html}{Getting Started documentation}, the application was ready to deploy on the HoloLens 2. This resulted in a barely running application as the polygon count of the brain model was orders of magnitude larger than what is recommended to maintain adequate performance on the HoloLens 2, which is in the order of 100,000 polygons shown in \autoref{fig:polycount}. The model used by Elden was scaled to run on workstation computer outputting to an HTC Vive, and thus his model was reduced from a original 16 million polygons to around 3 million. The HoloLens 2 runs all calculations on-device on a mobile ARM-based processing unit and naturally the brain model created for rendering on a dedicated workstation graphics card had to be further scaled down. 
+This downscaling was first experimented with doing at run-time dynamically on-device using the library \textit{UnityMeshSimplifier}. It was quickly determined that this was not a viable solution both because of untenable processing time, but also because the simplified result had a huge impact on quality of model, hinting at the performance optimization that had to be done on the simplifier algorithm to be able to execute at run-time. The next and final solution for downscaling was to use the \textit{decimate} modifier in \nameref{chap:blender}. \textit{Incremental decimation} is a mesh simplification algorithm which trades some speed for higher mesh quality, in contrast to the \textit{vertex clustering} presumably used in UnityMeshSimplifier which prioritizes speed in such a way that topology is not preserved. Within Blender functionality for simple application of the modifier to all objects in a tree-structure was not found, or understood to exist, so a script applying the decimate modifier with a given ratio was written, see \autoref{item:blenderscript}. The \texttt{ratio} parameter is a value between 0 and 1, representing the scaling of the resulting mesh' polygon count.
+
+\begin{lstlisting}[language=python, label={item:blenderscript}, caption={Blender script applying a decimate modifier to all relevant objects in a scene.}]
+import bpy # importing the blender python library
+
+def decimate(ratio, replace = True):
+    # Finds all objects and filters irrelevant objects from the FBX 
+    brainparts = [n for n in bpy.data.objects \
+        if n.name not in ("Camera", "Light")] 
+
+    for part in brainparts:
+        mod = 0
+        # Finds all decimate modifiers on each brainpart
+        decimate_mods = [n for n in part.modifiers \ 
+           if n.type == 'DECIMATE']
+        if decimate_mods and not replace:
+            mod = decimate_mods[0]
+        else:
+            if replace: 
+                # Removes all decimate modifiers from the brainpart
+                for m in decimate_mods:
+                    part.modifiers.remove(m)
+            mod = part.modifiers.new(type='DECIMATE', name='Decimate')
+            mod.decimate_type = 'COLLAPSE'
+        # Sets the specifies strength to the decimate operation. 
+        mod.ratio = ratio
+# Calls function with given decimate strength.
+decimate(0.08)
+\end{lstlisting}
+
+The resulting decimated model, even at the ratio of 0.08, was visibly nearly indistinguishable from the original model when looking at them through the HoloLens 2 display which, as described in \autoref{chap:hololens2}, is somewhat blurry. \autoref{fig:decimate} shows the difference as seen in the Unity editor. Ultimately, a decimation ratio of 0.08 was chosen as a compromise between detail and performance being about 300,000 polygons, this compromise will be discussed further in \autoref{chap:discussperformance}.
+\begin{figure}[ht]
+    \includegraphics[width=\textwidth]{fig/brainmodeldecimateratio2.png}
+    \caption{WHS rat brain models with decreasing polygon count.}
+    \label{fig:decimate}
+\end{figure}
+
+\subsection*{First AR MVP}
+Having a surface model of the brain running reasonably well on the HoloLens 2, the next step in developing the application was to implement basic AR features like object manipulation
+
+
+
+% importing Elden's brain, adding MRTK features, downscaling the model
+% first mvp 
 
 \section{Software Process}
 % https://www.wikipendium.no/TDT4140_Programvareutvikling/nb/#kapittel-2-software-processes
@@ -119,6 +176,17 @@ The rat brain model used in Nevrolens is, as of now, the same model as in \namer
 
 \subsection*{Porting to Android}
 The application was originally developed for HoloLens 2, but other platforms were always in mind and because of the use of \nameref{chap:mrtk}, deploying to other platform was relatively easy, within the documentation for MRTK, there was guides for how to build for Android. Interaction on Android is more complicated though. Because all interaction happens on screen additional effort has to be laid down to implement a good user experience on smartphone.  
+
+
+\section{Phase 1: Autumn}
+\section{Phase 1: Autumn}
+\section{Phase 1: Autumn}
+
+
+% møte med menno, research plan greia
+
+
+
 
 
 

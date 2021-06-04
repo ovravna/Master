@@ -15,6 +15,9 @@
 % \usepackage[shortlabels]{enumitem}
 \usepackage{listings}
 
+\usepackage{caption}
+\captionsetup[figure,lstlisting]{font=footnotesize}
+
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
@@ -59,9 +62,10 @@
 \setcounter{page}{0}
 \pagenumbering{arabic}
 \include{chapters/introduction}
-\include{chapters/background}
+\include{chapters/Background}
 \include{chapters/implementation}
 \include{chapters/results}
+\include{chapters/discussion}
 \include{chapters/conclusion}
 % Include more chapters as required.
 %%=========================================
