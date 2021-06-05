@@ -127,10 +127,37 @@ The resulting decimated model, even at the ratio of 0.08, was visibly nearly ind
     \label{fig:decimate}
 \end{figure}
 
+
+
 \subsection*{First AR MVP}
-Having a surface model of the brain running reasonably well on the HoloLens 2, the next step in developing the application was to implement basic AR features like object manipulation
+Having a surface model of the brain running reasonably well on the HoloLens 2, the next step in developing the application was to implement basic AR-based interact features. The brain model consist of an empty parent object with 29 children each containing the mesh of a delineated brain structure, see \autoref{fig:brainunitytree}. Adding the \texttt{Object Manipulator} component from MRTK and a standard Unity \texttt{Mesh Collider} component to each child in the brain model allows for picking apart the brain. This is done by grabbing and moving each separate structure with a MRTK defined \textit{pointer}, this is the logical abstraction for the simplest interact handling with HoloLens 2 giving the user a virtual laser pointer from their finger. The resulting action can be seen in \autoref{fig:grabbrain}. 
 
+% \begin{wrapfigure}{r}{0.38\textwidth} 
+%     \centering
+%     \includegraphics[width=0.35\textwidth]{fig/brainunitytree.png}
+%     \caption{The tree structure of the Unity \texttt{GameObject} of the brain model.}
+%     \vspace{-10pt}
+%     \label{fig:brainunitytree}
+% \end{wrapfigure}
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.30\textwidth]{fig/brainunitytree.png}
+    \includegraphics[width=0.60\textwidth]{fig/shittyassbraintreediagram.png}
+    \caption{The tree structure of the Unity \texttt{GameObject} of the brain model.}
+    \label{fig:brainunitytree}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig/grabbrainsection.png}
+    \caption{Grabbing the neocortex brain structure with a MRTK pointer in the Unity editor.}
+    \label{fig:grabbrain}
+\end{figure}
+
+An apparent problem at this stage was that thought the brain structures are separate objects, they were difficult to visually distinguish from each other. A script which took all child objects and applied a random color to each was written and placed on the parent object, thus quickly giving some visual separation of the structures. While implementing this feature, the \textit{material} of each child was changed from Unity's default material to a \textit{MRTK Standard} material. Materials are the way Unity handles rendering details for each object, this is where shader, texture and general rendering options are configured. The MRTK Standard materials is a set of materials using the the \texttt{MixedRealityStandard.shader} shader, this shader is optimized for MR use, and superficially for HoloLens, and is meant for fulfill all shader-needs when developing for these platforms. 
+
+With a colorful and manipulatable brain, the next natural step was tackling the system requirements, specifically the first functional requirement, implementing brain dissection. This was done with the clipping feature in the aforementioned MixedRealityStandard shader. Clipping has the effect of removing vertices by some defined function, and by using a prebuilt clipping plane prefab and declare on which meshes is should act, a dissection affect was created. 
 
 % importing Elden's brain, adding MRTK features, downscaling the model
 % first mvp 
