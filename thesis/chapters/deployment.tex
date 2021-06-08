@@ -1,0 +1,64 @@
+\chapter{Deployment}
+
+
+\subsection*{Installation of Nevrolens}
+
+This section will be a guide for installing Nevrolens on HoloLens 2 and Android from packages hosted on GitLab.
+By following the instructions for HoloLens 2, this should also work for HoloLens 1, but has limited testing on that platform as it was not a focus of this research.
+
+\subsubsection*{Deploy to HoloLens 2}
+
+\begin{enumerate}
+    \item {
+        \textbf{Go to the release page}\\
+        Found here: \url{https://gitlab.stud.idi.ntnu.no/olevra/nevrolens/-/releases}
+    }
+    \item {
+        \textbf{Choose a release}\\
+        Preferably the topmost and latest. This research ends on is version 0.3.3. 
+    }
+
+    \item {
+        \textbf{Download the HoloLens zip package}\\
+        Under \textit{Packages} click on the package for HoloLens (1 and 2) to download it.
+    }
+
+    \item {
+        \textbf{Unzip file}\\
+        Open the downloaded ZIP-file and extract it.
+    }
+
+    \item {
+        \textbf{Open the Windows Device Portal for HoloLens}\\
+        Guide by Microsoft: \href{https://docs.microsoft.com/en-us/windows/mixed-reality/develop/platform-capabilities-and-apis/using-the-windows-device-portal}{Using the Windows Device Portal}
+    }
+    \item {
+        \textbf{Install appxbundle}\\
+        Under \textit{Views / Apps} click \texttt{Choose File} and locate the APPXBUNDLE-file inside the folder extracted from the ZIP-file. Then click \texttt{Install}.
+    }
+
+\end{enumerate}
+
+\subsubsection*{Deploy to Android}
+
+\begin{enumerate}
+    \item {
+        \textbf{Go to the release page on your Android device}\\
+        Found here: \url{https://gitlab.stud.idi.ntnu.no/olevra/nevrolens/-/releases}
+    }
+    \item {
+        \textbf{Choose a release}\\
+        Preferably the topmost and latest. This research ends on is version 0.3.3. 
+    }
+
+    \item {
+        \textbf{Download the Android APK-file}\\
+        Under \textit{Packages} click on the package for Android to download it.
+    }
+
+    \item {
+        \textbf{Open the downloaded file.}\\
+        Your device will ask for your permission to install an application from a unknown source. Accepting this, the device will start installing the application.
+    }
+
+\end{enumerate}

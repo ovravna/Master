@@ -161,29 +161,32 @@ The coordinate system for WHS is defined as a continuous Cartesian system with t
 \end{figure}
 
 HoloLens 2 is the second iteration of Microsoft immersive headset line. It uses an ARM-based computing unit, running a custom holographic version of Windows 10 for ARM. This enables the HoloLens 2 to produce high quality graphics while being very power efficient. It was announced in early 2019, with a limited release on November 7, 2019. It is however jet, as of writing, not publicly available and could be considered a limited industrial product.
+As the technology stands today, HoloLens 2 is the most complete augmented reality device on the marked, with interaction features like hand tracking and eye tracking in combination with the most immersive display technology in any AR HMD. This makes it a natural device choice for developing AR applications with today. \author{fig:specshololens2} show the specifications for HoloLens 2. 
+Very helpfully the HoloLens 2 has on-board screen capturing tools and the option to live preview the video feed from the Windows Device Portal. These features have helped greatly both in user testing and in demonstration the application.
 
 \begin{figure}[ht]
     \includegraphics[width=\textwidth]{fig/hololens2specs}
     \caption{Specifications for the HoloLens 2}
+    \label{fig:specshololens2}
 \end{figure}
 
-This project mainly focuses on developing for the HoloLens 2.
 
 
-\section{Tools}\label{chap:tools}
+
+\section{Software Tools}\label{chap:tools}
 
 
 \subsection*{Unity}\label{chap:unity}
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\textwidth]{fig/unity_example.png}
+    \includegraphics[width=0.8\textwidth]{fig/unity_example.png}
     \caption{Unity 2019.4.13f1 running Nevrolens}
 \end{figure}
 
 Unity is a game engine for developing 2D and 3D games. It has grown to become the most popular game engine used by single developers and small development teams because of its ease of use and simple licensing terms for independent developers. Because of its popularity  and ease of use Unity has become a platform for 3D development within more widespread fields than video gaming, such as engineering, moviemaking and architecture. 
 Within this project the critical reason for choosing Unity for our 3D development is the exceptional support for the HoloLens product line. As seen in the \autoref{chap:mrtk}, Microsoft has poured resources into developing a "relatively" robust open framework for using Unity to develop for HoloLens. 
-Alternatives to using Unity are slim, but one could be to use Unreal Engine, an 3D game engine with great support for VR and AR in general, however the support for HoloLens specific tools like \nameref{chap:mrtk} is limited\footnote{Microsoft has a version of MRTK for Unreal, called \href{https://github.com/microsoft/MixedRealityToolkit-Unreal}{MRTK-Unreal}. It seems to be stale however, not having any updates in the last six months in the time of writing.}.
+Alternatives to using Unity are slim, but one could be to use Unreal Engine, an 3D game engine with great support for VR and AR in general, however the support for HoloLens specific tools like \nameref{chap:mrtk} is limited, Microsoft has a version of MRTK for Unreal, called \href{https://github.com/microsoft/MixedRealityToolkit-Unreal}{MRTK-Unreal}. It seems to be stale however, not having any updates in the last six months in the time of writing.
 % An alternative to using Unity wo
 
 \subsection*{Mixed Reality Toolkit}\label{chap:mrtk}
@@ -194,12 +197,13 @@ An alternative to using MRTK would be to us XRTK which is a community-driven for
 
 \subsection*{Blender}\label{chap:blender}
 
-Blender is a 3D modeling application, it is free open source software and is has a wide set of functionalities for 3D modeling, animation, rendering and optimization. Till now this project has only made use of one tool in Blender, \textit{decimation}, the process of simplifying the polygon count of a 3D model. This has been done by scripting, simply because Blender does not have a built-in way to apply a modifier on multiple objects\footnote{Or at least I didn't find any such solution.}. \autoref{item:blenderscript} showcases my use of Blender in its entirety.
+Blender is a 3D modeling application, it is free open source software and is has a wide set of functionalities for 3D modeling, animation, rendering and optimization. This was chosen because of its free and open availability. 
 
 
 
 \subsection*{Photon Unity Networking 2}\label{chap:pun}
-Photon Unity Networking 2 (PUN) is the state of the art networking library for Unity. It can manage everything from voice chat to interaction over network. This has not jet been used in the project, but will be referred to in \nameref{chap:futurework}. 
+Photon Unity Networking 2 (PUN) is the state of the art networking library for Unity. It can manage everything from voice chat to interaction over network. 
+
 
 \subsection*{Windows Device Portal}\label{chap:wdp}
 

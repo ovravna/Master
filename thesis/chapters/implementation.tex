@@ -30,7 +30,7 @@ Thus, we had an outline of a neuroanatomical education tool in AR using the Holo
     \item Describe/explore the feasibility to implement the system for Human neuroanatomy education.
 \end{enumerate}
 
-\footnotetext{Referring to \nameref{chap:vrvis}.}
+\footnotetext{Referring to \nameref{chap:vrvis} by \citep{Elden2017}.}
 
 Here items 1-4 were deemed critical for the project, while 5 and 6 were dependent on the progress made.
 
@@ -79,7 +79,7 @@ We should work to not fall under the 'meets' criteria on any relevant metric in 
 
 \section{Development phase}
 
-\subsection*{Initializing application, importing model and simplifying it}
+\subsection*{0th iteration: Initializing application, importing and simplifying brain model}
 
 \begin{wrapfigure}{r}{0.45\textwidth} 
     \centering
@@ -118,7 +118,7 @@ The resulting decimated model, even at the ratio of 0.08, was visibly nearly ind
 
 
 
-\subsection*{First phase}
+\subsection*{1st iteration: MVP}
 Having a surface model of the brain running reasonably well on the HoloLens 2, the next step in developing the application was to implement basic AR-based interact features. The brain model consist of an empty parent object with 29 children each containing the mesh of a delineated brain structure, see \autoref{fig:brainunitytree}. Adding the \texttt{Object Manipulator} component from MRTK and a standard Unity \texttt{Mesh Collider} component to each child in the brain model allows for picking apart the brain. This is done by grabbing and moving each separate structure with a MRTK defined \textit{pointer}, this is the logical abstraction for the simplest interact handling with HoloLens 2 giving the user a virtual laser pointer from their finger. The resulting action can be seen in \autoref{fig:grabbrain}. 
 
 % \begin{wrapfigure}{r}{0.38\textwidth} 
@@ -146,7 +146,8 @@ Having a surface model of the brain running reasonably well on the HoloLens 2, t
 
 An apparent problem at this stage was that thought the brain structures are separate objects, they were difficult to visually distinguish from each other. A script which took all child objects and applied a random color to each was written and placed on the parent object, thus quickly giving some visual separation of the structures. While implementing this feature, the \textit{material} of each child was changed from Unity's default material to a \textit{MRTK Standard} material. Materials are the way Unity handles rendering details for each object, this is where shader, texture and general rendering options are configured. The MRTK Standard materials is a set of materials using the the \texttt{MixedRealityStandard.shader} shader, this shader is optimized for MR use, and superficially for HoloLens, and is meant for fulfill all shader-needs when developing for these platforms. 
 
-With a colorful and manipulatable brain, the next natural step was tackling the system requirements, specifically the first functional requirement, implementing brain dissection. This was done with the clipping feature in the aforementioned MixedRealityStandard shader. Clipping has the effect of removing vertices by some defined function, and by using a prebuilt clipping plane prefab and declare on which meshes is should act, a dissection affect was created. A handle for manipulating the plane was added for ease of use, by dragged a ball the plane would move such that it was a fixed distance from the ball and perpendicular to the line between the ball and the center of the brain.
+With a some basic visibility and manipulation features for the brain model, the next natural step was tackling the system requirements, specifically the first functional requirement, implementing brain dissection. A \textit{clipping} shader was written and implement to work with the brain, giving more control over the feature than using MRTKs prebuild clipping feature, but seeing as it was not possible to combine a custom shader with MRTK optimizes feature set for AR rendering, the custom clipping implementation was abandoned in favor of MRTK, using the aforementioned MixedRealityStandard shader. Clipping has the effect of removing vertices by some defined function, and by using a prebuilt clipping plane prefab and declare on which meshes is should act, a dissection affect was created. A handle for manipulating the plane was added for ease of use, by dragged a ball the plane would move such that it was a fixed distance from the ball and perpendicular to the line between the ball and the center of the brain. 
+
 
 Further, a hovering menu displaying the name of the last grabbed brain structure and buttons for the actions moving, transparency and dissection was implemented. This was created by modifying a MRTK prefab and updating its name based on the name of the \texttt{GameObject} the \texttt{pointer} targeted while dragging, at the same time a selection lighting effect as applied by simply enabling \texttt{Border Lighting} in the MixedRealityStandard shader. Unity's layer functionality was used to ensure that it was a brain structurer being dragged. One last feature implemented at this phase was a tap-to-spawn feature, this entailed using the \texttt{pointer} to tap on the physical space, and using spatial awareness to place the brain at the locations the the user tapped. In MRTK spatial awareness is enabled by default and its mesh can be identified by a predefined Unity layer, thus \autoref{item:sudopointer} shows a simplified implementation of the \texttt{EventHandler} method, \texttt{OnPointerDown} which spawns the brain if the pointer is hitting the spatial awareness mesh and enables border lighting and menu text if it hits a brain structure.
 
@@ -188,11 +189,33 @@ The application was deployed for HoloLens 2, and was a first MVP demo of the res
     \label{fig:mvpdemo}
 \end{figure}
 
+\subsection*{Next iterations: Continuing development}
 
+This section will give a overview of the continued progress in developing the application and highlighting some specific features. 
 
+The first demonstration of the application was done over video conference, with a pre-recorded YouTube video, demonstrating the features of the application.
 
-\subsection*{Porting to Android}
+\subsubsection*{UI, menus and stuff }
+
+\subsubsection*{Feedback from demo}
+% list view
+
+\subsubsection*{Coloring brain}
+
+\subsubsection*{Snapping}
+
+\subsubsection*{Porting to Android}
 The application was originally developed for HoloLens 2, but other platforms were always in mind and because of the use of \nameref{chap:mrtk}, deploying to other platform was relatively easy, within the documentation for MRTK, there was guides for how to build for Android. Interaction on Android is more complicated though. Because all interaction happens on screen additional effort has to be laid down to implement a good user experience on smartphone.  
+
+
+\subsubsection*{Volumetric dissection plane}
+
+
+
+\subsection*{3rd iteration: Implementing network}
+\subsection*{4th iteration: Final product}
+
+
 
 
 
