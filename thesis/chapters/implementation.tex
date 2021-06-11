@@ -12,14 +12,16 @@
 
 % and non-functional requirements, which describe  
 
-\section{Development phase}
+\section{Development}
+This research project has been in active progression for two semesters and development has effectively been done in two stages. First in October and November 2020 and then from February till May in 2021. During the fall and first stage of development the focus was on the HoloLens 2 and creating a usable act of dissection in augmented reality. The second stage at spring, had a wider scope, with focus on implementing networking, volumetric data and more. During this chapter it will thus be clearly discrete improvements during the first iterations of the product while later iterations will be grouped and focus will be put on specific features or pain points. The final iteration will focus on improvements done from user feedback and the feature set at the end of development.
 
-\subsection*{0th iteration: Initializing application, importing and simplifying brain model}
+\subsection[Iteration 0]{Iteration 0: First steps, importing model}
+% 0th iteration: Initializing application, importing and simplifying brain model
 
 \begin{wrapfigure}{r}{0.45\textwidth} 
     \centering
     \includegraphics[width=0.45\textwidth]{fig/hololens2polycount}
-    \caption{Figure showing frame rate as a function of polygon count on HoloLens 2. \\ Credit: \href{https://community.fologram.com/t/hololens-2-polygon-count-and-frame-rate/49}{Fologram}}
+    \caption{Figure showing frame rate as a function of polygon count on HoloLens 2. Credit: \href{https://community.fologram.com/t/hololens-2-polygon-count-and-frame-rate/49}{Fologram}}
     \vspace{20pt}
     \label{fig:polycount}
 \end{wrapfigure}
@@ -53,7 +55,8 @@ The resulting decimated model, even at the ratio of 0.08, was visibly nearly ind
 
 
 
-\subsection*{1st iteration: MVP}
+\subsection[Iteration 1]{First iteration: Minimum Viable Product}\label{chap:itr1}
+
 Having a surface model of the brain running reasonably well on the HoloLens 2, the next step in developing the application was to implement basic AR-based interact features. The brain model consist of an empty parent object with 29 children each containing the mesh of a delineated brain structure, see \autoref{fig:brainunitytree}. Adding the \texttt{Object Manipulator} component from MRTK and a standard Unity \texttt{Mesh Collider} component to each child in the brain model allows for picking apart the brain. This is done by grabbing and moving each separate structure with a MRTK defined \textit{pointer}, this is the logical abstraction for the simplest interact handling with HoloLens 2 giving the user a virtual laser pointer from their finger. The resulting action can be seen in \autoref{fig:grabbrain}. 
 
 % \begin{wrapfigure}{r}{0.38\textwidth} 
@@ -81,36 +84,38 @@ Having a surface model of the brain running reasonably well on the HoloLens 2, t
 
 An apparent problem at this stage was that thought the brain structures are separate objects, they were difficult to visually distinguish from each other. A script which took all child objects and applied a random color to each was written and placed on the parent object, thus quickly giving some visual separation of the structures. While implementing this feature, the \textit{material} of each child was changed from Unity's default material to a \textit{MRTK Standard} material. Materials are the way Unity handles rendering details for each object, this is where shader, texture and general rendering options are configured. The MRTK Standard materials is a set of materials using the the \texttt{MixedRealityStandard.shader} shader, this shader is optimized for MR use, and superficially for HoloLens, and is meant for fulfill all shader-needs when developing for these platforms. 
 
+% Jeg heter Ole og jeg har liten tiss
+
 With a some basic visibility and manipulation features for the brain model, the next natural step was tackling the system requirements, specifically the first functional requirement, implementing brain dissection. A \textit{clipping} shader was written and implement to work with the brain, giving more control over the feature than using MRTKs prebuild clipping feature, but seeing as it was not possible to combine a custom shader with MRTK optimizes feature set for AR rendering, the custom clipping implementation was abandoned in favor of MRTK, using the aforementioned MixedRealityStandard shader. Clipping has the effect of removing vertices by some defined function, and by using a prebuilt clipping plane prefab and declare on which meshes is should act, a dissection affect was created. A handle for manipulating the plane was added for ease of use, by dragged a ball the plane would move such that it was a fixed distance from the ball and perpendicular to the line between the ball and the center of the brain. 
 
 
 Further, a hovering menu displaying the name of the last grabbed brain structure and buttons for the actions moving, transparency and dissection was implemented. This was created by modifying a MRTK prefab and updating its name based on the name of the \texttt{GameObject} the \texttt{pointer} targeted while dragging, at the same time a selection lighting effect as applied by simply enabling \texttt{Border Lighting} in the MixedRealityStandard shader. Unity's layer functionality was used to ensure that it was a brain structurer being dragged. One last feature implemented at this phase was a tap-to-spawn feature, this entailed using the \texttt{pointer} to tap on the physical space, and using spatial awareness to place the brain at the locations the the user tapped. In MRTK spatial awareness is enabled by default and its mesh can be identified by a predefined Unity layer, thus \autoref{item:sudopointer} shows a simplified implementation of the \texttt{EventHandler} method, \texttt{OnPointerDown} which spawns the brain if the pointer is hitting the spatial awareness mesh and enables border lighting and menu text if it hits a brain structure.
 
 \begin{lstlisting}[language=c, label={item:sudopointer}, caption={A simplified version of the event function called when a \texttt{Ponter} is clicked.}]
-    void OnPointerDown(MixedRealityPointerEventData eventData)
-    {
-        if (!HasTarget(eventData.Pointer)) 
-            return;
-        Vector3 hitPoint = GetHitPoint(eventData.Pointer);
-        GameObject target = GetCurrentTarget(eventData.Pointer);
+void OnPointerDown(MixedRealityPointerEventData eventData)
+{
+    if (!HasTarget(eventData.Pointer)) 
+        return;
+    Vector3 hitPoint = GetHitPoint(eventData.Pointer);
+    GameObject target = GetCurrentTarget(eventData.Pointer);
 
-        switch (target.layer)
+    switch (target.layer)
+    {
+        case SpatialAwarenessLayer:
         {
-            case SpatialAwarenessLayer:
-            {
-                if (BrainHasNotBeenSpawned())
-                    SpawnBrainAt(hitPoint);
-            }
-            case BrainStructureLayer:
-            {
-                if (selectedStructure != null)
-                    DisableBorderLighting(selectedStructure);
-                EnableBorderLighting(target);
-                SetMenuText(target.name);
-                selectedStructure = target;
-            }
+            if (BrainHasNotBeenSpawned())
+                SpawnBrainAt(hitPoint);
+        }
+        case BrainStructureLayer:
+        {
+            if (selectedStructure != null)
+                DisableBorderLighting(selectedStructure);
+            EnableBorderLighting(target);
+            SetMenuText(target.name);
+            selectedStructure = target;
         }
     }
+}
 \end{lstlisting}
 
 The application was deployed for HoloLens 2, and was a first MVP demo of the research project. \autoref{fig:mvpdemo} shows spawning of the brain model from image 1 to image 2 in the top row, notice the pointer on the table in image 1. Image 3 illustrates the clipping feature, while image 4 has a user taking out the \textit{cornu ammonis 3} brain structure.
@@ -124,21 +129,51 @@ The application was deployed for HoloLens 2, and was a first MVP demo of the res
     \label{fig:mvpdemo}
 \end{figure}
 
-\subsection*{Next iterations: Continuing development}
+\subsection[Iteration N]{Next iterations: Continuing development}
 
 The continuation of the project will be explored further, but will focus on implementation of highlighted features and and high-level overview of the process, rather than a chronological log as in previous sections. 
 % This section will give a overview of the continued progress in developing the application and highlighting some specific features. 
 
-The first demonstration of the application was done over video conference, with a pre-recorded YouTube video, demonstrating the features of the application.
+Shortly after end of the first iteration a demonstration of the application was done over video conference, with a pre-recorded YouTube video, demonstrating the features of the application. In addition a physical stakeholder meeting at St. Olavs Hospital was arranged where only the project researcher used the application with the HMD, but through live streaming the video feed from the headset and operational guidance from Dr. Menno Witter testing of dissection features were held. The application was at this stage nearly identical to what was seen at the end of the \nameref{chap:itr1}, with minor tweaks and bug fixes.
+
+After this initial demonstrations stakeholders from the Kavli Institute were intrigued to see further development and had very positive sentiments toward the research project. Feedback gathered from this meeting included mainly two features, an ability to place brain structures back into the brain after deconstruction, basically to tidy up the brain after manipulation. Second, a list view for choosing which brain structures should be visible, this feature request was inspired by Eldens \nameref{chap:vrvis} which some of the stakeholders had previous experience with.
+
+\subsubsection*{Snapping}
+The first of the described feature request to be able to put brain structures back into place. Snapping structures as magnets was suggested as a metaphor for the action. 
+
+This snapping effect was implement as a \texttt{MonoBehavior} called \texttt{SnapInPlace}, by storing the initial position of each snappable object and comparing the distance to this position with a given \texttt{snapThreshold} distance at the end of each manipulation: 
+
+\begin{lstlisting}[language=c]
+void OnManipulationEnded() {
+    if (Distance(storedPosition, currentPosition) < snapThreshold) 
+        currentPosition = storedPosition; 
+}
+\end{lstlisting}
+
+This worked well enough, however no indication of the snapping behavior was given to the user and so it could be interpreted as an unexpected behavior when the brain structure just disappears when the user releases it. This issue was solved by having a semi-transparent shadow of the brain structure at its initial position colored green when snapping would occur at release and gray otherwise. Additionally, a audio effect was implemented such that a clicking sound as the structure snapping in place. 
+
+\begin{figure}
+    \centering
+    % \includegraphics[width=0.65\textwidth]{fig/snaphint.png}
+    \includegraphics[width=0.32\textwidth]{fig/snaphint1.png}
+    \includegraphics[width=0.32\textwidth]{fig/snaphint2.png}
+    \includegraphics[width=0.32\textwidth]{fig/snaphint3.png}
+    \caption{The complete snapping process. Right most image shows the brain structure snapping in place at release.}
+\end{figure}
+
+\subsubsection*{Scrollable list view}
+
+A list view similar to the one in \nameref{chap:vrvis}, as seen in \autoref{fig:vrvis} was requested by stakeholders. 
+
 
 \subsubsection*{UI, menus and stuff }
+
 
 \subsubsection*{Feedback from demo}
 % list view
 
 \subsubsection*{Coloring brain}
 
-\subsubsection*{Snapping}
 
 \subsubsection*{Porting to Android}
 The application was originally developed for HoloLens 2, but other platforms were always in mind and because of the use of \nameref{chap:mrtk}, deploying to other platform was relatively easy, within the documentation for MRTK, there was guides for how to build for Android. Interaction on Android is more complicated though. Because all interaction happens on screen additional effort has to be laid down to implement a good user experience on smartphone.  
@@ -148,8 +183,8 @@ The application was originally developed for HoloLens 2, but other platforms wer
 
 
 
-\subsection*{3rd iteration: Implementing network}
-\subsection*{4th iteration: Final product}
+% \subsection*{3rd iteration: Implementing network}
+\subsection[Final Iteration]{Final Iteration}
 
 
 
