@@ -177,12 +177,38 @@ A list view similar to the one in \nameref{chap:vrvis}, as seen in \autoref{fig:
 \subsubsection*{Info Board}
 Textual information about the brain structures was requested by stakeholders as a educational tool for student to use by them self or in groups. The idea was that lecturers could add text as they see fit and change it to an appropriate level for the intended user group. 
 This feature was implemented based on the MRTK \texttt{Slate} with is an AR based floating text box, perfect to simulate a black board. In fact, if wished for in the future it would be trivial to make it look more as a black board by changing the color and the font to something more handwritten.
+The slate was customized by changing the content text reference from \texttt{InfoBoard} MonoBehavior when the a new brain structure was selected, this was done with a \texttt{UnityEvent}, a simple callback function, implemented to trigger when a new brain section is selected (this implementation
+ is found in \texttt{NetworkBrainManager.cs}). The text descriptions for each structure is saved as a text file and is parsed in \texttt{InfoBoard.cs}, the text file uses a custom structure where "@" at the begin of a line indicates a new brain structure and "+" indicates a added images and and all other text is seen as descriptions for the last indicated brain structure. This works well enough, but an obviously more standard and readable approach would be to use a common text based serialization format like JSON or XML. In future development it should be looked into using one of these as both are well supported with built-in deserialization features in Unity with C\#. The implementation does not support any run-time importing of this text even though the parsing is done at run time, functional it would thus be trivial to add. What has to be implemented for this to work however is either file exploring or some other way of accessing files, e.g. from network, see \nameref{chap:futurework} for more on this.
+
+\subsubsection*{Clustering}
+
+By clustering brain structures based on the neurological attributes lecturers can visualize how complete compound structures operation and where they are located in the brain. Just as the \texttt{InfoBoard} this feature utilizes a custom text file parser to define each clusters name, brain structures and color pallet. Again JSON or XML would probably be a wise transition for these configuration files. 
+When selecting the clustering action, the \texttt{Clustering} MonoBehavior iterates through all brain structures and enables or disables according to whether it is a part of the cluster. It also assigns a new color based on the color pallet defined in the configuration file. Color pallets are defined based on HSV color hues, with two numbers indicating start and end hue in degrees, then the brain structures are assigned colors uniformly the given sector of the color wheel. This was found to be a simple and reliable solution to color coding, but could with ease be argue as not being a intuitive solution for unaccustomed or non-technical users. 
 
 
+\begin{figure}
+    \centering
+    % \includegraphics[width=0.65\textwidth]{fig/snaphint.png}
+    \includegraphics[width=0.32\textwidth]{fig/cluster1.png}
+    \includegraphics[width=0.32\textwidth]{fig/cluster2.png}
+    \includegraphics[width=0.32\textwidth]{fig/cluster3.png}
+    \caption{Clusters in Nevrolens.}
+\end{figure}
 
 
 \subsubsection*{Porting to Android}
-The application was originally developed for HoloLens 2, but other platforms were always in mind and because of the use of \nameref{chap:mrtk}, deploying to other platform was relatively easy, within the documentation for MRTK, there was guides for how to build for Android. Interaction on Android is more complicated though. Because all interaction happens on screen additional effort has to be laid down to implement a good user experience on smartphone.  
+% The application was originally developed for HoloLens 2, but other platforms were always in mind and because of the use of \nameref{chap:mrtk}, deploying to other platform was relatively easy, within the documentation for MRTK, there was guides for how to build for Android. Interaction on Android is more complicated though. Because all interaction happens on screen additional effort has to be laid down to implement a good user experience on smartphone.  
+
+As MRTK is a framework specifically designed for HoloLens development, the HoloLens 2 naturally became the main focus of development and thus the application running on Android is a porting of the HoloLens version with small changes to somewhat accommodate the smartphone interface. It has however seen too little platform specific development and is in reality an incomplete product. It is however very much usable and can be seen as a great demonstration of the multiplatform capabilities of MRTK. 
+Porting to Android was initially done by simply deploy the same application to Android, this is easily done in Unity with some MRTK tweaks which can be read up on in the \href{https://microsoft.github.io/MixedRealityToolkit-Unity/version/releases/2.2.0/Documentation/CrossPlatform/UsingARFoundation.html}{documentation}. While this works, some expected features are missing. For example, on the HoloLens 2 the user enables actions in a menu which is bound to their hand this is not possible in Android because the user interacts with the application not by moving the hand in space, but by touching the devices screen, therefore the application will simply disable the hand following feature on Android such that the menu buttons are static in space at all time. This is far from a optimal solution, but has worked for basic proof of concept. 
+\begin{lstlisting}[language=c]
+if (runtimePlatform != GlobalSettings.SupportedPlatform.HoloLens2)
+{
+    GetComponent<HandConstraintPalmUp>().enabled = false;
+}
+\end{lstlisting}
+
+% There are of course some 
 
 
 \subsubsection*{Volumetric dissection plane}
