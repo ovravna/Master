@@ -15,7 +15,7 @@
 \section{Development}
 This research project has been in active progression for two semesters and development has effectively been done in two stages. First in October and November 2020 and then from February till May in 2021. During the fall and first stage of development the focus was on the HoloLens 2 and creating a usable act of dissection in augmented reality. The second stage at spring, had a wider scope, with focus on implementing networking, volumetric data and more. During this chapter it will thus be clearly discrete improvements during the first iterations of the product while later iterations will be grouped and focus will be put on specific features or pain points. The final iteration will focus on improvements done from user feedback and the feature set at the end of development.
 
-\subsection[Iteration 0]{Iteration 0: First steps, importing model}
+\subsection[Iteration 0]{Iteration 0: First steps, importing model}\label{chap:zeroiter}
 % 0th iteration: Initializing application, importing and simplifying brain model
 
 \begin{wrapfigure}{r}{0.45\textwidth} 
@@ -125,7 +125,7 @@ The application was deployed for HoloLens 2, and was a first MVP demo of the res
     \includegraphics[width=0.5\textwidth]{fig/mvpdemo2.png}
     \includegraphics[width=0.5\textwidth]{fig/mvpdemo3.png}
     \includegraphics[width=0.5\textwidth]{fig/mvpdemo4.png}
-    \caption{The first demo of the application.}
+    \caption{The first demo of the application, running on the HoloLens 2.}
     \label{fig:mvpdemo}
 \end{figure}
 
@@ -184,9 +184,10 @@ The slate was customized by changing the content text reference from \texttt{Inf
 
 By clustering brain structures based on the neurological attributes lecturers can visualize how complete compound structures operation and where they are located in the brain. Just as the \texttt{InfoBoard} this feature utilizes a custom text file parser to define each clusters name, brain structures and color pallet. Again JSON or XML would probably be a wise transition for these configuration files. 
 When selecting the clustering action, the \texttt{Clustering} MonoBehavior iterates through all brain structures and enables or disables according to whether it is a part of the cluster. It also assigns a new color based on the color pallet defined in the configuration file. Color pallets are defined based on HSV color hues, with two numbers indicating start and end hue in degrees, then the brain structures are assigned colors uniformly the given sector of the color wheel. This was found to be a simple and reliable solution to color coding, but could with ease be argue as not being a intuitive solution for unaccustomed or non-technical users. 
+For users not to loose spatial orientation when exploring the clusters a outline of the rat brain was added. This outline is a hollow version of the geometric brain model, which was created by manually selecting all outer vertices of the brain model using Blender, this is far from a perfect approach and gives a inaccurate and rough outline and a high polygon count, however if not for future performance issues the author sees no need to fix this.
 
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     % \includegraphics[width=0.65\textwidth]{fig/snaphint.png}
     \includegraphics[width=0.32\textwidth]{fig/cluster1.png}
@@ -215,8 +216,16 @@ if (runtimePlatform != GlobalSettings.SupportedPlatform.HoloLens2)
 
 
 
+
+
+\subsubsection*{Networking optimization}
+
+\subsubsection*{}
+
+
+
 % \subsection*{3rd iteration: Implementing network}
-\subsection[Final Iteration]{Final Iteration}
+\subsection[Final Iteration]{Final Iteration}\label{chap:finaliter}
 
 
 

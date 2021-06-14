@@ -12,18 +12,18 @@
   "latex-workshop.intellisense.package.enabled": true,
   "latex-workshop.view.outline.labels.enabled": false,
   "latex-workshop.view.outline.numbers.enabled": false,
-  "latex-workshop.latex.autoBuild.run": "never",
+  // "latex-workshop.latex.autoBuild.run": "never",
 
   "spellright.notificationClass": "warning",
 
-  // "files.exclude": {
-  //   "**/*.{aux,out,blg,fdb_latexmk,fls,toc}": true,
-  //   "**/*.synctex.gz": true
-  // },
-  // "files.watcherExclude": {
-  //   "**/*.{aux,out,blg,fdb_latexmk,fls,toc}": true,
-  //   "**/*.synctex.gz": true
-  // },
+  "files.exclude": {
+    "**/*.{aux,out,blg,fdb_latexmk,fls,toc}": true,
+    "**/*.synctex.gz": true
+  },
+  "files.watcherExclude": {
+    "**/*.{aux,out,blg,fdb_latexmk,fls,toc}": true,
+    "**/*.synctex.gz": true
+  },
 
   "openInExternalApp.openMapper": [
     {
@@ -88,5 +88,12 @@
     "markdown",
     "latex",
     "plaintext"
+  ],
+  "latex-workshop.view.outline.floats.enabled": false,
+  "latex-workshop.view.outline.sections": [
+    "part",
+    "chapter",
+    "section",
+    "subsection"
   ],
 }

@@ -4,10 +4,30 @@
 
 \section{Performance}\label{chap:discussperformance}
 
+The main limiting factor for the performance of the Nevrolens application is the polygon count for the models used. The count for the models uses are around 300,000 for the complete model at decimation ratio 0.08 and an hollow outline model with decimation ration 0.4 at about 350,000 polygons, used in clustering. The counts are higher than what is generally recommended for HoloLens 2, naturally this results in an application which runs well under the best recommended performance quality criteria which the non-functional requirements of this research project set out to meet. The application will hover around 40 to 50 frames per second while in normal use and drop to around 30 to 35 while rendering the volumetric dissection plane, the recommended quality criteria lists 60 fps as a goal for \textit{Best} performance, but the application follows the \textit{Meets} criteria, which state that:
+\begin{quote}
+\textit{The app has intermittent frame drops not impeding the core experience, or FPS is consistently lower than desired goal but doesn’t impede the app experience.}
+\end{quote}
+Thus, the application can be said to meet the quality criteria set by Microsoft. 
+Throughout testing, framerate was genuinely not a detectable issue, no user tester did at any time commented on low performance and even testers experienced with HoloLens and AR technology did not unprompted notice the low framerate while using the application. This could be the result of the somewhat blurry display of the HoloLens 2, or simply that targeting 60 fps is far less critical in AR application, than in on VR devices. 
+On tested Android devices performance has not been of any concern, running at a consistent 60 fps all the time. The teste device is a Samsung Galaxy S8, which was released in 2017 way before the HoloLens 2, and does in fact have a slower processing unit than the HoloLens 2 does. Answering why this performance gap exist will only be speculation, and will not be attempted.
+In conclusion, the performance of the application is at an acceptable level and does not impede the user experience, if that were to happen, either by increased load from demanding features or porting to less performant platforms, a natural and easy solution would be to scale down the brain model further.
+
 \section{Hardware limitations}
 
-\section{Missing data set}
+\subsection*{HoloLens 2 display technology}
 
+\subsection*{Android interaction}
+% Sterioscopic rendering
+
+\subsection*{Android spatial locking}
+
+\section{Missing data set}
+The brain model data set used in this research, which as described in \autoref{chap:zeroiter} was imported from \nameref{chap:vrvis}, is missing a number of brain structures. The model consists of 29 separate structures while the Waxholm Space Rat Brain model it is based on included as least 75 structures. This is of course a huge discrepancy, but it is not as critical as it could seem as most of the omitted structures are very small and would be impractical to handle within AR. Upon questioning Elden has explained that the reduction was done to decrease computational time as the model was meant for a proof of concept. As this is still the case the reduces number of brain structures is still not a critical issue, however if this research project were to be used as an actual educational tool this would be of most dire need for fixing. Another reason this issue has not seen any need for fixing is that there will be a new version of the Waxholm Space brain model released shortly, and stakeholders at Kavli are interested in the use of this model in further research, thus creation of a new brain model has been deferred to \nameref{chap:futurework}.
+
+% There is however one quite notable structure missing, the \textit{Corpus Collosum} .
+\section{Human neuroanatomy}
+Describe/explore the feasibility to implement the system for Human neuroanatomy education.
 % display issues
 
 \section{Contribution}
