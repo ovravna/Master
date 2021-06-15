@@ -1,5 +1,8 @@
 \chapter{Deployment}
 
+The application in this research has been development using Microsoft's Mixed Reality Toolkit and has followed the platforms best practices and recommendations. The deployment process for HoloLens devices are based on sideloading of the application compiled and built with Visual Studio Community 2019, this is the standard way of both building and deploying for HoloLens. For Android the principle of sideloading is also used, but here Unity is responsible for compilation and the build process. 
+The application as 
+
 
 \subsection*{Installation of Nevrolens}
 
@@ -62,3 +65,19 @@ By following the instructions for HoloLens 2, this should also work for HoloLens
     }
 
 \end{enumerate}
+
+\subsection*{Getting started with developing the project}
+This section will briefly explain how to set up the project for development, this differs from deployment in that the goal is to be able to continue development of the project from within Unity and with supporting tools. This is the process the current developer uses when developing from a new computer.
+Having completed this set up deployment of the application can be done, directly from Unity for Android and through Visual Studio 2019 for HoloLens devices.
+
+
+\textbf{Requirements}
+\begin{enumerate}
+    \item Git and Git LFS
+    \item { Unity 2019.4 LTS \\
+    When installing add: \textit{Android Build support} }
+    \item {Visual Studio 2019 \\
+    When installing add: \textit{Universal Windows Platform development}, \textit{USB Device Connectivity}, \textit{Game development with Unity} }
+\end{enumerate}
+Begin by cloning the \textit{Git} repository by typing: \\ \texttt{git clone https://gitlab.stud.idi.ntnu.no/olevra/nevrolens.git} in to \textit{Git Bash}, than type \texttt{git lfs install \&\& git lfs fetch \-\-all}. Now open Unity Hub and locate and add the repository just cloned as a Unity project. Open it with Unity 2019.4, it is critical that this version is used for MRTK to work properly. First time opening this project will take some time, when it is done the project is ready.
+% The deployment process can be found in MRTK documentation 

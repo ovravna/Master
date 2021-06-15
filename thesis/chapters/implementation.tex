@@ -202,7 +202,7 @@ For users not to loose spatial orientation when exploring the clusters a outline
 
 As MRTK is a framework specifically designed for HoloLens development, the HoloLens 2 naturally became the main focus of development and thus the application running on Android is a porting of the HoloLens version with small changes to somewhat accommodate the smartphone interface. It has however seen too little platform specific development and is in reality an incomplete product. It is however very much usable and can be seen as a great demonstration of the multiplatform capabilities of MRTK. 
 Porting to Android was initially done by simply deploy the same application to Android, this is easily done in Unity with some MRTK tweaks which can be read up on in the \href{https://microsoft.github.io/MixedRealityToolkit-Unity/version/releases/2.2.0/Documentation/CrossPlatform/UsingARFoundation.html}{documentation}. While this works, some expected features are missing. For example, on the HoloLens 2 the user enables actions in a menu which is bound to their hand this is not possible in Android because the user interacts with the application not by moving the hand in space, but by touching the devices screen, therefore the application will simply disable the hand following feature on Android such that the menu buttons are static in space at all time. This is far from a optimal solution, but has worked for basic proof of concept. 
-\begin{lstlisting}[language=c]
+\begin{lstlisting}[language=c, caption={Basic example of separate features per device.}]
 if (runtimePlatform != GlobalSettings.SupportedPlatform.HoloLens2)
 {
     GetComponent<HandConstraintPalmUp>().enabled = false;
@@ -214,6 +214,58 @@ if (runtimePlatform != GlobalSettings.SupportedPlatform.HoloLens2)
 
 \subsubsection*{Volumetric dissection plane}
 
+The basic implementation of clipping used for the dissection functionality leaves much to be desired. Clipping is a basic feature in most graphical libraries and shader languages, is will simply discard vertices which does not meet some set predicate. Its foremost purpose in computer graphics is to ensure that vertices outside the viewing cone will not be rendered, this to optimize render time. The result of this process on the surface model being cut open, such that the clipped part of the model becomes a empty hole to the inside of the model. This can be solved by rasterizing the cut plane, and this was experimented with in this project with some success, however this functionality is not afforded by MRTKs standard shader, and thus implementation required the use of a custom shader, which meant that many other useful features implemented in the standard shader also had to be reimplemented. This lead to abandoning this solution and focusing instead on overlaying volumetric data upon the plane of dissection. 
+
+The Waxholm Space rat brain model is a volumetric data set, thus the goal with this feature was to visualize this data set as slices of the volume. The first step in this process was to format the volume in a manner that is usable in Unity and runnable on the target devices. The format of the WHS data set is the NIFTI format, this is a standardized format for neuroimaging data. With help from the library Nifti.NET accessing the \texttt{ushort[]} 3d data array was made possible. An issue arising was that Unity struggled with parsing the data set, and this would result in the application freezing and no data array, thus a basic \textit{dotnet} console application called \href{https://github.com/ovravna/NevrolensNiftiTool}{NevrolensNiftiTool} was made to parse the NIFTI-file and output the 3d array as, of all things, a JSON object. JSON was chosen, after experimenting with \texttt{BinarySerialization}, but finding it to complex to use for data transfer, JSON was tested with success. The Unity scene \texttt{TextureBuilderScene} has a single purpose to generate a \texttt{Texture3D} resource from a JSON file. The MonoBehavior \texttt{BuildNifti3DTexture} takes the JSON file as input and fills the data in a \texttt{Texture3D} and saves in as a asset. 
+With the data in the right format the first naïve implementation was using a MonoBehavior to apply a slice of the 3D data onto the \texttt{Texture2D} of a plane-object. This gave the desired effect of displaying a fixed slice of the volume, and by setting a free variable to one axis a sliding effect was made, however it was with the price of atrocious performance. For a robust implementation the feature would have to be excecated on the GPU as a shader. 
+
+For the intended behavior, it was critical not just to generate slices along predefined axes, but to generate slices along arbitrary planes in the volume. This is, in theory, quite easy to implement on the shader by making use \textit{transformation matrices}. The idea is to map the UV coordinates of the default 2D texture onto the 3D volume. A basic implementation of this in the fragment shader can look like this:
+\begin{lstlisting}[language=c]
+fixed4 frag (v2f i) {
+    // point from the 2D i.uv and the uniform float VariableSlider
+    float3 uvw = float3(i.uv, VariableSlider);
+    // tex3D samples the 3D texture NiftiTexture3D at point uvw
+    fixed4 color = tex3D(NiftiTexture3D, uvw);
+    return color;
+}
+\end{lstlisting}
+
+    This implementation will, just as the C\# MonoBehavior, display slices along the Z-axis. However, by simply multiplying the UV coordinate with a \texttt{TransformationMatrix} instead of setting the Z coordinate, the result is the implementation of the shader used in this application. This one change makes the whole mapping process dependent on the TransformationMatrix, which makes the path forward very flexible.
+
+\begin{lstlisting}[language=c]
+fixed4 frag (v2f i) {
+    // point from product of TransformMatrix and i.uv as 4D point
+    float4 uvw = mul(TransformationMatrix, float4(i.uv, 0, 1));
+    // tex3D samples the 3D texture _NiftiTexture3D at point uvw
+    fixed4 color = tex3D(NiftiTexture3D, uvw);
+    return color;
+}
+\end{lstlisting}
+
+% \autoref{chap:transformation} delves into detail on this topic. 
+
+
+
+
+
+
+% \texttt{Quad}
+
+
+
+% \footnote{Quads, like planes, are 2D surfaces in 3D space, but Quads are designed }
+
+
+
+% this meant to create a \texttt{Texture3D} out
+
+
+% Volumetric data of the Waxholm Space rat brain is a part of the open access data set, in fact the 
+
+
+
+
+% Rotation in multiplayer space and such
 
 
 

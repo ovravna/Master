@@ -4,71 +4,18 @@
 %%=========================================
 \chapter{Conclusion}
 
+Both in this research and others augmented reality technology has shown great promise in communicating complex three dimensional data, and results from this research shows the potential for using this ability for education of neuroanatomy to medical students. Finding from this research also support the use of AR in remote lecturing, and shows that lecturing through AR devices has educational potential.
+
+Used as an educational device the HoloLens 2, which has seen the bulk of development resources in this project, is limited from a price and availability perspective. Hopefully, this issue will resolve with better technology or expansion into more available platforms.
+
+This research has established that collaborative learning between head mounted display devices and Android smartphone is archivable, and to some extent that this collaboration has a educational value. However, further research into cross platform collaboration is called for, with the possibility for adding platforms which are deemed accessible for wide adoption.
+% is could improve educational opportunity.
+% thus the further expansion of this type of software to more available platforms it could bring wider adoption.
+
+As a whole the software application is still in a proof of concept phase, which a research project of this scope naturally produces. With further development the author is of the opinion that the application, or an AR app of similar caliber, can be of great value to medicine students, if developed for public release.
 
 
 
-%%=========================================
-\section{Limitations}
-
-This project rapport is based on work from a 15 credits course, thus there has been time constraints managing the project with other courses and exams. Combined with the busy schedule of the neuroscientists at the Kavli Institute, it has been challenging to gather feedback in the relatively short time frame of this project.
-Of course, the COVID-19 pandemic has made physical sharing of the headset problematic, and thus user testing has been difficult. 
-In total, there is a very thin basis for results in this project, but this will hopefully be turned around for the master project.
-
-
-%%=========================================
-\section{Discussion}
-
-% The research question the project set out to answer are
-
-
-This project has mainly focused on implementing the application answering \href{subrq1}{Sub-RQ1}. As such this can be seen as a minimal viable product for exploring Sub-RQ1, and in that capacity it has shown great promise. The basic tools for dissection is implemented and the medical academics at Kavli Institute and UiO sees great potential in its use. 
-As for the Sub-RQ2 and 3, there is less work done. However, by building the application for Android, I have shown that the possibility for cross-platform collaboration is open. And it will be worked on for the master thesis, by implementing networking with \nameref{chap:photon}. Sub-RQ3, has not seen any concrete development, I do have some ideas of how it could be implemented with textures generated from a volumetric brain model. 
-
-
-%%=========================================
-\section{Conclusion}
-
-The state of the project now is a small scale proof of concept for a AR application supporting teaching of neuroanatomy and dissection for medical students. There is still no collaboration or microscopic data visualization in the app. However, the biggest problem with the state of the project is the lack of concrete feedback from medical user groups. It has been received very positively by the neuroscientists who has seen the application in use, and they are awaiting more news on the project. The need for exact user testing and user feedback is still large. The project is however progressing nicely, and with further development I believe this project could create impressing results.
-
-
-%%=========================================
-\section{Further Work}\label{chap:futurework}
-
-% \begin{itemize}
-%     \item Collaboration, Networking
-%     \item Macro+micro implementation
-%     \item Importing new models
-%     \item Look into volumetric rendering  
-% \end{itemize}
-
-There is still a lot of work left on this project, and it will be continues by me. While there is numerous features and fixes which are waiting in the backlog I would like to focus on the overall picture and what has to be in focus to create an collaborative educational experience in AR. 
-
-\begin{itemize}
-
-    \item {
-        \textbf{Focus on usability}\\
-        Implement better guidance and affordance such that anyone can use the application. To manage this it will be essential to have user testers and testing with medical user groups. This will give feedback on what makes sense and what doesn't.
-        
-    }
-    \item {
-        \textbf{Collaboration; implement cross-platform networking}\\
-        Networking tools will be required to create a collaborative experience, this will be done using \nameref{chap:photon} to synchronize the HoloLens 2 application with the Android application.
-    }
-
-    \item {
-        \textbf{Visualize volumetric data}\\
-        While the HoloLens 2 does support volumetric rendering, I am pretty sure it is not in an adequate resolution for this project. It will however be explored. Other than that volumetric data could be used as 2D textures mapped on the clipping plane used to cut the brain.
-    }
-
-    \item {
-        \textbf{Explore ways of using other brains}\\
-        \autoref{chap:elden} explains the steps taken by \citet{Elden2017} to use medical imagery in \nameref{chap:vrvis}. An exploration into whether there is a more elegant way of doing this, should be done.
-    }
-
-A general focus when continuing this project should be gathering more user data in the form of user tests and interviews, there should be a focus on establishing whether this project can improve learning outcomes for medical students.
-
-
-\end{itemize}
 
 \section{Future Work}
 
@@ -89,7 +36,7 @@ A general focus when continuing this project should be gathering more user data 
 % Desktop or WebGL view app
 
 
-This section will lay down suggestions for how to further the research project. These are based on the authors experience with the project and on discussions with the neuro specialists and medical students testing the application.
+This section will lay down suggestions for how to further the research project. These are based on the authors experience with the project and on discussions with the neurologists and medical students testing the application. 
 
 \subsubsection*{Import new data sets}
 
@@ -127,3 +74,66 @@ A future version of the application running on the web, with WebGL, would probab
 
 
 
+
+% %%=========================================
+% \section{Limitations}
+
+% This project rapport is based on work from a 15 credits course, thus there has been time constraints managing the project with other courses and exams. Combined with the busy schedule of the neuroscientists at the Kavli Institute, it has been challenging to gather feedback in the relatively short time frame of this project.
+% Of course, the COVID-19 pandemic has made physical sharing of the headset problematic, and thus user testing has been difficult. 
+% In total, there is a very thin basis for results in this project, but this will hopefully be turned around for the master project.
+
+
+% %%=========================================
+% \section{Discussion}
+
+% % The research question the project set out to answer are
+
+
+% This project has mainly focused on implementing the application answering \href{subrq1}{Sub-RQ1}. As such this can be seen as a minimal viable product for exploring Sub-RQ1, and in that capacity it has shown great promise. The basic tools for dissection is implemented and the medical academics at Kavli Institute and UiO sees great potential in its use. 
+% As for the Sub-RQ2 and 3, there is less work done. However, by building the application for Android, I have shown that the possibility for cross-platform collaboration is open. And it will be worked on for the master thesis, by implementing networking with \nameref{chap:photon}. Sub-RQ3, has not seen any concrete development, I do have some ideas of how it could be implemented with textures generated from a volumetric brain model. 
+
+
+% %%=========================================
+% \section{Conclusion}
+
+% The state of the project now is a small scale proof of concept for a AR application supporting teaching of neuroanatomy and dissection for medical students. There is still no collaboration or microscopic data visualization in the app. However, the biggest problem with the state of the project is the lack of concrete feedback from medical user groups. It has been received very positively by the neuroscientists who has seen the application in use, and they are awaiting more news on the project. The need for exact user testing and user feedback is still large. The project is however progressing nicely, and with further development I believe this project could create impressing results.
+
+
+% %%=========================================
+% \section{Further Work}\label{chap:futurework}
+
+% % \begin{itemize}
+% %     \item Collaboration, Networking
+% %     \item Macro+micro implementation
+% %     \item Importing new models
+% %     \item Look into volumetric rendering  
+% % \end{itemize}
+
+% There is still a lot of work left on this project, and it will be continues by me. While there is numerous features and fixes which are waiting in the backlog I would like to focus on the overall picture and what has to be in focus to create an collaborative educational experience in AR. 
+
+% \begin{itemize}
+
+%     \item {
+%         \textbf{Focus on usability}\\
+%         Implement better guidance and affordance such that anyone can use the application. To manage this it will be essential to have user testers and testing with medical user groups. This will give feedback on what makes sense and what doesn't.
+        
+%     }
+%     \item {
+%         \textbf{Collaboration; implement cross-platform networking}\\
+%         Networking tools will be required to create a collaborative experience, this will be done using \nameref{chap:photon} to synchronize the HoloLens 2 application with the Android application.
+%     }
+
+%     \item {
+%         \textbf{Visualize volumetric data}\\
+%         While the HoloLens 2 does support volumetric rendering, I am pretty sure it is not in an adequate resolution for this project. It will however be explored. Other than that volumetric data could be used as 2D textures mapped on the clipping plane used to cut the brain.
+%     }
+
+%     \item {
+%         \textbf{Explore ways of using other brains}\\
+%         \autoref{chap:elden} explains the steps taken by \citet{Elden2017} to use medical imagery in \nameref{chap:vrvis}. An exploration into whether there is a more elegant way of doing this, should be done.
+%     }
+
+% A general focus when continuing this project should be gathering more user data in the form of user tests and interviews, there should be a focus on establishing whether this project can improve learning outcomes for medical students.
+
+
+% \end{itemize}
