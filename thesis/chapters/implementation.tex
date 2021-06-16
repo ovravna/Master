@@ -187,7 +187,7 @@ When selecting the clustering action, the \texttt{Clustering} MonoBehavior itera
 For users not to loose spatial orientation when exploring the clusters a outline of the rat brain was added. This outline is a hollow version of the geometric brain model, which was created by manually selecting all outer vertices of the brain model using Blender, this is far from a perfect approach and gives a inaccurate and rough outline and a high polygon count, however if not for future performance issues the author sees no need to fix this.
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     % \includegraphics[width=0.65\textwidth]{fig/snaphint.png}
     \includegraphics[width=0.32\textwidth]{fig/cluster1.png}
@@ -213,16 +213,27 @@ if (runtimePlatform != GlobalSettings.SupportedPlatform.HoloLens2)
 
 
 \subsubsection*{Volumetric dissection plane}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{fig/volumdissectionoverview.png}
+    \caption{Volume dissection in Nevrolens}
+\end{figure}
 
-The basic implementation of clipping used for the dissection functionality leaves much to be desired. Clipping is a basic feature in most graphical libraries and shader languages, is will simply discard vertices which does not meet some set predicate. Its foremost purpose in computer graphics is to ensure that vertices outside the viewing cone will not be rendered, this to optimize render time. The result of this process on the surface model being cut open, such that the clipped part of the model becomes a empty hole to the inside of the model. This can be solved by rasterizing the cut plane, and this was experimented with in this project with some success, however this functionality is not afforded by MRTKs standard shader, and thus implementation required the use of a custom shader, which meant that many other useful features implemented in the standard shader also had to be reimplemented. This lead to abandoning this solution and focusing instead on overlaying volumetric data upon the plane of dissection. 
-
+The basic implementation of clipping used for the dissection functionality leaves much to be desired. Clipping is a basic feature in most graphical libraries and shader languages, is will simply discard vertices which does not meet some set predicate. Its foremost purpose in computer graphics is to ensure that vertices outside the viewing cone will not be rendered, this to optimize render time. The result of this process on the surface model being cut open, such that the clipped part of the model becomes a empty hole to the inside of the model, this is illustrated in \autoref{fig:onoffvolume}. This can be solved by rasterizing the cut plane, and this was experimented with in this project with some success, however this functionality is not afforded by MRTKs standard shader, and thus implementation required the use of a custom shader, which meant that many other useful features implemented in the standard shader also had to be reimplemented. This lead to abandoning this solution and focusing instead on overlaying volumetric data upon the plane of dissection. 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{fig/top_mrtkdissect2.png}
+    \includegraphics[width=0.4\textwidth]{fig/top_volumedissect2.png}
+    \caption{Dissection without and with volume plane.}
+    \label{fig:onoffvolume}
+\end{figure}
 The Waxholm Space rat brain model is a volumetric data set, thus the goal with this feature was to visualize this data set as slices of the volume. The first step in this process was to format the volume in a manner that is usable in Unity and runnable on the target devices. The format of the WHS data set is the NIFTI format, this is a standardized format for neuroimaging data. With help from the library Nifti.NET accessing the \texttt{ushort[]} 3d data array was made possible. An issue arising was that Unity struggled with parsing the data set, and this would result in the application freezing and no data array, thus a basic \textit{dotnet} console application called \href{https://github.com/ovravna/NevrolensNiftiTool}{NevrolensNiftiTool} was made to parse the NIFTI-file and output the 3d array as, of all things, a JSON object. JSON was chosen, after experimenting with \texttt{BinarySerialization}, but finding it to complex to use for data transfer, JSON was tested with success. The Unity scene \texttt{TextureBuilderScene} has a single purpose to generate a \texttt{Texture3D} resource from a JSON file. The MonoBehavior \texttt{BuildNifti3DTexture} takes the JSON file as input and fills the data in a \texttt{Texture3D} and saves in as a asset. 
 With the data in the right format the first naïve implementation was using a MonoBehavior to apply a slice of the 3D data onto the \texttt{Texture2D} of a plane-object. This gave the desired effect of displaying a fixed slice of the volume, and by setting a free variable to one axis a sliding effect was made, however it was with the price of atrocious performance. For a robust implementation the feature would have to be excecated on the GPU as a shader. 
 
 For the intended behavior, it was critical not just to generate slices along predefined axes, but to generate slices along arbitrary planes in the volume. This is, in theory, quite easy to implement on the shader by making use \textit{transformation matrices}. The idea is to map the UV coordinates of the default 2D texture onto the 3D volume. A basic implementation of this in the fragment shader can look like this:
 \begin{lstlisting}[language=c]
 fixed4 frag (v2f i) {
-    // point from the 2D i.uv and the uniform float VariableSlider
+    // point from the 2D UV and the uniform float VariableSlider
     float3 uvw = float3(i.uv, VariableSlider);
     // tex3D samples the 3D texture NiftiTexture3D at point uvw
     fixed4 color = tex3D(NiftiTexture3D, uvw);
@@ -230,17 +241,70 @@ fixed4 frag (v2f i) {
 }
 \end{lstlisting}
 
-    This implementation will, just as the C\# MonoBehavior, display slices along the Z-axis. However, by simply multiplying the UV coordinate with a \texttt{TransformationMatrix} instead of setting the Z coordinate, the result is the implementation of the shader used in this application. This one change makes the whole mapping process dependent on the TransformationMatrix, which makes the path forward very flexible.
+This implementation will, just as the C\# MonoBehavior, display slices along the Z-axis. However, by simply multiplying the UV coordinate with a \texttt{TransformationMatrix} instead of setting the Z-coordinate, the result is the implementation of the shader used in this application. This one change makes the whole mapping process dependent on the TransformationMatrix, which makes the path forward very flexible.
 
 \begin{lstlisting}[language=c]
 fixed4 frag (v2f i) {
-    // point from product of TransformMatrix and i.uv as 4D point
-    float4 uvw = mul(TransformationMatrix, float4(i.uv, 0, 1));
-    // tex3D samples the 3D texture _NiftiTexture3D at point uvw
+    // point cast from product of TransformMatrix and UV as 4d point
+    float3 uvw = mul(TransformationMatrix, float4(i.uv, 0, 1));
+    // tex3D samples the 3D texture NiftiTexture3D at point uvw
     fixed4 color = tex3D(NiftiTexture3D, uvw);
     return color;
 }
 \end{lstlisting}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{fig/dissection_boxplaneview.png}
+    % \includegraphics[width=0.4\textwidth]{fig/dissection_boxplanegame.png}
+    \caption{The orange dissection plane and the green 1x2x1 cuboid brain model space.}
+    \label{fig:boxandplanedissect}
+\end{figure}
+
+Affine transformations with matrices has built in support in Unity with the methods\\ \texttt{Matrix4x4.Translate(Vector3)}, \texttt{Matrix4x4.Rotate(Quaternion)}, \texttt{Matrix4x4.Scale(Vector3)} and a short hand for the product of all of these the \texttt{Matrix4x4.TRS(Vector3, Quaternion, Vector3)}. 
+With the described implementation of the shader the aim will be to set the transformation matrix corresponding with a transformation from the clipping plane surface to a slice in the volumetric texture of the brain model, for arbitrary positions of the clipping plane relative to the brain model. This will be done by transforming through several vector spaces. As is custom with matrix multiplication these transformations will be explained in reverse order. 
+
+% they will be described in the following 
+
+The \texttt{tex3D} texture sampler on the shader samples textures as a 1x1x1 cube, with its center in (0.5, 0.5, 0.5), thus the output of the matrix transformation script must reflect this by mapping the UV coordinates to this space, lets call this the \textit{sampler space}. 
+
+The model space of the geometric brain model has its center at the local origin and is a 1x2x1 cuboid. This \textit{brain model space} is illustrated as the green box in \autoref{fig:boxandplanedissect}. Additionally the geometric model is 180 degrees rotated on the X-axis relatively to the volumetric data, this is probably a result of swapped axis when creating either the volumetric data or the geometric data. Thus, the matrix transformation from brain model space to sampler space can look like this:
+
+\begin{lstlisting}[language=c++]
+Matrix4x4 modelToSamplerMatrix = Matrix4x4.TRS(
+    new Vector3(0.5f, 0.5f, 0.5f),// translate center from origin
+    Quaternion.Euler(180, 0, 0),  // rotational difference in models
+    new Vector3(1, 0.5f, 1)       // scale down from 1x2x1 to 1x1x1
+);
+\end{lstlisting}
+
+Transforming further from brain model space to the dissection plane space, colored orange in \autoref{fig:boxandplanedissect}, is done in to steps; from brain model to game world and from game world to dissection plane space. The matrices also, as oppose to the previous matrix, has to be calculated in the \texttt{Update} loop as it changes when the brain model or dissection plane is manipulated. These matrices are both trivial to implement as they use \texttt{Matrix4x4.TRS} with the \texttt{position}, \texttt{rotation} and \texttt{lossyScale} from each models \texttt{Transform} component.  This generates a model to world matrix, therefore the brain model matrix has to be Inversed. Lastly, a transformation is needed to offset the center of the dissection plane from the graphical origin in the upper left to the geometric origin in the center, this \texttt{planeOffsetMatrix} is a constant translation of (0.5, 0.5, 0). The final implementation will look like this:
+% Unity provides the fields \texttt{Renderer.worldToLocalMatrix} and \texttt{Renderer.localToWorldMatrix} for this type of purpose, however the
+\begin{lstlisting}[language=c++]
+void Update() {
+    worldToModelMatrix = Matrix4x4.TRS(
+        model.position, model.rotation, model.lossyScale);
+
+    worldToPlaneMatrix = Matrix4x4.TRS(
+        plane.position, plane.rotation, plane.lossyScale);
+
+    Matrix4x4 transformation = modelToSamplerMatrix 
+                * Matrix4x4.Inverse(worldToModelMatrix)
+                * worldToPlaneMatrix
+                * planeOffsetMatrix;
+
+    // moves the matrix to the shader as TransformationMatrix
+    renderer.SetMatrix("TransformationMatrix", transformation);
+}
+\end{lstlisting}
+
+
+
+
+% output for the matrix multiplication
+
+% This will be done by transform through several spaces, \texttt{tex3D} space to brain model space 
+
+
 
 % \autoref{chap:transformation} delves into detail on this topic. 
 
