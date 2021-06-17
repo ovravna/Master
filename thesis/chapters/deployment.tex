@@ -1,6 +1,6 @@
 \chapter{Deployment}
 
-The application in this research has been development using Microsoft's Mixed Reality Toolkit and has followed the platforms best practices and recommendations. The deployment process for HoloLens devices are based on sideloading of the application compiled and built with Visual Studio Community 2019, this is the standard way of both building and deploying for HoloLens. For Android the principle of sideloading is also used, but here Unity is responsible for compilation and the build process. 
+The application in this research has been development using Microsoft's Mixed Reality Toolkit and has followed the platforms best practices and recommendations, thus, any issues arising when going through the following section should be answered in Microsoft's \href{https://docs.microsoft.com/en-us/windows/mixed-reality/mrtk-unity}{MRTK documentation}. The deployment process for HoloLens devices are based on sideloading of the application compiled and built with Visual Studio Community 2019, this is the standard way of both building and deploying for HoloLens. For Android the principle of sideloading is also used, but here Unity is responsible for compilation and the build process. 
 The application as 
 
 
@@ -79,5 +79,20 @@ Having completed this set up deployment of the application can be done, directly
     \item {Visual Studio 2019 (Community or other)\\
     When installing add: \textit{Universal Windows Platform development}, \textit{USB Device Connectivity}, \textit{Game development with Unity} }
 \end{enumerate}
-Begin by cloning the \textit{Git} repository by typing: \\ \texttt{git clone https://gitlab.stud.idi.ntnu.no/olevra/nevrolens.git} in to \textit{Git Bash}, than type \texttt{cd nevrolens \&\& git lfs install \&\& git lfs fetch -{}-all}. When this has completed, open Unity Hub and locate and add the repository just cloned as a Unity project. Open it with Unity 2019.4, it is critical that this version is used for MRTK to work properly. First time opening this project will take some time, when it is done the project is ready.
+
+Type the following commands in to the \textit{Git Bash}, it will clone the repository, and download all files which are to large for git with \textit{Git LFS}.
+\begin{lstlisting}[numbers=none]
+$ git clone "https://gitlab.stud.idi.ntnu.no/olevra/nevrolens.git"
+$ cd nevrolens
+$ git lfs install
+$ git lfs fetch --all
+\end{lstlisting}
+
+\begin{wrapfigure}{r}{0.35\textwidth} 
+    \centering
+    \includegraphics[width=0.35\textwidth]{fig/unitybuildhololens.png}
+    \caption{Unity build configurations for HoloLens 2.}
+    \label{fig:unitybuildhololens}
+\end{wrapfigure}
+When this has completed, open Unity Hub and locate and add the \texttt{nevrolens} repository just cloned as a Unity project. Open it with Unity 2019.4, it is critical that this version is used for MRTK to work properly. First time opening this project will take some time, when it is done the project is ready. Deployment for HoloLens 2 can be done by building (ctrl+shift+b) the Unity project with the configurations in \autoref{fig:unitybuildhololens} and opening the outputted \texttt{Nevrolens.sln} solution in Visual Studio 2019 and running the solution for \texttt{Remote Machine} while the HoloLens 2 device is connected by USB. Refer to the MRTK documentation for OTA deployment through Wi-Fi. Android deployment is done by simply choosing Android in Unity's build configuration view and clicking \textit{Build And Run} while the Android device is connected by USB and is set to developer mode. Make sure to follow the MRTK documentation on which version of ARCore etc. that should be installed in the project, found \href{https://microsoft.github.io/MixedRealityToolkit-Unity/version/releases/2.5.1/Documentation/CrossPlatform/UsingARFoundation.html}{here}.
 % The deployment process can be found in MRTK documentation 

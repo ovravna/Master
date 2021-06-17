@@ -15,14 +15,16 @@
 \section{Development}
 This research project has been in active progression for two semesters and development has effectively been done in two stages. First in October and November 2020 and then from February till May in 2021. During the fall and first stage of development the focus was on the HoloLens 2 and creating a usable act of dissection in augmented reality. The second stage at spring, had a wider scope, with focus on implementing networking, volumetric data and more. During this chapter it will thus be clearly discrete improvements during the first iterations of the product while later iterations will be grouped and focus will be put on specific features or pain points. The final iteration will focus on improvements done from user feedback and the feature set at the end of development.
 
+A note on the code in 
+
 \subsection[Iteration 0]{Iteration 0: First steps, importing model}\label{chap:zeroiter}
 % 0th iteration: Initializing application, importing and simplifying brain model
 
-\begin{wrapfigure}{r}{0.45\textwidth} 
+\begin{wrapfigure}[10]{r}{0.45\textwidth} 
     \centering
     \includegraphics[width=0.45\textwidth]{fig/hololens2polycount}
     \caption{Figure showing frame rate as a function of polygon count on HoloLens 2. Credit: \href{https://community.fologram.com/t/hololens-2-polygon-count-and-frame-rate/49}{Fologram}}
-    \vspace{20pt}
+    % \vspace{20pt}
     \label{fig:polycount}
 \end{wrapfigure}
 
@@ -48,8 +50,8 @@ decimate(0.08)
 
 The resulting decimated model, even at the ratio of 0.08, was visibly nearly indistinguishable from the original model when looking at them through the HoloLens 2 display which, as described in \autoref{chap:hololens2}, is somewhat blurry. \autoref{fig:decimate} shows the difference as seen in the Unity editor. Ultimately, a decimation ratio of 0.08 was chosen as a compromise between detail and performance being about 300,000 polygons, this compromise will be discussed further in \autoref{chap:discussperformance}. At this stage requirement 1 and 2 in the initial requirements from \autoref{chap:req} could conclusively be answer as possible and completed.
 \begin{figure}[ht]
-    \includegraphics[width=\textwidth]{fig/brainmodeldecimateratio2.png}
-    \caption{WHS rat brain models with decreasing polygon count.}
+    \includegraphics[width={\textwidth},trim={2.5cm 4cm 4.5cm 2cm},clip]{fig/brainmodeldecimateratio2.png}
+    \caption{WHS brain models with 3M, 744K and 297K polygons respectively.}
     \label{fig:decimate}
 \end{figure}
 
@@ -141,38 +143,57 @@ After this initial demonstrations stakeholders from the Kavli Institute were int
 \subsubsection*{Snapping}
 The first of the described feature request to be able to put brain structures back into place. Snapping structures as magnets was suggested as a metaphor for the action. 
 
-This snapping effect was implement as a \texttt{MonoBehavior} called \texttt{SnapInPlace}, by storing the initial position of each snappable object and comparing the distance to this position with a given \texttt{snapThreshold} distance at the end of each manipulation: 
+This snapping effect was implement as a \texttt{MonoBehavior} called \texttt{SnapInPlace}, by storing the \texttt{initialPosition} of each snappable object and comparing the distance to this position with a given \texttt{threshold} distance at the end of each manipulation: 
 
 \begin{lstlisting}[language=c]
 void OnManipulationEnded() {
-    if (Distance(storedPosition, currentPosition) < snapThreshold) 
-        currentPosition = storedPosition; 
+    if (Distance(initialPosition, structure.position) < threshold) 
+        // set brain structure to initial position 
+        structure.position = initialPosition; 
 }
 \end{lstlisting}
 
-This worked well enough, however no indication of the snapping behavior was given to the user and so it could be interpreted as an unexpected behavior when the brain structure just disappears when the user releases it. This issue was solved by having a semi-transparent shadow of the brain structure at its initial position colored green when snapping would occur at release and gray otherwise. Additionally, a audio effect was implemented such that a clicking sound as the structure snapping in place. 
+This worked as expected, however no indication of the snapping behavior was given to the user and so it could be interpreted as an unexpected behavior when the brain structure just disappears when the user releases it. This issue was solved by having a semi-transparent shadow of the brain structure at its initial position colored green when snapping would occur at release and gray otherwise. Additionally, a audio effect was implemented such that a clicking sound as the structure snapping in place. 
+As the snap implementation code above suggests, structures are snapped in place the same frame as the manipulating has ended. It was experienced with using \textit{lerping} for smoother movement, however it was found to not give the same feeling of "snap" as just setting the position and playing a sound effect.
 
 \begin{figure}
-    \centering
     % \includegraphics[width=0.65\textwidth]{fig/snaphint.png}
-    \includegraphics[width=0.32\textwidth]{fig/snaphint1.png}
-    \includegraphics[width=0.32\textwidth]{fig/snaphint2.png}
-    \includegraphics[width=0.32\textwidth]{fig/snaphint3.png}
+    \includegraphics[width=0.33\textwidth]{fig/snaphint1.png}
+    \includegraphics[width=0.33\textwidth]{fig/snaphint2.png}
+    \includegraphics[width=0.33\textwidth]{fig/snaphint3.png}
     \caption{The complete snapping process. Right most image shows the brain structure snapping in place at release.}
 \end{figure}
 
-\subsubsection*{Scrollable list view}
+% \subsubsection*{Scrollable list view}
 
-A list view similar to the one in \nameref{chap:vrvis}, as seen in \autoref{fig:vrvis} was requested by stakeholders. 
-
-
-\subsubsection*{UI, menus and stuff }
+% A list view similar to the one in \nameref{chap:vrvis}, as seen in \autoref{fig:vrvis} was requested by stakeholders. 
 
 
-\subsubsection*{Feedback from demo}
+\subsubsection*{User Interface}
+
+User interfaces in augmented reality is still a rapidly developing field with few optimal solution. This project uses quite minimal UI for simplicity of use and development, but some UI is required i.a. for enabling features and informing the user. During this project, several iterations on menu design has tried and found lacking. The first iteration is seen in \autoref{fig:mvpdemo} and is a combination of text content naming the selected brain structure and action buttons. This worked as for simple MVP purposes, but was far from optimal. It was tedious for users to click the buttons as they were hovering above the brain model. 
+% \subsubsection*{Feedback from demo}
 % list view
 
-\subsubsection*{Coloring brain}
+\begin{figure}[h]
+    % \includegraphics[width=0.65\textwidth]{fig/snaphint.png}
+\begin{subfigure}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{fig/handmenuiter2.png}
+    \caption{Second iteration}
+    \label{fig:hanmenuiter2}
+\end{subfigure}
+\begin{subfigure}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{fig/handmenuiter3.png}
+    \caption{Final iteration}
+    \label{fig:hanmenuiter3}
+\end{subfigure}
+\caption{}
+
+\end{figure}
+
+This was solved by adding the action buttons to a menu which follows the hand of the user. This can be seen in \autoref{fig:hanmenuiter2} which uses a prefab hand menu found in MRTK. The prefab was however deemed too inflexible and a custom hand menu was designed. This new design uses default MRTK \texttt{PressableButtons} grouped by context in horizontal \texttt{GridObjectCollections}, which again are in a vertical \texttt{GridObjectCollection} that uses a \texttt{HandBound} and \texttt{HandConstraintPalmUp} component to follow the users hand. In short the menu is designed by using simpler MRTK building blocks to create a more scalable hand menu, a early version of this menu design can be seen in \autoref{fig:hanmenuiter3}. The horizontal button groups can be hidden or shown based on context, in the final product there are five button groups; \textit{Brian Control}, \textit{Tools}, \textit{Admin Tools}, \textit{Clustering Control}, \textit{Dissection Tools}. The first two will always be visible, while the rest are context aware.
+Hand menus have one big issue, they are dependent on hand recognition. So devices without this feature can not fully utilize this type of UI, the solution used in this project is to simply disable the \texttt{HandConstraintPalmUp} for other device types, as in \autoref{item:androidcode}, and let the menu hover in air. This is of course wildly suboptimal, and a better cross platform solution should be implemented in further research.
+
 
 \subsubsection*{Info Board}
 Textual information about the brain structures was requested by stakeholders as a educational tool for student to use by them self or in groups. The idea was that lecturers could add text as they see fit and change it to an appropriate level for the intended user group. 
@@ -188,11 +209,10 @@ For users not to loose spatial orientation when exploring the clusters a outline
 
 
 \begin{figure}[ht]
-    \centering
     % \includegraphics[width=0.65\textwidth]{fig/snaphint.png}
-    \includegraphics[width=0.32\textwidth]{fig/cluster1.png}
-    \includegraphics[width=0.32\textwidth]{fig/cluster2.png}
-    \includegraphics[width=0.32\textwidth]{fig/cluster3.png}
+    \includegraphics[width=0.33\textwidth]{fig/cluster1.png}
+    \includegraphics[width=0.33\textwidth]{fig/cluster2.png}
+    \includegraphics[width=0.33\textwidth]{fig/cluster3.png}
     \caption{Clusters in Nevrolens.}
 \end{figure}
 
@@ -202,7 +222,7 @@ For users not to loose spatial orientation when exploring the clusters a outline
 
 As MRTK is a framework specifically designed for HoloLens development, the HoloLens 2 naturally became the main focus of development and thus the application running on Android is a porting of the HoloLens version with small changes to somewhat accommodate the smartphone interface. It has however seen too little platform specific development and is in reality an incomplete product. It is however very much usable and can be seen as a great demonstration of the multiplatform capabilities of MRTK. 
 Porting to Android was initially done by simply deploy the same application to Android, this is easily done in Unity with some MRTK tweaks which can be read up on in the \href{https://microsoft.github.io/MixedRealityToolkit-Unity/version/releases/2.2.0/Documentation/CrossPlatform/UsingARFoundation.html}{documentation}. While this works, some expected features are missing. For example, on the HoloLens 2 the user enables actions in a menu which is bound to their hand this is not possible in Android because the user interacts with the application not by moving the hand in space, but by touching the devices screen, therefore the application will simply disable the hand following feature on Android such that the menu buttons are static in space at all time. This is far from a optimal solution, but has worked for basic proof of concept. 
-\begin{lstlisting}[language=c, caption={Basic example of separate features per device.}]
+\begin{lstlisting}[language=c, caption={Basic example of separate features per device.}, label={item:androidcode}]
 if (runtimePlatform != GlobalSettings.SupportedPlatform.HoloLens2)
 {
     GetComponent<HandConstraintPalmUp>().enabled = false;
@@ -219,15 +239,14 @@ if (runtimePlatform != GlobalSettings.SupportedPlatform.HoloLens2)
     \caption{Volume dissection in Nevrolens}
 \end{figure}
 
-The basic implementation of clipping used for the dissection functionality leaves much to be desired. Clipping is a basic feature in most graphical libraries and shader languages, is will simply discard vertices which does not meet some set predicate. Its foremost purpose in computer graphics is to ensure that vertices outside the viewing cone will not be rendered, this to optimize render time. The result of this process on the surface model being cut open, such that the clipped part of the model becomes a empty hole to the inside of the model, this is illustrated in \autoref{fig:onoffvolume}. This can be solved by rasterizing the cut plane, and this was experimented with in this project with some success, however this functionality is not afforded by MRTKs standard shader, and thus implementation required the use of a custom shader, which meant that many other useful features implemented in the standard shader also had to be reimplemented. This lead to abandoning this solution and focusing instead on overlaying volumetric data upon the plane of dissection. 
+The basic implementation of clipping used for the dissection functionality leaves much to be desired. Clipping is a basic feature in most graphical libraries and shader languages, is will simply discard vertices which does not meet some set predicate. Its foremost purpose in computer graphics is to ensure that vertices outside the viewing cone will not be rendered, this to optimize render time. The result of this process on the surface model being cut open, such that the clipped part of the model becomes a empty hole to the inside of the model, this is illustrated on the left image of \autoref{fig:onoffvolume}. This can be solved by rasterizing the cut plane, and this was experimented with in this project with some success, however this functionality is not afforded by MRTKs standard shader, and thus implementation required the use of a custom shader, which meant that many other useful features implemented in the standard shader also had to be reimplemented. This lead to abandoning the solution and focusing instead on overlaying volumetric data upon the plane of dissection. 
 \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.4\textwidth]{fig/top_mrtkdissect2.png}
-    \includegraphics[width=0.4\textwidth]{fig/top_volumedissect2.png}
+    \includegraphics[width=0.5\textwidth , trim={3cm 2cm 4cm 5cm}, clip]{fig/top_mrtkdissect2.png}
+    \includegraphics[width=0.5\textwidth , trim={3cm 2cm 4cm 5cm}, clip]{fig/top_volumedissect2.png}
     \caption{Dissection without and with volume plane.}
     \label{fig:onoffvolume}
 \end{figure}
-The Waxholm Space rat brain model is a volumetric data set, thus the goal with this feature was to visualize this data set as slices of the volume. The first step in this process was to format the volume in a manner that is usable in Unity and runnable on the target devices. The format of the WHS data set is the NIFTI format, this is a standardized format for neuroimaging data. With help from the library Nifti.NET accessing the \texttt{ushort[]} 3d data array was made possible. An issue arising was that Unity struggled with parsing the data set, and this would result in the application freezing and no data array, thus a basic \textit{dotnet} console application called \href{https://github.com/ovravna/NevrolensNiftiTool}{NevrolensNiftiTool} was made to parse the NIFTI-file and output the 3d array as, of all things, a JSON object. JSON was chosen, after experimenting with \texttt{BinarySerialization}, but finding it to complex to use for data transfer, JSON was tested with success. The Unity scene \texttt{TextureBuilderScene} has a single purpose to generate a \texttt{Texture3D} resource from a JSON file. The MonoBehavior \texttt{BuildNifti3DTexture} takes the JSON file as input and fills the data in a \texttt{Texture3D} and saves in as a asset. 
+The Waxholm Space rat brain model is a volumetric data set, thus the goal with this feature was to visualize this data set as slices of the volume. The first step in this process was to format the volume in a manner that is usable in Unity and runnable on the target devices. The format of the WHS data set is the NIFTI format, this is a standardized format for neuroimaging data. With help from the library \href{https://github.com/plwp/Nifti.NET}{Nifti.NET} accessing the \texttt{ushort[]} 3d data array was made possible. An issue arising was that Unity struggled with parsing the data set, and this would result in the application freezing and no data array, thus a basic \textit{dotnet} console application called \href{https://github.com/ovravna/NevrolensNiftiTool}{NevrolensNiftiTool} was made to parse the NIFTI-file and output the 3d array as, of all things, a JSON object. JSON was chosen, after experimenting with \texttt{BinarySerialization}, but finding it to complex to use for data transfer, JSON was tested with success. The Unity scene \texttt{TextureBuilderScene} has a single purpose to generate a \texttt{Texture3D} resource from a JSON file. The MonoBehavior \texttt{BuildNifti3DTexture} takes the JSON file as input and outputs the data as a \texttt{Texture3D} Unity asset.  This texture asset can than be used in later stages independent of the JSON file. 
 With the data in the right format the first naïve implementation was using a MonoBehavior to apply a slice of the 3D data onto the \texttt{Texture2D} of a plane-object. This gave the desired effect of displaying a fixed slice of the volume, and by setting a free variable to one axis a sliding effect was made, however it was with the price of atrocious performance. For a robust implementation the feature would have to be excecated on the GPU as a shader. 
 
 For the intended behavior, it was critical not just to generate slices along predefined axes, but to generate slices along arbitrary planes in the volume. This is, in theory, quite easy to implement on the shader by making use \textit{transformation matrices}. The idea is to map the UV coordinates of the default 2D texture onto the 3D volume. A basic implementation of this in the fragment shader can look like this:
@@ -297,8 +316,11 @@ void Update() {
 }
 \end{lstlisting}
 
+A last note is that there is a small, jet very noticeable, discrepancy between the volume model and the geometric model such that they do not completely overlap, \autoref{fig:onoffvolume} shows this to some extent. The researcher attributes this to the fact that different versions of the Waxholm Space brain are used in the generation of each volume and the lack of control in how the geometric model was created. Thus, when a single new data set is used for both geometric and volumetric models this issue should disappear.
 
+\subsubsection*{Coloring the brain}
 
+Throughout this thesis the reader will see the brain visualized in a number of different colors.
 
 % output for the matrix multiplication
 
@@ -334,7 +356,6 @@ void Update() {
 
 
 
-\subsubsection*{Networking optimization}
 
 \subsubsection*{}
 
@@ -348,6 +369,7 @@ void Update() {
 
 
 
+\subsubsection*{Networking optimization}
 
 
 
