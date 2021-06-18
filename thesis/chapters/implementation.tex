@@ -5,22 +5,22 @@
 
 
 
-\chapter{Implementation}
+\chapter{Implementation}\label{chap:implementaiton}
 
 % Hololens, UWP, WMR
 
 
 % and non-functional requirements, which describe  
 
-\section{Development}
+% \section{Development}
 This research project has been in active progression for two semesters and development has effectively been done in two stages. First in October and November 2020 and then from February till May in 2021. During the fall and first stage of development the focus was on the HoloLens 2 and creating a usable act of dissection in augmented reality. The second stage at spring, had a wider scope, with focus on implementing networking, volumetric data and more. During this chapter it will thus be clearly discrete improvements during the first iterations of the product while later iterations will be grouped and focus will be put on specific features or pain points. The final iteration will focus on improvements done from user feedback and the feature set at the end of development.
 
-A note on the code in 
+% A note on the code in 
 
-\subsection[Iteration 0]{Iteration 0: First steps, importing model}\label{chap:zeroiter}
+\section[Iteration 0]{Iteration 0: First steps, importing model}\label{chap:zeroiter}
 % 0th iteration: Initializing application, importing and simplifying brain model
 
-\begin{wrapfigure}[10]{r}{0.45\textwidth} 
+\begin{wrapfigure}[12]{r}{0.45\textwidth} 
     \centering
     \includegraphics[width=0.45\textwidth]{fig/hololens2polycount}
     \caption{Figure showing frame rate as a function of polygon count on HoloLens 2. Credit: \href{https://community.fologram.com/t/hololens-2-polygon-count-and-frame-rate/49}{Fologram}}
@@ -50,14 +50,14 @@ decimate(0.08)
 
 The resulting decimated model, even at the ratio of 0.08, was visibly nearly indistinguishable from the original model when looking at them through the HoloLens 2 display which, as described in \autoref{chap:hololens2}, is somewhat blurry. \autoref{fig:decimate} shows the difference as seen in the Unity editor. Ultimately, a decimation ratio of 0.08 was chosen as a compromise between detail and performance being about 300,000 polygons, this compromise will be discussed further in \autoref{chap:discussperformance}. At this stage requirement 1 and 2 in the initial requirements from \autoref{chap:req} could conclusively be answer as possible and completed.
 \begin{figure}[ht]
-    \includegraphics[width={\textwidth},trim={2.5cm 4cm 4.5cm 2cm},clip]{fig/brainmodeldecimateratio2.png}
+    \includegraphics[width={\textwidth},trim={2.5cm 2cm 4.5cm 2cm},clip]{fig/brainmodeldecimateratio2.png}
     \caption{WHS brain models with 3M, 744K and 297K polygons respectively.}
     \label{fig:decimate}
 \end{figure}
 
 
 
-\subsection[Iteration 1]{First iteration: Minimum Viable Product}\label{chap:itr1}
+\section[Iteration 1]{First iteration: Minimum Viable Product}\label{chap:itr1}
 
 Having a surface model of the brain running reasonably well on the HoloLens 2, the next step in developing the application was to implement basic AR-based interact features. The brain model consist of an empty parent object with 29 children each containing the mesh of a delineated brain structure, see \autoref{fig:brainunitytree}. Adding the \texttt{Object Manipulator} component from MRTK and a standard Unity \texttt{Mesh Collider} component to each child in the brain model allows for picking apart the brain. This is done by grabbing and moving each separate structure with a MRTK defined \textit{pointer}, this is the logical abstraction for the simplest interact handling with HoloLens 2 giving the user a virtual laser pointer from their finger. The resulting action can be seen in \autoref{fig:grabbrain}. 
 
@@ -131,7 +131,7 @@ The application was deployed for HoloLens 2, and was a first MVP demo of the res
     \label{fig:mvpdemo}
 \end{figure}
 
-\subsection[Iteration N]{Next iterations: Continuing development}
+\section[Iteration N]{Next iterations: Continuing development}
 
 The continuation of the project will be explored further, but will focus on implementation of highlighted features and and high-level overview of the process, rather than a chronological log as in previous sections. 
 % This section will give a overview of the continued progress in developing the application and highlighting some specific features. 
@@ -140,7 +140,7 @@ Shortly after end of the first iteration a demonstration of the application was 
 
 After this initial demonstrations stakeholders from the Kavli Institute were intrigued to see further development and had very positive sentiments toward the research project. Feedback gathered from this meeting included mainly two features, an ability to place brain structures back into the brain after deconstruction, basically to tidy up the brain after manipulation. Second, a list view for choosing which brain structures should be visible, this feature request was inspired by Eldens \nameref{chap:vrvis} which some of the stakeholders had previous experience with.
 
-\subsubsection*{Snapping}
+\subsection{Snapping}
 The first of the described feature request to be able to put brain structures back into place. Snapping structures as magnets was suggested as a metaphor for the action. 
 
 This snapping effect was implement as a \texttt{MonoBehavior} called \texttt{SnapInPlace}, by storing the \texttt{initialPosition} of each snappable object and comparing the distance to this position with a given \texttt{threshold} distance at the end of each manipulation: 
@@ -169,7 +169,7 @@ As the snap implementation code above suggests, structures are snapped in place 
 % A list view similar to the one in \nameref{chap:vrvis}, as seen in \autoref{fig:vrvis} was requested by stakeholders. 
 
 
-\subsubsection*{User Interface}
+\subsection{User Interface}
 
 User interfaces in augmented reality is still a rapidly developing field with few optimal solution. This project uses quite minimal UI for simplicity of use and development, but some UI is required i.a. for enabling features and informing the user. During this project, several iterations on menu design has tried and found lacking. The first iteration is seen in \autoref{fig:mvpdemo} and is a combination of text content naming the selected brain structure and action buttons. This worked as for simple MVP purposes, but was far from optimal. It was tedious for users to click the buttons as they were hovering above the brain model. 
 % \subsubsection*{Feedback from demo}
@@ -195,13 +195,13 @@ This was solved by adding the action buttons to a menu which follows the hand of
 Hand menus have one big issue, they are dependent on hand recognition. So devices without this feature can not fully utilize this type of UI, the solution used in this project is to simply disable the \texttt{HandConstraintPalmUp} for other device types, as in \autoref{item:androidcode}, and let the menu hover in air. This is of course wildly suboptimal, and a better cross platform solution should be implemented in further research.
 
 
-\subsubsection*{Info Board}
+\subsection{Info Board}
 Textual information about the brain structures was requested by stakeholders as a educational tool for student to use by them self or in groups. The idea was that lecturers could add text as they see fit and change it to an appropriate level for the intended user group. 
 This feature was implemented based on the MRTK \texttt{Slate} with is an AR based floating text box, perfect to simulate a black board. In fact, if wished for in the future it would be trivial to make it look more as a black board by changing the color and the font to something more handwritten.
 The slate was customized by changing the content text reference from \texttt{InfoBoard} MonoBehavior when the a new brain structure was selected, this was done with a \texttt{UnityEvent}, a simple callback function, implemented to trigger when a new brain section is selected (this implementation
  is found in \texttt{NetworkBrainManager.cs}). The text descriptions for each structure is saved as a text file and is parsed in \texttt{InfoBoard.cs}, the text file uses a custom structure where "@" at the begin of a line indicates a new brain structure and "+" indicates a added images and and all other text is seen as descriptions for the last indicated brain structure. This works well enough, but an obviously more standard and readable approach would be to use a common text based serialization format like JSON or XML. In future development it should be looked into using one of these as both are well supported with built-in deserialization features in Unity with C\#. The implementation does not support any run-time importing of this text even though the parsing is done at run time, functional it would thus be trivial to add. What has to be implemented for this to work however is either file exploring or some other way of accessing files, e.g. from network, see \nameref{chap:futurework} for more on this.
 
-\subsubsection*{Clustering}
+\subsection{Clustering}\label{chap:clustering}
 
 By clustering brain structures based on the neurological attributes lecturers can visualize how complete compound structures operation and where they are located in the brain. Just as the \texttt{InfoBoard} this feature utilizes a custom text file parser to define each clusters name, brain structures and color pallet. Again JSON or XML would probably be a wise transition for these configuration files. 
 When selecting the clustering action, the \texttt{Clustering} MonoBehavior iterates through all brain structures and enables or disables according to whether it is a part of the cluster. It also assigns a new color based on the color pallet defined in the configuration file. Color pallets are defined based on HSV color hues, with two numbers indicating start and end hue in degrees, then the brain structures are assigned colors uniformly the given sector of the color wheel. This was found to be a simple and reliable solution to color coding, but could with ease be argue as not being a intuitive solution for unaccustomed or non-technical users. 
@@ -214,10 +214,11 @@ For users not to loose spatial orientation when exploring the clusters a outline
     \includegraphics[width=0.33\textwidth]{fig/cluster2.png}
     \includegraphics[width=0.33\textwidth]{fig/cluster3.png}
     \caption{Clusters in Nevrolens.}
+    \label{fig:clustering}
 \end{figure}
 
 
-\subsubsection*{Porting to Android}
+\subsection{Porting to Android}
 % The application was originally developed for HoloLens 2, but other platforms were always in mind and because of the use of \nameref{chap:mrtk}, deploying to other platform was relatively easy, within the documentation for MRTK, there was guides for how to build for Android. Interaction on Android is more complicated though. Because all interaction happens on screen additional effort has to be laid down to implement a good user experience on smartphone.  
 
 As MRTK is a framework specifically designed for HoloLens development, the HoloLens 2 naturally became the main focus of development and thus the application running on Android is a porting of the HoloLens version with small changes to somewhat accommodate the smartphone interface. It has however seen too little platform specific development and is in reality an incomplete product. It is however very much usable and can be seen as a great demonstration of the multiplatform capabilities of MRTK. 
@@ -232,7 +233,7 @@ if (runtimePlatform != GlobalSettings.SupportedPlatform.HoloLens2)
 % There are of course some 
 
 
-\subsubsection*{Volumetric dissection plane}
+\subsection{Volumetric dissection plane}\label{chap:dissect}
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.7\textwidth]{fig/volumdissectionoverview.png}
@@ -246,7 +247,7 @@ The basic implementation of clipping used for the dissection functionality leave
     \caption{Dissection without and with volume plane.}
     \label{fig:onoffvolume}
 \end{figure}
-The Waxholm Space rat brain model is a volumetric data set, thus the goal with this feature was to visualize this data set as slices of the volume. The first step in this process was to format the volume in a manner that is usable in Unity and runnable on the target devices. The format of the WHS data set is the NIFTI format, this is a standardized format for neuroimaging data. With help from the library \href{https://github.com/plwp/Nifti.NET}{Nifti.NET} accessing the \texttt{ushort[]} 3d data array was made possible. An issue arising was that Unity struggled with parsing the data set, and this would result in the application freezing and no data array, thus a basic \textit{dotnet} console application called \href{https://github.com/ovravna/NevrolensNiftiTool}{NevrolensNiftiTool} was made to parse the NIFTI-file and output the 3d array as, of all things, a JSON object. JSON was chosen, after experimenting with \texttt{BinarySerialization}, but finding it to complex to use for data transfer, JSON was tested with success. The Unity scene \texttt{TextureBuilderScene} has a single purpose to generate a \texttt{Texture3D} resource from a JSON file. The MonoBehavior \texttt{BuildNifti3DTexture} takes the JSON file as input and outputs the data as a \texttt{Texture3D} Unity asset.  This texture asset can than be used in later stages independent of the JSON file. 
+The Waxholm Space rat brain model is a volumetric data set, thus the goal with this feature was to visualize this data set as slices of the volume. The first step in this process was to format the volume in a manner that is usable in Unity and runnable on the target devices. The format of the WHS data set is the NIFTI format, this is a standardized format for neuroimaging data. With help from the library \href{https://github.com/plwp/Nifti.NET}{Nifti.NET} accessing the \texttt{ushort[]} 3d data array was made possible. An issue arising was that Unity struggled with parsing the data set, and this would result in the application freezing and no data array, thus a basic \textit{dotnet} console application called \href{https://github.com/ovravna/NevrolensNiftiTool}{NevrolensNiftiTool} was made to parse the NIFTI-file and output the 3d array as, of all things, a JSON object. JSON was chosen, after experimenting with \texttt{BinarySerialization}, but finding it to complex to use for data transfer, JSON was tested with success. The Unity scene \texttt{TextureBuilderScene} has a single purpose to generate a \texttt{Texture3D} resource from a JSON file. The MonoBehavior \texttt{BuildNifti3DTexture} takes the JSON file as input and outputs the data as a \texttt{Texture3D} Unity asset. This texture asset can than be used in later stages independent of the JSON file. 
 With the data in the right format the first naïve implementation was using a MonoBehavior to apply a slice of the 3D data onto the \texttt{Texture2D} of a plane-object. This gave the desired effect of displaying a fixed slice of the volume, and by setting a free variable to one axis a sliding effect was made, however it was with the price of atrocious performance. For a robust implementation the feature would have to be excecated on the GPU as a shader. 
 
 For the intended behavior, it was critical not just to generate slices along predefined axes, but to generate slices along arbitrary planes in the volume. This is, in theory, quite easy to implement on the shader by making use \textit{transformation matrices}. The idea is to map the UV coordinates of the default 2D texture onto the 3D volume. A basic implementation of this in the fragment shader can look like this:
@@ -279,7 +280,7 @@ fixed4 frag (v2f i) {
     \label{fig:boxandplanedissect}
 \end{figure}
 
-Affine transformations with matrices has built in support in Unity with the methods\\ \texttt{Matrix4x4.Translate(Vector3)}, \texttt{Matrix4x4.Rotate(Quaternion)}, \texttt{Matrix4x4.Scale(Vector3)} and a short hand for the product of all of these the \texttt{Matrix4x4.TRS(Vector3, Quaternion, Vector3)}. 
+The affine transformations with matrices has built in support in Unity with the methods\\ \texttt{Matrix4x4.Translate(Vector3)}, \texttt{Matrix4x4.Rotate(Quaternion)}, \texttt{Matrix4x4.Scale(Vector3)} and a short hand for the product of all of these the \texttt{Matrix4x4.TRS(Vector3, Quaternion, Vector3)}. 
 With the described implementation of the shader the aim will be to set the transformation matrix corresponding with a transformation from the clipping plane surface to a slice in the volumetric texture of the brain model, for arbitrary positions of the clipping plane relative to the brain model. This will be done by transforming through several vector spaces. As is custom with matrix multiplication these transformations will be explained in reverse order. 
 
 % they will be described in the following 
@@ -315,13 +316,69 @@ void Update() {
     renderer.SetMatrix("TransformationMatrix", transformation);
 }
 \end{lstlisting}
+The resulting plane will however be in grayscale as the \texttt{Texture3D} contains single \texttt{ushort} values per voxel, how this was fixed will be explored in \nameref{chap:braincolor}.
 
 A last note is that there is a small, jet very noticeable, discrepancy between the volume model and the geometric model such that they do not completely overlap, \autoref{fig:onoffvolume} shows this to some extent. The researcher attributes this to the fact that different versions of the Waxholm Space brain are used in the generation of each volume and the lack of control in how the geometric model was created. Thus, when a single new data set is used for both geometric and volumetric models this issue should disappear.
 
-\subsubsection*{Coloring the brain}
+\subsection{Coloring the brain}\label{chap:braincolor}
 
-Throughout this thesis the reader will see the brain visualized in a number of different colors.
+Throughout this thesis the reader will see the brain visualized in a number of different colors. Many images seen are of completely gray brains this are not and have never been part of the application, and are just for demonstration, this is how the model is seen in the Unity editor because color is set at runtime. The first iteration of coloring the brain structures, described in \autoref{chap:itr1}, was to use random colors. The goal of this was simply to visually distinguish the separate brain structures. An improvement was added which biased the random generation such that it generated lighter more saturated colors, but otherwise this was the state of brain colors until networking was implemented. With multiple users randomized colors was not appropriate anymore, because users would not be able to describe structures in terms of their color (unless the master client generates colors and distributes them to all, this approach was not taken). The properties needed from the colors was to be visually distinct and to be deterministically generated. This was implemented by sampling colors with uniform distance on the circumference of a circle of radius one inside the RGB-cube, like this. 
+\begin{lstlisting}[caption={With \texttt{v} ranging from 0 to 2$\pi$.}]
+float r = (Mathf.Sin(v) + 1) / 2;
+float g = (Mathf.Cos(v) + 1) / 2;
+float b = (-Mathf.Sin(v) + 1) / 2;
+\end{lstlisting}
+After some time the developer realized that smarter people than him already had solved this issue, and that the exact color properties needed was found in the HSV color model. The \textit{hue} channel in the HSV color model operates in the same manner as the code above when the other channels are constant. Thus by setting \textit{saturation} and \textit{value} to their max value and setting hue to the \texttt{v} from above mapped between zero and one, the resulting colors were basically the same only more saturated\footnote{The RGB implementation had a radius of 1, while $\sqrt{3}$ would (probably) give max saturation.}. The difference can be seen in \autoref{fig:hsvcolors}.
 
+\begin{figure}[h]
+    % \includegraphics[width=0.65\textwidth]{fig/snaphint.png}
+\centering
+\begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{fig/nevrolens_brain_rgb_original.png}
+    \caption{RGB implementation}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{fig/nevrolens_brain_hsv_imitate.png}
+    \caption{HSV implementation}
+\end{subfigure}
+\caption{}
+\label{fig:hsvcolors}
+\end{figure}
+
+After demonstrating the application to neurologists, the developer was made aware that the Waxholm Space model has a predefined color model, and thus all the hard work was for naught. The final implementation consists of a parser of the LABLE-files in the Waxholm Space data set which contains color data. Then matching the name of the brain structure to its label and applying this color. The resulting colors can be seen in \autoref{chap:dissect}, e.g. in \autoref{fig:onoffvolume}. 
+Though the HSV implementation is not used anymore for the brain coloring, the properties of this color model was found useful for other part of the application and is used to generate distinct colors for each user when in multiplayer and in clustering as seen in \autoref{fig:clustering}.
+
+\subsubsection*{Coloring the dissection plane}
+To color the dissect plane appropriate the same label colors as above as used, however the coloring of the structures in the plane happens on the shader so the color data had to be moved to the GPU. A 1D texture was used as a lookup table for the shader. The values in the volume \texttt{Texture3D} explored in \autoref{chap:dissect} are identifiers for the segmentation or brain structure the voxel is part of. These identifiers are defined in the label file, and thus by setting colors at the index of the identifier in the lookup table, the correct color could be sampled with \texttt{tex1D} in the shader.
+
+\begin{lstlisting}
+lookupTableLength = Labels.Last().identifier;
+// Unity doesn't support 1D texture so it's 2D with height=1 
+lookupTable = new Texture2D(width: lookupTableLength, height: 1);
+foreach (var label : Labels)
+    lookupTable.SetPixel(x: label.identifier, y: 0, label.color);
+
+// moves the values to shader
+renderer.SetFloat("LookupTableLength", lookupTableLength);
+renderer.SetTexture("LookupTable", lookupTable);
+\end{lstlisting}
+
+The code above shows how the lookup table can be implemented. The fragment shader explored in \autoref{chap:dissect} can now be extended to sample these colors:
+\begin{lstlisting}
+fixed4 frag (v2f i) {
+    float3 uvw = mul(TransformationMatrix, float4(i.uv, 0, 1));
+    fixed4 voxel = tex3D(NiftiTexture3D, uvw);
+
+    // maps 0 - 1 alpha channel, to 8-bit numbers
+    float identifier = voxel.a * 256; 
+    fixed4 color = tex1D(LookupTable, identifier / LookupTableLength)
+    return color;
+}
+\end{lstlisting}
+
+The volume texture is of the format \texttt{Alpha8} instead of the default \texttt{RGBA32}, this means that all its data is in the alpha channel and has a bit depth of eight, this could be done because all the data in the volume is the range 0 to 115, the range of identifiers in the label file. Thus, line 6 in the shader code above uses only the alpha value. 
+
+% The texture is set to the format \texttt{Alpha8} such that each voxel is 8 bits instead of the 16 bits in the \texttt{ushort[]}, this is because the date only ranges from 0 to 115, 
 % output for the matrix multiplication
 
 % This will be done by transform through several spaces, \texttt{tex3D} space to brain model space 

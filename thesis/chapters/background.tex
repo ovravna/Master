@@ -62,11 +62,11 @@ This research also makes use of the medical data to visualize the brain segmenta
 \end{wrapfigure}
 
 Within computer graphics colors are generally encoded by their component primary color values in separate channels, this is called RGB for red, green and blue. This is the basis for most color models used on computers. The RGB color model is naturally used widely in this project, and will not be explained further. There is however another less common color model used in this project which has some useful properties worth exploring. 
-This is the HSV color model. The different channels are hue, saturation, and value. The hue is simply the color based on a traditional color wheel, this means that the color will periodically repeat starting with red on hue=0, green on hue=0.33 and green on hue=0.67. The saturation is how "colorful" the color is, there 0 is a gray-scale and 1 is completely colored. The value is sometimes also called light or brightness, where 0 is black and 1 is again completely colored.
+This is the HSV color model. The different channels are hue, saturation, and value. The hue is simply the color based on a traditional color wheel, this means that the color will periodically repeat starting with red on zero, green on one third and green on two thirds. The saturation is how "colorful" the color is, there 0 is a gray-scale and 1 is completely colored. The value is sometimes also called light or brightness, where 0 is black and 1 is again completely colored. This periodic properties of the color model is useful for general various color schemes as will be explored in \nameref{chap:implementaiton}.
 % This color model is designed to be more intuitive for human use and also 
 
 
-\subsection*{Transformation}\label{chap:transformation}
+% \subsection*{Transformation}\label{chap:transformation}
 
 
 
@@ -148,6 +148,13 @@ The coordinate system for WHS is defined as a continuous Cartesian system with t
 \noindent
 \autoref{fig:waxholmspace} visualizes the axes through origin of WHS in the brain of a rat. Within the scope of this project WHS will be the local space of the rat brain model implemented in Nevrolens.
 
+\subsection*{Teaching of Neuroanatomy}
+
+The way students are educated in brain anatomy today in large part consists of two main approaches.
+The first is text books with two dimensional illustrations with accompanying textual descriptions as quoted from \citet{WaxholmSpaceAndMouseBrain2011} in the previous section. 
+Secondly, dissection of cadavers is used to demonstrate real brain anatomy. Optimally this would be done with human brains, does are however naturally difficult to attain and thus the most used brain it that of the rodent. This approach has the problem that it is not very scalable and the size of the rat brain make it quite trick do demonstrate structures of anatomy.
+
+% two dimensional illustration on text books and 
 
 
 
@@ -170,6 +177,10 @@ Very helpfully the HoloLens 2 has on-board screen capturing tools and the option
     \label{fig:specshololens2}
 \end{figure}
 
+\subsection*{Android} 
+
+Android is a operating system developed by Google. The OS runs on many different device types, but most commonly and most relevantly for this project it runs on smartphones. Nearly all modern smartphones not made by Apple run on the Android operating system and they thus have a wide marked penetration, which is one of the reasons for using this OS in this research. With support for development in combination with HoloLens 2 and good support for AR this was a natural choice. Apples iPhones would also be a good choice however Apple is restrictive on how one can development for their platform which makes supporting it difficult. 
+The Android device mostly used in this research is the Samsung Galaxy 8, both the research's personal device and the devices at the VR Lab are of this model. It was release in 2017, and has internals which in theory should make it a bit less performant than the HoloLens 2, it is however modern enough for supporting AR applications and throughout this research it has not been found lacking.
 
 
 
