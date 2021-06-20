@@ -253,8 +253,9 @@ With the data in the right format the first naïve implementation was using a Mo
 For the intended behavior, it was critical not just to generate slices along predefined axes, but to generate slices along arbitrary planes in the volume. This is, in theory, quite easy to implement on the shader by making use \textit{transformation matrices}. The idea is to map the UV coordinates of the default 2D texture onto the 3D volume. A basic implementation of this in the fragment shader can look like this:
 \begin{lstlisting}[language=c]
 fixed4 frag (v2f i) {
-    // point from the 2D UV and the uniform float VariableSlider
+    // 3D point from 2D UV and uniform float VariableSlider
     float3 uvw = float3(i.uv, VariableSlider);
+
     // tex3D samples the 3D texture NiftiTexture3D at point uvw
     fixed4 color = tex3D(NiftiTexture3D, uvw);
     return color;
@@ -267,6 +268,7 @@ This implementation will, just as the C\# MonoBehavior, display slices along the
 fixed4 frag (v2f i) {
     // point cast from product of TransformMatrix and UV as 4d point
     float3 uvw = mul(TransformationMatrix, float4(i.uv, 0, 1));
+
     // tex3D samples the 3D texture NiftiTexture3D at point uvw
     fixed4 color = tex3D(NiftiTexture3D, uvw);
     return color;
@@ -297,7 +299,7 @@ Matrix4x4 modelToSamplerMatrix = Matrix4x4.TRS(
 );
 \end{lstlisting}
 
-Transforming further from brain model space to the dissection plane space, colored orange in \autoref{fig:boxandplanedissect}, is done in to steps; from brain model to game world and from game world to dissection plane space. The matrices also, as oppose to the previous matrix, has to be calculated in the \texttt{Update} loop as it changes when the brain model or dissection plane is manipulated. These matrices are both trivial to implement as they use \texttt{Matrix4x4.TRS} with the \texttt{position}, \texttt{rotation} and \texttt{lossyScale} from each models \texttt{Transform} component.  This generates a model to world matrix, therefore the brain model matrix has to be Inversed. Lastly, a transformation is needed to offset the center of the dissection plane from the graphical origin in the upper left to the geometric origin in the center, this \texttt{planeOffsetMatrix} is a constant translation of (0.5, 0.5, 0). The final implementation will look like this:
+Transforming further from brain model space to the dissection plane space, colored orange in \autoref{fig:boxandplanedissect}, is done in to steps; from brain model to game world and from game world to dissection plane space. The matrices also, as oppose to the previous matrix, has to be calculated in the \texttt{Update} loop as it changes when the brain model or dissection plane is manipulated. These matrices are both trivial to implement as they use \texttt{Matrix4x4.TRS} with the \texttt{position}, \texttt{rotation} and \texttt{lossyScale} from each models \texttt{Transform} component.  This generates a model to world matrix, therefore the brain model matrix has to be Inversed. Of note, Unity provides the fields \texttt{Renderer.worldToLocalMatrix} and \texttt{Renderer.localToWorldMatrix} for this type of purpose, however with initial experimentation it didn't produce the expected results, using these fields would probably be more efficient. Lastly, a transformation is needed to offset the center of the dissection plane from the graphical origin in the upper left to the geometric origin in the center, this \texttt{planeOffsetMatrix} is a constant translation of (0.5, 0.5, 0). The final implementation will look like this:
 % Unity provides the fields \texttt{Renderer.worldToLocalMatrix} and \texttt{Renderer.localToWorldMatrix} for this type of purpose, however the
 \begin{lstlisting}[language=c++]
 void Update() {
@@ -307,6 +309,7 @@ void Update() {
     worldToPlaneMatrix = Matrix4x4.TRS(
         plane.position, plane.rotation, plane.lossyScale);
 
+    // Assemble transformation from plane to volume sampler
     Matrix4x4 transformation = modelToSamplerMatrix 
                 * Matrix4x4.Inverse(worldToModelMatrix)
                 * worldToPlaneMatrix
@@ -316,7 +319,7 @@ void Update() {
     renderer.SetMatrix("TransformationMatrix", transformation);
 }
 \end{lstlisting}
-The resulting plane will however be in grayscale as the \texttt{Texture3D} contains single \texttt{ushort} values per voxel, how this was fixed will be explored in \nameref{chap:braincolor}.
+The resulting plane will however be in grayscale as the \texttt{Texture3D} contains single \texttt{ushort} values per voxel, how this was fixed will be explored in \autoref{chap:braincolor}.
 
 A last note is that there is a small, jet very noticeable, discrepancy between the volume model and the geometric model such that they do not completely overlap, \autoref{fig:onoffvolume} shows this to some extent. The researcher attributes this to the fact that different versions of the Waxholm Space brain are used in the generation of each volume and the lack of control in how the geometric model was created. Thus, when a single new data set is used for both geometric and volumetric models this issue should disappear.
 
@@ -352,9 +355,12 @@ Though the HSV implementation is not used anymore for the brain coloring, the pr
 To color the dissect plane appropriate the same label colors as above as used, however the coloring of the structures in the plane happens on the shader so the color data had to be moved to the GPU. A 1D texture was used as a lookup table for the shader. The values in the volume \texttt{Texture3D} explored in \autoref{chap:dissect} are identifiers for the segmentation or brain structure the voxel is part of. These identifiers are defined in the label file, and thus by setting colors at the index of the identifier in the lookup table, the correct color could be sampled with \texttt{tex1D} in the shader.
 
 \begin{lstlisting}
+// As the labels are sorted, the last label has the highest index
 lookupTableLength = Labels.Last().identifier;
+
 // Unity doesn't support 1D texture so it's 2D with height=1 
 lookupTable = new Texture2D(width: lookupTableLength, height: 1);
+
 foreach (var label : Labels)
     lookupTable.SetPixel(x: label.identifier, y: 0, label.color);
 
