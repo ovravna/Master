@@ -191,7 +191,7 @@ User interfaces in augmented reality is still a rapidly developing field with fe
 
 \end{figure}
 
-This was solved by adding the action buttons to a menu which follows the hand of the user. This can be seen in \autoref{fig:hanmenuiter2} which uses a prefab hand menu found in MRTK. The prefab was however deemed too inflexible and a custom hand menu was designed. This new design uses default MRTK \texttt{PressableButtons} grouped by context in horizontal \texttt{GridObjectCollections}, which again are in a vertical \texttt{GridObjectCollection} that uses a \texttt{HandBound} and \texttt{HandConstraintPalmUp} component to follow the users hand. In short the menu is designed by using simpler MRTK building blocks to create a more scalable hand menu, a early version of this menu design can be seen in \autoref{fig:hanmenuiter3}. The horizontal button groups can be hidden or shown based on context, in the final product there are five button groups; \textit{Brian Control}, \textit{Tools}, \textit{Admin Tools}, \textit{Clustering Control}, \textit{Dissection Tools}. The first two will always be visible, while the rest are context aware.
+This was solved by adding the action buttons to a menu which follows the hand of the user. This can be seen in \autoref{fig:hanmenuiter2} which uses a prefab hand menu found in MRTK. The prefab was however deemed too inflexible and a custom hand menu was designed. This new design uses default MRTK \texttt{PressableButtons} grouped by context in horizontal \texttt{GridObjectCollections}, which again are in a vertical \texttt{GridObjectCollection} that uses a \texttt{HandBound} and \texttt{HandConstraintPalmUp} component to follow the users hand. With this grid setup buttons and button groups can be added dynamically and be resized to fit the menu. In short the menu is designed by using simpler MRTK building blocks to create a more scalable hand menu, a early version of this menu design can be seen in \autoref{fig:hanmenuiter3}. The horizontal button groups can be hidden or shown based on context, in the final product there are five button groups; \textit{Brian Control}, \textit{Tools}, \textit{Admin Tools}, \textit{Clustering Control}, \textit{Dissection Tools}. The first two will always be visible, while the rest are context aware.
 Hand menus have one big issue, they are dependent on hand recognition. So devices without this feature can not fully utilize this type of UI, the solution used in this project is to simply disable the \texttt{HandConstraintPalmUp} for other device types, as in \autoref{item:androidcode}, and let the menu hover in air. This is of course wildly suboptimal, and a better cross platform solution should be implemented in further research.
 
 
@@ -378,6 +378,8 @@ fixed4 frag (v2f i) {
 
 The volume texture is of the format \texttt{Alpha8} instead of the default \texttt{RGBA32}, this means that all its data is in the alpha channel and has a bit depth of eight, this could be done because all the data in the volume is the range 0 to 115, the range of identifiers in the label file. Thus, line 6 in the shader code above uses only the alpha value. 
 
+This implementation with the lookup table allow for arbitrary coloring of the plane. For example, brain structures that are moved away from the brain can be set transparent and therefore hidden. This was implemented in a quick and dirty fashion at the end of the project i.a. without synchronizing over network. Other uses of this flexibility could be further explored. 
+
 % The texture is set to the format \texttt{Alpha8} such that each voxel is 8 bits instead of the 16 bits in the \texttt{ushort[]}, this is because the date only ranges from 0 to 115, 
 % output for the matrix multiplication
 
@@ -419,14 +421,20 @@ The volume texture is of the format \texttt{Alpha8} instead of the default \text
 
 
 % \subsection*{3rd iteration: Implementing network}
-\subsection[Final Iteration]{Final Iteration}\label{chap:finaliter}
+\section[Final Iteration]{Final Iteration}\label{chap:finaliter}
+
+The first test session was done in late April, and gave useful feedback on what worked, what had to be fixed and which features that should be explored. Most of the improvements needed where the some portion of the networking implementation and how collaboration was done. 
 
 
 
 
+\subsection{Collaboration improvements}
+
+The implementation of networking has not been covered in detail in this thesis. This is both because \nameref{chap:techdesign} describes the main features and the connection system, but also because it mostly is quite spread out, where many MonoBehavior have small implementations of things like \texttt{RPC} and photon callbacks to synchronize features, but mainly the implementation consists of just adding the component \texttt{PhotonView} and \texttt{PhotonViewTransform} to the \texttt{GameObjects} that needs synchronizing. 
+However, after the first user testing session, some glaring issues became apparent. The most problematic of this issues was that dissection was not possible to perform in collaboration over network at all. This was because even though the dissection plane and the brain were both synchronized they were not using the same vector space when synchronizing, both used their local space, which resulted in the player being able to see each others manipulations, but they gave different cuts in the brain and were therefore completely useless in a educational setting. The solution to this is explored in \autoref{chap:multiplayerworldspace}, but in short by giving both objects, or in fact all synchronized objects, a common parent \texttt{GameObject} called \texttt{GameWorldSpace}, transformations in Photon networking could use this space as the vector space for the multiplayer world. 
 
 
-\subsubsection*{Networking optimization}
+Another issue that became apparent was that users could not see where other users were looking or pointing, making collaborating difficult. By this stage before the first test session multiplayer avatars were implemented in the form of spherical heads with eyes and a randomly assigned name above them, this feature suffered from the same world space problem as mentioned above and was thusly not useful in this test session. This feature at once became more usable when this was fixed, but in addition to this, a visualization of each users MRTK pointer was implementation to also synchronize. 
 
-
+Lastly, the ability to edit ones nickname, such that the avatar displayed the users chosen name was implemented. This required the use of the system keyboard, this had to be implemented differently for each platform, but otherwise simply required setting a string variable and informing all users that the name was changes with \texttt{PunRPC}.
 

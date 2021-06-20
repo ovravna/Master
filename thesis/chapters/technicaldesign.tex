@@ -1,4 +1,4 @@
-\chapter{Technical Design}
+\chapter{Technical Design}\label{chap:techdesign}
 
 This chapter will give a overview of the structure of the application as well as some choices taken when developing the research product, Nevrolens. The chapter will exclusively focus on the application as it is at the end of this research project, which is functionally identical to version 0.3.3 of Nevrolens. However, some refactoring i.e. name changes and restructuring may have occurred. 
 
@@ -71,8 +71,13 @@ Another implication of this design is that every user will necessarily connect t
 All in all this solution work well enough for the current state of the research project. In fact, by abstracting away the connection and room selection process it has simplified the user testing process because there are fewer steps to get to a running application. 
 
 
-\subsection*{Multiplayer world space}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig/nevrolensandroidtester.jpg}
+    \caption{Networking allows the Android test user to see the same brain model as the HoloLens 2 user. The monitor on the background displays a live feed from the HoloLens device.}
+\end{figure}
+
+\subsection*{Multiplayer world space}\label{chap:multiplayerworldspace}
 % local world space, multiplay space, rotation etc
 
 When collaborating with other players there is a need for having a synchronized world space, by default Photon PUN2 will synchronize all objects spatially by their own model space, or \texttt{local space}. This works good for basic tasks like synchronize the movement of a brain structure relative to the others, but meets problems when separating the shared multiplayer world space from from the local user world space. This is needed so that a user can move the AR objects to fit in their field of view, physical surroundings and at the scale appropriate for their comfort and device type. For this reason all GameObjects which are to be synchronized in the shared multiplayer world space are placed as children of an empty GameObject called \texttt{GameWorldSpace} and the local model space of this object is used as the multiplayer world space. With this implementation, and manipulation of the \texttt{GameWorldSpace} is local and not shared over network, while any manipulation of its child object will be reflected for all users over the network. 
-

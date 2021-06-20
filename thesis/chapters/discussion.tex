@@ -2,11 +2,17 @@
 
 \section{Limitations}
 
+% This project rapport is based on work from a 15 credits course, thus there has been time constraints managing the project with other courses and exams. Combined with the busy schedule of the neuroscientists at the Kavli Institute, it has been challenging to gather feedback in the relatively short time frame of this project.
+% Of course, the COVID-19 pandemic has made physical sharing of the headset problematic, and thus user testing has been difficult. 
+% In total, there is a very thin basis for results in this project, but this will hopefully be turned around for the master project.
+
+
 \section{Results}
 
 
+\section{Hardware limitations}
 
-\section{Performance}\label{chap:discussperformance}
+\subsection{Performance}\label{chap:discussperformance}
 
 The main limiting factor for the performance of the Nevrolens application is the polygon count for the models used. The count for the models uses are around 300,000 for the complete model at decimation ratio 0.08 and an hollow outline model with decimation ration 0.4 at about 350,000 polygons, used in clustering. The counts are higher than what is generally recommended for HoloLens 2, naturally this results in an application which runs well under the best recommended performance quality criteria which the non-functional requirements of this research project set out to meet. The application will hover around 40 to 50 frames per second while in normal use and drop to around 30 to 35 while rendering the volumetric dissection plane, the recommended quality criteria lists 60 fps as a goal for \textit{Best} performance, but the application follows the \textit{Meets} criteria, which state that:
 \begin{quote}
@@ -17,21 +23,34 @@ Throughout testing, framerate was genuinely not a detectable issue, no user test
 On tested Android devices performance has not been of any concern, running at a consistent 60 fps all the time. The teste device is a Samsung Galaxy S8, which was released in 2017 way before the HoloLens 2, and does in fact have a slower processing unit than the HoloLens 2 does. Answering why this performance gap exist will only be speculation, and will not be attempted.
 In conclusion, the performance of the application is at an acceptable level and does not impede the user experience, if that were to happen, either by increased load from demanding features or porting to less performant platforms, a natural and easy solution would be to scale down the brain model further.
 
-\section{Hardware limitations}
 
-\subsection*{HoloLens 2 display technology}
+\subsection{HoloLens 2}
 
-\subsection*{Android interaction}
-% Sterioscopic rendering
+% Because of it being  a see-through display right in front of the uses 
+The HoloLens 2 uses a see-through holographic display technology based on a combination of waveguides and light projectors\footnote{https://docs.microsoft.com/en-us/hololens/hololens2-display}, this is a unique display technology developed by Microsoft. This results in images being less sharp and less color accurate than with conventional LCD or OLED displays. From the researchers experience it can be a person to person difference the experience of these issues, the researcher sees the display as muddy, while others have reported not such problem. The display issues are very noticeable when comparing between devices. The first HoloLens 2 device arrived at the VRLab in early spring of 2020, while the second device arrived in April 2021. The old display is even less sharp and color accurate than the newer device.
+The consequence of these issues are that high fidelity details on surface models are being washed out and almost indistinguishable from their low fidelity variants. Anecdotally, the researcher, after getting used to seeing the brain models through the HoloLens 2 display got supported by the level of detail observed when outputting the same model on a LCD display from a workstation computer. From the researchers view striving for higher resolution 3D models when rendered on current display technology for AR (HoloLens 2 specifically) is a futile effort.
+As discussed in \autoref{chap:discussperformance}, the HoloLens 2 is remarkably less performant than the tested Android handset, when running the research artifact. This is probably a result of poor optimization in the pipe line from building on Unity, through complication in Visual Studio to the HoloLens 2, undoubtedly the Android build pipe line is better optimized as a result of it being a more mature platform.
 
-\subsection*{Android spatial locking}
+\subsection{Android}
+
+The main limitation of using Android in this project is that is simply not designed for the purpose. Android devices, like the Samsung Galaxy S8, are design for interaction through touch sensitive displays and not as a viewport for interaction with the wider world. From the test session with the Android application a common feedback was to just disable the AR and have it be more pure experience for Android interaction. This is quite sensible and should definitively be looked further into. The researcher sees to main problems with the approach taken when implementing AR on Android handsets. First, the spatial locking is very poor, resulting in the brain model and other objects moving from their places position during use of the application. This does not meet Microsoft's App quality criteria for holographic stability, rather as the failed criteria states; \textit{Primary content in frame shows unexpected movement}. This may be a device specific issue, as the application has only been tested at reasonable extent on the Samsung Galaxy S8.
+The second main problem with Android is that, as mentioned before, interaction on Android handsets is a completely different paradigm from the one of head mounted devices like  HoloLens 2. This means that all UI elements should be platform specific or at least optimized such that they bring good user experience to all platforms. This has not been done during this research project, as the application is now Android users have a considerably poorer experience when interacting with UI than what HoloLens 2 user have. 
+Both problems could in the future be solved with stereoscopic rendering, which splits the display in two distinct areas for each eye such that the smartphone when mounted to the head, with specials googles, could simulate the experience of using a HMD device. As current versions of Androids AR API do not support hand tracking, the addition of either third-party APIs like \href{https://www.manomotion.com}{ManoMotion}, or accessories like the Leap Motion controller should be explored. Stereoscopic rendering is as of the time or writing not supported in MRTK, hopefully this will change when Android support gets out of beta. 
+
 
 \section{Missing data set}
 The brain model data set used in this research, which as described in \autoref{chap:zeroiter} was imported from \nameref{chap:vrvis}, is missing a number of brain structures. The model consists of 29 separate structures while the Waxholm Space Rat Brain model it is based on included as least 75 structures. This is of course a huge discrepancy, but it is not as critical as it could seem as most of the omitted structures are very small and would be impractical to handle within AR. Upon questioning Elden has explained that the reduction was done to decrease computational time as the model was meant for a proof of concept. As this is still the case the reduces number of brain structures is still not a critical issue, however if this research project were to be used as an actual educational tool this would be of most dire need for fixing. Another reason this issue has not seen any need for fixing is that there will be a new version of the Waxholm Space brain model released shortly, and stakeholders at Kavli are interested in the use of this model in further research, thus creation of a new brain model has been deferred to \nameref{chap:futurework}. A increases in structure count could however result in increased polygon count which would have to be accounted for then scaling the resolution of the surface models.
 
 % There is however one quite notable structure missing, the \textit{Corpus Collosum} .
 \section{Human neuroanatomy}
-Describe/explore the feasibility to implement the system for Human neuroanatomy education.
+% Describe/explore the feasibility to implement the system for Human neuroanatomy education.
+
+The stakeholders of this research from the Kavli Institute expressed interest from the very begin of this project to extend the its functionality to support human neuroanatomy educational. In principle, nothing in this research project sets a limit this from becoming a really. In fact, replacing the WHS rat brain model with a surface model of the human brain could be done with very little effort. In future development, the researcher envisions a system for importing different brain models into the application with limited overhead. 
+
+% This could possibly be done by 
+% This is probably something of a pipedream.
+
+
 % display issues
 
 % \section{Contribution}
