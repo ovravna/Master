@@ -138,7 +138,7 @@ The continuation of the project will be explored further, but will focus on impl
 
 Shortly after end of the first iteration a demonstration of the application was done over video conference, with a pre-recorded YouTube video, demonstrating the features of the application. In addition a physical stakeholder meeting at St. Olavs Hospital was arranged where only the project researcher used the application with the HMD, but through live streaming the video feed from the headset and operational guidance from Dr. Menno Witter testing of dissection features were held. The application was at this stage nearly identical to what was seen at the end of the \nameref{chap:itr1}, with minor tweaks and bug fixes.
 
-After this initial demonstrations stakeholders from the Kavli Institute were intrigued to see further development and had very positive sentiments toward the research project. Feedback gathered from this meeting included mainly two features, an ability to place brain structures back into the brain after deconstruction, basically to tidy up the brain after manipulation. Second, a list view for choosing which brain structures should be visible, this feature request was inspired by Eldens \nameref{chap:vrvis} which some of the stakeholders had previous experience with.
+After this initial demonstrations stakeholders from the Kavli Institute were intrigued to see further development and had very positive sentiments toward the research project. Feedback gathered from this meeting included mainly two features, an ability to place brain structures back into the brain after deconstruction, basically to tidy up the brain after manipulation. Second, a list view for choosing which brain structures should be visible, this feature request was inspired by Eldens \nameref{chap:vrvis} which some of the stakeholders had previous experience with. The latter feature was abandoned due to unexpected behavior in the MRTK library and its need was partly filled by the cluster feature which allow for enabling only a desired set of brain structures. This will be explored further in \autoref{chap:clustering}.
 
 \subsection{Snapping}
 The first of the described feature request to be able to put brain structures back into place. Snapping structures as magnets was suggested as a metaphor for the action. 
@@ -153,7 +153,7 @@ void OnManipulationEnded() {
 }
 \end{lstlisting}
 
-This worked as expected, however no indication of the snapping behavior was given to the user and so it could be interpreted as an unexpected behavior when the brain structure just disappears when the user releases it. This issue was solved by having a semi-transparent shadow of the brain structure at its initial position colored green when snapping would occur at release and gray otherwise. Additionally, a audio effect was implemented such that a clicking sound as the structure snapping in place. 
+The code above is simplified to only work on the local space, meaning only while the complete brain has not been manipulated, but it does show the core idea and will otherwise worked as expected. However no indication of the snapping behavior was given to the user and so it could be interpreted as an unexpected behavior when the brain structure just disappears when the user releases it. This issue was solved by having a semi-transparent shadow of the brain structure at its initial position colored green when snapping would occur at release and gray otherwise. Additionally, a audio effect was implemented such that a clicking sound as the structure snapping in place. 
 As the snap implementation code above suggests, structures are snapped in place the same frame as the manipulating has ended. It was experienced with using \textit{lerping} for smoother movement, however it was found to not give the same feeling of "snap" as just setting the position and playing a sound effect.
 
 \begin{figure}
@@ -187,7 +187,7 @@ User interfaces in augmented reality is still a rapidly developing field with fe
     \caption{Final iteration}
     \label{fig:hanmenuiter3}
 \end{subfigure}
-\caption{}
+\caption{Iterations of hand menus. Note: Parallaxing causes the hand mesh not overlapping the actual hand in the image.}
 
 \end{figure}
 
@@ -208,7 +208,7 @@ When selecting the clustering action, the \texttt{Clustering} MonoBehavior itera
 For users not to loose spatial orientation when exploring the clusters a outline of the rat brain was added. This outline is a hollow version of the geometric brain model, which was created by manually selecting all outer vertices of the brain model using Blender, this is far from a perfect approach and gives a inaccurate and rough outline and a high polygon count, however if not for future performance issues the author sees no need to fix this.
 
 
-\begin{figure}[ht]
+\begin{figure}[H]
     % \includegraphics[width=0.65\textwidth]{fig/snaphint.png}
     \includegraphics[width=0.33\textwidth]{fig/cluster1.png}
     \includegraphics[width=0.33\textwidth]{fig/cluster2.png}
@@ -234,14 +234,15 @@ if (runtimePlatform != GlobalSettings.SupportedPlatform.HoloLens2)
 
 
 \subsection{Volumetric dissection plane}\label{chap:dissect}
-\begin{figure}[ht]
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{fig/volumdissectionoverview.png}
     \caption{Volume dissection in Nevrolens}
 \end{figure}
 
 The basic implementation of clipping used for the dissection functionality leaves much to be desired. Clipping is a basic feature in most graphical libraries and shader languages, is will simply discard vertices which does not meet some set predicate. Its foremost purpose in computer graphics is to ensure that vertices outside the viewing cone will not be rendered, this to optimize render time. The result of this process on the surface model being cut open, such that the clipped part of the model becomes a empty hole to the inside of the model, this is illustrated on the left image of \autoref{fig:onoffvolume}. This can be solved by rasterizing the cut plane, and this was experimented with in this project with some success, however this functionality is not afforded by MRTKs standard shader, and thus implementation required the use of a custom shader, which meant that many other useful features implemented in the standard shader also had to be reimplemented. This lead to abandoning the solution and focusing instead on overlaying volumetric data upon the plane of dissection. 
-\begin{figure}[ht]
+\begin{figure}[hb]
     \includegraphics[width=0.5\textwidth , trim={3cm 2cm 4cm 5cm}, clip]{fig/top_mrtkdissect2.png}
     \includegraphics[width=0.5\textwidth , trim={3cm 2cm 4cm 5cm}, clip]{fig/top_volumedissect2.png}
     \caption{Dissection without and with volume plane.}
@@ -282,7 +283,7 @@ fixed4 frag (v2f i) {
     \label{fig:boxandplanedissect}
 \end{figure}
 
-The affine transformations with matrices has built in support in Unity with the methods\\ \texttt{Matrix4x4.Translate(Vector3)}, \texttt{Matrix4x4.Rotate(Quaternion)}, \texttt{Matrix4x4.Scale(Vector3)} and a short hand for the product of all of these the \texttt{Matrix4x4.TRS(Vector3, Quaternion, Vector3)}. 
+The affine transformations with matrices has built in support in Unity with the \texttt{Matrix4x4} class and its methods \texttt{Translate(Vector3)}, \texttt{Rotate(Quaternion)}, \texttt{Scale(Vector3)} and a short hand for the product of all of these the \texttt{TRS(Vector3, Quaternion, Vector3)}. 
 With the described implementation of the shader the aim will be to set the transformation matrix corresponding with a transformation from the clipping plane surface to a slice in the volumetric texture of the brain model, for arbitrary positions of the clipping plane relative to the brain model. This will be done by transforming through several vector spaces. As is custom with matrix multiplication these transformations will be explained in reverse order. 
 
 % they will be described in the following 
@@ -299,7 +300,7 @@ Matrix4x4 modelToSamplerMatrix = Matrix4x4.TRS(
 );
 \end{lstlisting}
 
-Transforming further from brain model space to the dissection plane space, colored orange in \autoref{fig:boxandplanedissect}, is done in to steps; from brain model to game world and from game world to dissection plane space. The matrices also, as oppose to the previous matrix, has to be calculated in the \texttt{Update} loop as it changes when the brain model or dissection plane is manipulated. These matrices are both trivial to implement as they use \texttt{Matrix4x4.TRS} with the \texttt{position}, \texttt{rotation} and \texttt{lossyScale} from each models \texttt{Transform} component.  This generates a model to world matrix, therefore the brain model matrix has to be Inversed. Of note, Unity provides the fields \texttt{Renderer.worldToLocalMatrix} and \texttt{Renderer.localToWorldMatrix} for this type of purpose, however with initial experimentation it didn't produce the expected results, using these fields would probably be more efficient. Lastly, a transformation is needed to offset the center of the dissection plane from the graphical origin in the upper left to the geometric origin in the center, this \texttt{planeOffsetMatrix} is a constant translation of (0.5, 0.5, 0). The final implementation will look like this:
+Transforming further from brain model space to the dissection plane space, colored orange in \autoref{fig:boxandplanedissect}, is done in to steps; from brain model to game world and from game world to dissection plane space. The matrices also, as oppose to the previous matrix, has to be calculated in the \texttt{Update} loop as it changes when the brain model or dissection plane is manipulated. These matrices are both trivial to implement as they use \texttt{Matrix4x4.TRS} with the \texttt{position}, \texttt{rotation} and \texttt{lossyScale} from each models \texttt{Transform} component.  This generates a model to world matrix, therefore the brain model matrix has to be Inversed. Unity provides the fields \texttt{Renderer.worldToLocalMatrix} and \\\texttt{Renderer.localToWorldMatrix} for this type of purpose, however with initial experimentation it didn't produce the expected results, using these fields would probably be more efficient. Lastly, a transformation is needed to offset the center of the dissection plane from the graphical origin in the upper left to the geometric origin in the center, this \texttt{planeOffsetMatrix} is a constant translation of (0.5, 0.5, 0). The final implementation will look like this:
 % Unity provides the fields \texttt{Renderer.worldToLocalMatrix} and \texttt{Renderer.localToWorldMatrix} for this type of purpose, however the
 \begin{lstlisting}[language=c++]
 void Update() {

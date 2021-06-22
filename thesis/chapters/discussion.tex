@@ -6,8 +6,71 @@
 % Of course, the COVID-19 pandemic has made physical sharing of the headset problematic, and thus user testing has been difficult. 
 % In total, there is a very thin basis for results in this project, but this will hopefully be turned around for the master project.
 
+% covid 
+% medical expertice
+% single developer time
+
+This research project carried out by one singular computer science student. Both the \textit{one} and the \textit{computer science} part of that statement can arguably be a limitation of a project of this scope and subject area. Of these the researchers lack of expertise in the field of medicine and neuroanatomy of undoubtedly the main limiting factor, while the fact that is has been done by a single researcher operationally equals the always present time constraint. Another limitation facing this project has been the lack of a accessible surface model of the WHS rat brain. In hindsight, this should have been created in early stages of the research, however the project has progressed with Eldens surface model and with the limitation that brings, see \autoref{chap:missingdataset}. Lastly, it is impossible not to mention the Covid-19 pandemic which, as the reader will know, has effected every phase of a project of this scale.
 
 \section{Results}
+
+While limited in quantity the results all in all hint to a highly usable system with promising value as a teaching tool. However the feedback on the collaboration features suggests that this is an area which needs improvement.
+
+The scores in the SUS questionnaire indicate that the test participants in general found the system easy to use. 
+
+A problem with the results from this questionnaire is the fact that it's answers are gathered from two different user groups, one the medical student and the other being the two computer science students attending the test session. As it was the medical student which took part in the structured lecturing by the neurologist, while the CS student observed it through Device Portal. Another, issue which has limited the quantity of data is that of the five medical students present at the final test session only four returned the digital questionnaire, this was regrettably uncovered to late to pursuit the last participant, and therefore the results are even more limited than was called for.
+
+
+\section{Comparison}
+This section will compere the featured related systems, in \autoref{chap:relatedwork}, with the resulting IT artifact of this research project. The comparison matrix in \autoref{tab:compmatrix} will compare the feature set of the different systems. All of the systems compered can be said to be more complete, both in execution and fidelity, this is of course expected as those systems are production ready and have presumably had quite a bit more resources available.
+
+\begin{table}[ht]
+    \centering
+    \small
+\begin{tabular}{c|c|c|c|c|c|c|c|}
+\cline{2-8}
+\textbf{} &
+  \begin{tabular}[c]{@{}c@{}}WHS\\ rat \\ brain\end{tabular} &
+  HMD &
+  Mobile &
+  \begin{tabular}[c]{@{}c@{}}Desk-\\ top\end{tabular} &
+  Collab. &
+  \begin{tabular}[c]{@{}c@{}}Spatial\\ Anchor\end{tabular} &
+  \begin{tabular}[c]{@{}c@{}}MRI\\ /CT\\ data\end{tabular} \\ \hline
+\multicolumn{1}{|c|}{\begin{tabular}[c]{@{}c@{}}Complete\\ Anatomy\end{tabular}}  &   &   & X & X & X & X &   \\ \hline
+\multicolumn{1}{|c|}{\begin{tabular}[c]{@{}c@{}}HoloBrain\\ \qquad\end{tabular}}       &   & X &   &   & X & X & X \\ \hline
+\multicolumn{1}{|c|}{\begin{tabular}[c]{@{}c@{}}HoloAnatomy\\ \qquad\end{tabular}}     &   & X &   &   & X & X &   \\ \hline
+\multicolumn{1}{|c|}{\begin{tabular}[c]{@{}c@{}}VRVisualization\\ \qquad\end{tabular}} & X & X &   &   &   &   &   \\ \hline
+\multicolumn{1}{|c|}{\begin{tabular}[c]{@{}c@{}}Nevrolens\\ \qquad\end{tabular}}       & X & X & X &   & X &   & X \\ \hline
+\end{tabular}
+\caption{Comparison matrix of the featured systems.}
+\label{tab:compmatrix}
+\end{table}
+
+As seen in \autoref{tab:compmatrix} the Nevrolens application contains a unique set of features as compared to the featured systems. Notably, its the only system to feature cross-platform collaboration between mobile and HMD devices, and also one of two to use the open-access WHS rat brain. These are both intentional choice to increase the accessibility of the system.
+Both HoloBrain and Nevrolens support MRI data, however the implementation in the former consists of static axial sprites, while the letter used dynamic visualizing of MRI volumes in arbitrary angle dissections.
+
+Of note, every other system with collaboration features includes spatial anchoring, meaning that users in the same physical play space can se the model in the same physical space. This requires the synchronizing some physical attribute, either an object, a QR-code (or similar) or using AI systems like Microsoft's \textit{Azure Spatial Anchors}. None of these have been attempted in this research as the covid-19 pandemic has put a focus on remote collaboration, which naturally has no such need.
+
+\section{Contributions}
+In this section the contributions of this research project will be accessed based on the research question it set out to answer. 
+
+
+\begin{enumerate}[label=\textbf{RQ1:}, left=\parindent]
+    \itshape
+    \item How can AR support teaching of neuroanatomy and dissection for medical students?
+\end{enumerate}
+
+\begin{enumerate}[label=\textbf{RQ2:}, left=\parindent]
+    
+    \itshape
+    \item How should interaction in be implemented in AR to accommodate medical students and educators?
+\end{enumerate}
+
+\begin{enumerate}[label=\textbf{RQ3:}, left=\parindent]
+    \itshape
+    \item How will a collaborative experience shared between an HMD and a smartphone compare to accommodate medical users?
+\end{enumerate}
 
 
 \section{Hardware limitations}
@@ -38,7 +101,7 @@ The second main problem with Android is that, as mentioned before, interaction o
 Both problems could in the future be solved with stereoscopic rendering, which splits the display in two distinct areas for each eye such that the smartphone when mounted to the head, with specials googles, could simulate the experience of using a HMD device. As current versions of Androids AR API do not support hand tracking, the addition of either third-party APIs like \href{https://www.manomotion.com}{ManoMotion}, or accessories like the Leap Motion controller should be explored. Stereoscopic rendering is as of the time or writing not supported in MRTK, hopefully this will change when Android support gets out of beta. This would however probably result in a VR application, as the camera feed will not be usable for head mounted AR.
 
 
-\section{Missing data set}
+\section{Missing data set}\label{chap:missingdataset}
 The brain model data set used in this research, which as described in \autoref{chap:zeroiter} was imported from \nameref{chap:vrvis}, is missing a number of brain structures. The model consists of 29 separate structures while the Waxholm Space Rat Brain model it is based on included as least 75 structures. This is of course a huge discrepancy, but it is not as critical as it could seem as most of the omitted structures are very small and would be impractical to handle within AR. Upon questioning Elden has explained that the reduction was done to decrease computational time as the model was meant for a proof of concept. As this is still the case the reduces number of brain structures is still not a critical issue, however if this research project were to be used as an actual educational tool this would be of most dire need for fixing. Another reason this issue has not seen any need for fixing is that there will be a new version of the Waxholm Space brain model released shortly, and stakeholders at Kavli are interested in the use of this model in further research, thus creation of a new brain model has been deferred to \nameref{chap:futurework}. A increases in structure count could however result in increased polygon count which would have to be accounted for then scaling the resolution of the surface models.
 
 % There is however one quite notable structure missing, the \textit{Corpus Collosum} .

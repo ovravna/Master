@@ -20,19 +20,63 @@ The knowledge test was taken by the medical students in test sessions, while the
 
 % though further research is needed.
 
-\section{Educational value}
+\section{Neuroanatomical test}
+The multiple choice neuroanatomical knowledge test was performed at both test sessions. The test was taken by three medical students at the first session, two third year and one fifth year student. At the second session five first year medical students partook in the knowledge test.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{0.8\textwidth}
+        \includegraphics[width=\textwidth]{fig/knowtestresult1}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.8\textwidth}
+        \includegraphics[width=\textwidth]{fig/knowtestresult2}
+        \caption{}
+    \end{subfigure}
+\end{figure}
 
 
 
 
 
-\section{Usability}
+\section{Questionnaire}
 
 The usability results are based on the second test session where a questionnaire, including a SUS section, was uses in addition to unstructured feedback from the test participants. The results from these methods will be presented in this section. 
 
 \subsection{System usability scale questionnaire}
  
-The SUS questionnaire was taken by six participants, five answering based on the HoloLens 2 experience and one based on using the Android application. The mean score from the HoloLens 2 is $79.0 \pm 10.4$, while the result from the single Android test was 75. This means that the application on HoloLens 2 sits high in the good rating almost reaching excellent, while the Android app is near the middle of the good rating. \autoref{fig:susresults} show the results of the SUS questionnaire charted with the red line representing the 68 \textit{average} score.
+The SUS questionnaire was taken by six participants, five answering based on the HoloLens 2 experience and one based on using the Android application. The mean score from the HoloLens 2 is $79.0 \pm 10.4$, while the result from the single Android test was 75. This means that the application on HoloLens 2 sits high in the good rating almost reaching excellent, while the Android app is near the middle of the good rating. \autoref{fig:susresults} show the results of the SUS questionnaire charted with the red line representing the 68 \textit{average} score. All answers are listed in \autoref{tab:sus}, note that SUS is ordered such that every other statement is negative, meaning that a better score is achieved when they are disagreed to.
+
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[]
+    
+\centering
+\textbf{Results from SUS questionnaire}\par\medskip
+\small
+\begin{tabular}{l|ccccc}
+\hline
+                                                                                                                                         & \begin{tabular}[c]{@{}c@{}}Strongly\\ disagree\end{tabular} & Disagree                                                   & Neutral                                                    & Agree                                                     & \begin{tabular}[c]{@{}c@{}}Strongly\\ agree\end{tabular}   \\ \hline
+\begin{tabular}[c]{@{}l@{}}I think that I would like to use this \\ system frequently.\end{tabular}                                      & {\color[HTML]{333333} \textbf{}}                            & {\color[HTML]{333333} \textbf{}}                           & {\color[HTML]{333333} \textbf{}}                           & \cellcolor[HTML]{9698ED}{\color[HTML]{EFEFEF} \textbf{2}} & \cellcolor[HTML]{6434FC}{\color[HTML]{EFEFEF} \textbf{4*}} \\
+\rowcolor[HTML]{EFEFEF} 
+\begin{tabular}[c]{@{}l@{}}I found the system \\ unnecessarily complex.\end{tabular}                                                     & \cellcolor[HTML]{6665CD}{\color[HTML]{EFEFEF} \textbf{3}}   & \cellcolor[HTML]{9698ED}{\color[HTML]{EFEFEF} \textbf{2*}} & \cellcolor[HTML]{CBCEFB}{\color[HTML]{EFEFEF} \textbf{1}}  & {\color[HTML]{333333} \textbf{}}                          & {\color[HTML]{333333} \textbf{}}                           \\
+\begin{tabular}[c]{@{}l@{}}I thought the system was \\ easy to use.\end{tabular}                                                         & {\color[HTML]{333333} \textbf{}}                            & {\color[HTML]{333333} \textbf{}}                           & \cellcolor[HTML]{9698ED}{\color[HTML]{EFEFEF} \textbf{2*}} & \cellcolor[HTML]{6434FC}{\color[HTML]{EFEFEF} \textbf{4}} & {\color[HTML]{333333} \textbf{}}                           \\
+\rowcolor[HTML]{EFEFEF} 
+\begin{tabular}[c]{@{}l@{}}I think that I would need the \\ support of a technical person \\ to be able to use this system.\end{tabular} & \cellcolor[HTML]{6665CD}{\color[HTML]{EFEFEF} \textbf{3*}}  & \cellcolor[HTML]{9698ED}{\color[HTML]{EFEFEF} \textbf{2}}  & \cellcolor[HTML]{CBCEFB}{\color[HTML]{EFEFEF} \textbf{1}}  & {\color[HTML]{333333} \textbf{}}                          & {\color[HTML]{333333} \textbf{}}                           \\
+\begin{tabular}[c]{@{}l@{}}I found the various functions in \\ this system were well integrated.\end{tabular}                            & {\color[HTML]{333333} \textbf{}}                            & {\color[HTML]{333333} \textbf{}}                           & \cellcolor[HTML]{CBCEFB}{\color[HTML]{EFEFEF} \textbf{1*}} & \cellcolor[HTML]{6434FC}{\color[HTML]{EFEFEF} \textbf{4}} & \cellcolor[HTML]{CBCEFB}{\color[HTML]{EFEFEF} \textbf{1}}  \\
+\cellcolor[HTML]{EFEFEF}\begin{tabular}[c]{@{}l@{}}I thought there was too much \\ inconsistency in this system.\end{tabular}            & \cellcolor[HTML]{CBCEFB}{\color[HTML]{EFEFEF} \textbf{1}}   & \cellcolor[HTML]{6665CD}{\color[HTML]{EFEFEF} \textbf{3}}  & \cellcolor[HTML]{CBCEFB}{\color[HTML]{EFEFEF} \textbf{1}}  & \cellcolor[HTML]{CBCEFB}{\color[HTML]{EFEFEF} \textbf{1*}}   & \cellcolor[HTML]{EFEFEF}\textbf{}                          \\
+\begin{tabular}[c]{@{}l@{}}I would imagine that most \\ people would learn to use \\ this system very quickly.\end{tabular}              & {\color[HTML]{333333} \textbf{}}                            & {\color[HTML]{333333} \textbf{}}                           & \cellcolor[HTML]{CBCEFB}{\color[HTML]{EFEFEF} \textbf{1}}  & \cellcolor[HTML]{6665CD}{\color[HTML]{EFEFEF} \textbf{3}} & \cellcolor[HTML]{9698ED}{\color[HTML]{EFEFEF} \textbf{2*}} \\
+\rowcolor[HTML]{EFEFEF} 
+\begin{tabular}[c]{@{}l@{}}I found the system very \\ cumbersome to use.\end{tabular}                                                    & \cellcolor[HTML]{9698ED}{\color[HTML]{EFEFEF} \textbf{2}}   & \cellcolor[HTML]{6665CD}{\color[HTML]{EFEFEF} \textbf{3}}  & \cellcolor[HTML]{CBCEFB}{\color[HTML]{EFEFEF} \textbf{1*}} & {\color[HTML]{333333} \textbf{}}                          & {\color[HTML]{333333} \textbf{}}                           \\
+\begin{tabular}[c]{@{}l@{}}I felt very confident using \\ the system.\end{tabular}                                                       & {\color[HTML]{333333} \textbf{}}                            & {\color[HTML]{333333} \textbf{}}                           & \cellcolor[HTML]{CBCEFB}{\color[HTML]{EFEFEF} \textbf{1}}  & \cellcolor[HTML]{9698ED}{\color[HTML]{EFEFEF} \textbf{2}} & \cellcolor[HTML]{6665CD}{\color[HTML]{EFEFEF} \textbf{3*}} \\
+\rowcolor[HTML]{EFEFEF} 
+\begin{tabular}[c]{@{}l@{}}I needed to learn a lot of \\ things before I could get \\ going with this system.\end{tabular}               & \cellcolor[HTML]{9698ED}{\color[HTML]{EFEFEF} \textbf{2*}}  & \cellcolor[HTML]{6665CD}{\color[HTML]{EFEFEF} \textbf{3}}  & {\color[HTML]{333333} \textbf{}}                           & \cellcolor[HTML]{CBCEFB}{\color[HTML]{EFEFEF} \textbf{1}} & {\color[HTML]{333333} \textbf{}}                           \\ \hline
+\end{tabular}
+\caption{The results form the SUS section. Number and color values represent the magnitude of answers with the corresponding alternative. Android answer is marked with "*".}
+\label{tab:sus}
+
+\end{table}
 
 \begin{figure}
     \centering
@@ -43,8 +87,23 @@ The SUS questionnaire was taken by six participants, five answering based on the
 \end{figure}
 
 
-\subsection{Research specific questionnaire}
-The questionnaire included a section with research specific questions written by the researcher with the aim to gather data relating to the research questions of the project. The question were, just as in SUS, based on the \textit{Likert scale}, with answer alternatives ranging from 1 - 5 indicating how much in agreement the user is with the statement. The section was answered by six participants, and it was platform independent.
+\subsection{Research specific questionnaire}\label{chap:researchspes}
+The questionnaire included a section with research specific questions written by the researcher with the aim to gather data relating to the research questions of the project. The question were, just as in SUS, based on the \textit{Likert scale}, with answer alternatives ranging from 1 - 5 indicating how much in agreement the user is with the statement. The section was answered by six participants, and it was platform independent. The results can be seen in \autoref{tab:researchspes}. In addition to the Likert ranking free form text boxes were provided after the questions for gathering qualitative data. 
+
+
+% Notably, the participants were asked what platform they preferred
+Notably, every participant who tried both platforms preferred the HoloLens 2 experience, based on the question \textit{Which platform did you prefer?}. Saying the following:
+\newline
+\textbf{Why did you prefer that platform?}
+{\small\itshape
+\begin{itemize}[]
+    \item Physically interactive and the menu is on your hand
+    \item Much easier to understand the 3d structure, as you can see and rotate it at any angle.
+    \item Holo is easier to manoeuvre and look from different angles.
+    \item It was more a more fun way of learning, which again increases motivation for learning.
+\end{itemize}
+}
+
 % Please add the following required packages to your document preamble:
 % \usepackage[table,xcdraw]{xcolor}
 % If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
@@ -53,6 +112,7 @@ The questionnaire included a section with research specific questions written by
 \begin{table}[h]
 \centering
 \textbf{Results from research questionnaire}\par\medskip
+\small
 \begin{tabular}{l|ccccc}
 \hline
                                                                                                                                                           & \begin{tabular}[c]{@{}c@{}}Strongly\\ disagree\end{tabular} & Disagree                                                  & Neutral                                                   & Agree                                                     & \begin{tabular}[c]{@{}c@{}}Strongly\\ agree\end{tabular}  \\ \hline
@@ -67,13 +127,16 @@ The questionnaire included a section with research specific questions written by
 \begin{tabular}[c]{@{}l@{}}The system would be useful for remote \\ teaching of neuroanatomy.\end{tabular}                                                & \textbf{}                                                   & \textbf{}                                                 & \cellcolor[HTML]{CBCEFB}{\color[HTML]{EFEFEF} \textbf{1}} & \cellcolor[HTML]{9698ED}{\color[HTML]{EFEFEF} \textbf{2}} & \cellcolor[HTML]{6665CD}{\color[HTML]{EFEFEF} \textbf{3}} \\ \hline
 \end{tabular}
 \caption{The results form the research specific questions, the number and color values represent the magnitude of answers with the corresponding alternative.}
+\label{tab:researchspes}
 \end{table}
 
 \subsection{IPEAR AR and peer learning questionnaire}
-This section was included as part of other research at the NTNU VRLab
+This section was included as part of other research at the NTNU VRLab. The results from the section is however just as relevant for this study. \autoref{tab:peer} shows the results.
 
 \begin{table}[]
 \centering
+\textbf{Results from AR and peer learning questionnaire}\par\medskip
+\small
 \begin{tabular}{l|ccccc}
 \hline
                                                                                                                                              & \begin{tabular}[c]{@{}c@{}}Strongly\\ disagree\end{tabular} & Disagree                                                  & Neutral                                                   & Agree                                                     & \begin{tabular}[c]{@{}c@{}}Strongly\\ agree\end{tabular}  \\ \hline
@@ -84,13 +147,14 @@ This section was included as part of other research at the NTNU VRLab
 \rowcolor[HTML]{EFEFEF} 
 \begin{tabular}[c]{@{}l@{}}Do you think it would be useful in other \\ courses or fields of study as well?\end{tabular}                      & {\color[HTML]{EFEFEF} \textbf{}}                            & {\color[HTML]{EFEFEF} \textbf{}}                          & {\color[HTML]{EFEFEF} \textbf{}}                          & \cellcolor[HTML]{9698ED}{\color[HTML]{EFEFEF} \textbf{2}} & \cellcolor[HTML]{6434FC}{\color[HTML]{EFEFEF} \textbf{4}} \\ \hline
 \end{tabular}
+\caption{The results form the research specific questions, the number and color values represent the magnitude of answers with the corresponding alternative.}
+\label{tab:peer}
 \end{table}
 
 
 \subsection{Feedback from participants}
 
-During the test sessions the participants gave feedback on their thoughts of the application, and how to improve the user experience.
-
+During the test sessions the participants gave feedback on their thoughts of the application, and how to improve the user experience. For the HoloLens 2 application the stated feedback was overwhelmingly positive, in \autoref{chap:researchspes} some give more constructive feedback which was not pointed out when talking with the participants. For the Android experience the prime vocalized feedback was to disable the AR in the application such that it would be a standard 3D application, this was explained both by the poor spatial locking on the device and the non optimal ergonomics of having to point the camera on the same spot at all times. 
 
 
 

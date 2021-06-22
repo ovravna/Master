@@ -62,7 +62,7 @@ This research also makes use of the medical data to visualize the brain segmenta
 \end{wrapfigure}
 
 Within computer graphics colors are generally encoded by their component primary color values in separate channels, this is called RGB for red, green and blue. This is the basis for most color models used on computers. The RGB color model is naturally used widely in this project, and will not be explained further. There is however another less common color model used in this project which has some useful properties worth exploring. 
-This is the HSV color model. The different channels are hue, saturation, and value. The hue is simply the color based on a traditional color wheel, this means that the color will periodically repeat starting with red on zero, green on one third and green on two thirds. The saturation is how "colorful" the color is, there 0 is a gray-scale and 1 is completely colored. The value is sometimes also called light or brightness, where 0 is black and 1 is again completely colored. This periodic properties of the color model is useful for general various color schemes as will be explored in \nameref{chap:implementaiton}.
+This is the HSV color model. The different channels are hue, saturation, and value. The hue is simply the color based on a traditional color wheel, this means that the color will periodically repeat starting with red on zero, green on one third and blue on two thirds. The saturation is how "colorful" the color is, there 0 is a gray-scale and 1 is completely colored. The value is sometimes also called light or brightness, where 0 is black and 1 is again completely colored. This periodic properties of the color model is useful for general various color schemes as will be explored in \nameref{chap:implementaiton}.
 % This color model is designed to be more intuitive for human use and also 
 
 
@@ -241,36 +241,109 @@ GitKraken is a graphical Git management tool. What's more relevant here is its K
 \end{figure}
 
 
-\section{Related work}
+% \section{Related work}
 
-\subsection*{VRVisualizer}\label{chap:vrvis}
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{fig/vrvis_ratbrain.jpg}
-    \caption{Cutting operation in VRVisualizer on HTC Vive}
-    \label{fig:vrvis}
+% \subsection*{VRVisualizer}
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[width=\textwidth]{fig/vrvis_ratbrain.jpg}
+%     \caption{Cutting operation in VRVisualizer on HTC Vive}
+% \end{figure}
+% VRVisualizer is the name of the research product from the master thesis \citet{Elden2017}. It is a VR application running on the HTC Vive. While its features are similar to the goals of this project, the focus of Eldens project was to develop universal guidelines for scientific visualization in VR. That is far from this projects goals and thus its feature set, relating to interaction and exploration, is quite superficial.
+
+
+% \subsection*{ITK-Snap}
+
+% ITK-Snap is an open-source interactive computer application for navigating medical imagery. It is a convectional tool used to display, segment and label 3D neuroanatomical data. It supports a wide array of visual tools which helps in learning about the brain.
+% However, the fact that it is purely displayed on a two dimensional monitor, means it limits the opportunity of spatial understanding.
+
+% \begin{figure}[ht]
+%     \includegraphics[width=0.5\textwidth]{fig/itk_snap}
+%     \includegraphics[width=0.5\textwidth]{fig/itk_snap_example}
+%     \caption{ITK-Snap, Waxholm Space Rat Brain (left), Human brain (right)}
+% \end{figure}
+
+% \subsection*{HoloAnatomy}
+
+% HoloAnatomy is a application running on HoloLens, which aims to be a educational tool for anatomy including basic neuroanatomy. \citet{Wish2020} has shown great promise in use of this application for education. While this application is really promising, it lacks some features we would like to focus on. There is no use of mobile devices for collaborative learning. And HoloAnatomy focuses on the macroscopic image of anatomy, and does not go into microscopic detail, which is something this project aims to do. Further, at NTNU and the Kavli Institute research and education using rat brains is normal an thus visualizing it it AR is also a focus.
+
+% \begin{figure}[ht]
+%     \includegraphics[width=0.5\textwidth]{fig/holoanatomy1}
+%     \includegraphics[trim={0 1.76cm 0 0},clip,width=0.5\textwidth]{fig/holoanatomy2}
+%     \caption{HoloAnatomy}
+    
+% \end{figure}
+
+
+% \subsection*{HoloBrain}
+
+
+% \newpage
+\section{Related work}\label{chap:relatedwork}
+
+
+\subsection*{Complete Anatomy}
+
+\begin{figure}[H]
+    \includegraphics[width=0.5\textwidth]{fig/completeanatomyipad}
+    \includegraphics[width=0.5\textwidth]{fig/completeanatomybrain}
+    \caption{Complete Anatomy}
+    \label{fig:completeanatomy}
 \end{figure}
-VRVisualizer is the name of the research product from the master thesis \citet{Elden2017}. It is a VR application running on the HTC Vive. While its features are similar to the goals of this project, the focus of Eldens project was to develop universal guidelines for scientific visualization in VR. That is far from this projects goals and thus its feature set, relating to interaction and exploration, is quite superficial.
 
+Complete Anatomy is an AR application for mobile and desktop created by 3D4Medical, which is a development studio owned by medical publishing company Elsevier. It targets medical students and professionals with a monthly subscription payment model. 
+Arguably the most fully-featured medical AR application to date, it can visualize the entire human body, including detailed animation of biomechanics and the beating heart, and video lectures of multiple anatomical systems. Additionally, microscopic cell biology and nervous system interactions are present. 
+The application has high detail models of all human organs and can visualize connective tissue and cardiovascular pathways.
+Naturally, this includes brain anatomy with a limited dissection tool, e.g. only dissecting through the middle of the brain as in the right image of  \autoref{fig:completeanatomy}. The dissection tool operates like a presentation mode with controlled axial dissections and textual describe. 
+The application supports collaboration through mobile AR, such that users can view the same 3D model in physical space.  
 
-\subsection*{ITK-Snap}
-
-ITK-Snap is an open-source interactive computer application for navigating medical imagery. It is a convectional tool used to display, segment and label 3D neuroanatomical data. It supports a wide array of visual tools which helps in learning about the brain.
-However, the fact that it is purely displayed on a two dimensional monitor, means it limits the opportunity of spatial understanding.
-
-\begin{figure}[ht]
-    \includegraphics[width=0.5\textwidth]{fig/itk_snap}
-    \includegraphics[width=0.5\textwidth]{fig/itk_snap_example}
-    \caption{ITK-Snap, Waxholm Space Rat Brain (left), Human brain (right)}
-\end{figure}
 
 \subsection*{HoloAnatomy}
 
-HoloAnatomy is a application running on HoloLens, which aims to be a educational tool for anatomy including basic neuroanatomy. \citet{Wish2020} has shown great promise in use of this application for education. While this application is really promising, it lacks some features we would like to focus on. There is no use of mobile devices for collaborative learning. And HoloAnatomy focuses on the macroscopic image of anatomy, and does not go into microscopic detail, which is something this project aims to do. Further, at NTNU and the Kavli Institute research and education using rat brains is normal an thus visualizing it it AR is also a focus.
+HoloAnatomy is an application for the HoloLens systems. Is is development by researchers at Case Western Reserve University and offers a expansive view of human anatomy. It visualizes both organs, nerve and cardiovascular systems and supports collaboration features through HoloLens 1 and 2 with a synchronize play space and remote networking with 98 simultaneous players in one session. \citet{Wish2020} has shown great promise in use of this application for education, and has concluded that student learn more efficiently and retain more information by learning through HoloAnatomy. The system supports dissection through rudimentary clipping, this allows for enhanced visibility of complex structures and pathways.
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \includegraphics[width=0.5\textwidth]{fig/holoanatomy1}
     \includegraphics[trim={0 1.76cm 0 0},clip,width=0.5\textwidth]{fig/holoanatomy2}
     \caption{HoloAnatomy}
-    
 \end{figure}
+
+
+\subsection*{HoloBrain}
+Development by researchers at the University of British Columbia in collaboration with Microsoft, HoloBrain is an application specifically designed for the HoloLens platform. It includes a multitude of brain visualization, both macroscopic and microscopical in nature. As the earlier mentioned systems HoloBrain supports collaborating in a shared space. The system supports various types of volumetric neuroimaging displayed in axial slices. Additionally, their research seems to be focus on automating the volume to surface model creation and segmentation process using artificial intelligence. Other highlights include recognition of 3D-printed brain models and anchoring AR models onto it. This is illustrated in \autoref{fig:holobrain}.
+
+The researchers are currently evaluating the systems performance as a teaching tool for undergraduate students\footnote{http://eml.ubc.ca/eml-hive/holobrain/}. 
+
+
+\begin{figure}[H]
+    \begin{subfigure}[t]{\textwidth}
+        \includegraphics[width=\textwidth,trim={0 5cm 0 0.5cm},clip]{fig/holobraincollab}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.33\textwidth}
+        \includegraphics[width=\textwidth]{fig/holobrainfmri.png}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.33\textwidth}
+        \includegraphics[width=\textwidth]{fig/holobrainmriaxis.png}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.33\textwidth}
+        \includegraphics[width=\textwidth]{fig/holobrainmagicwoodoo.png}
+    \end{subfigure}
+    \caption{HoloBrain}
+    \label{fig:holobrain}
+\end{figure}
+
+\subsection*{VRVisualizer}\label{chap:vrvis}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{fig/vrvis_ratbrain.jpg}
+    \caption{Dissection in VRVisualizer on HTC Vive}
+    \label{fig:vrvis}
+\end{figure}
+VRVisualizer is the research product from the master thesis \citet{Elden2017} at the University of Oslo. It is a VR application running on the HTC Vive. Eldens research project was to develop universal guidelines for scientific visualization in VR and approached that by visualizing multiple scientific data sets among those the WHS rat brain. The system support selecting and dissection of the rat brain, but is quite limited as that was a minor part of research. Eldens research project has been inspirational to this very research and the data set created by Elden has been used in this project. However, the aims of the this and Eldens research are so dissimilar that it's appropriate to compare his system as related work. 
+
+
+% The research did however result in 
+
+
+% That is far from this projects goals and thus its feature set, relating to interaction and exploration, is quite superficial.
+
