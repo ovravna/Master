@@ -10,15 +10,22 @@
 % medical expertice
 % single developer time
 
-This research project carried out by one singular computer science student. Both the \textit{one} and the \textit{computer science} part of that statement can arguably be a limitation of a project of this scope and subject area. Of these the researchers lack of expertise in the field of medicine and neuroanatomy of undoubtedly the main limiting factor, while the fact that is has been done by a single researcher operationally equals the always present time constraint. Another limitation facing this project has been the lack of a accessible surface model of the WHS rat brain. In hindsight, this should have been created in early stages of the research, however the project has progressed with Eldens surface model and with the limitation that brings, see \autoref{chap:missingdataset}. Lastly, it is impossible not to mention the Covid-19 pandemic which, as the reader will know, has effected every phase of a project of this scale.
+This research project carried out by one singular computer science student. Both the \textit{one} and the \textit{computer science} part of that statement can arguably be a limitation of a project of this scope and subject area. Of these, the researchers lack of expertise in the field of medicine and neuroanatomy of undoubtedly the main limiting factor, while the fact that is has been done by a single researcher operationally equals the always present time constraint. Another limitation facing this project has been the lack of a accessible surface model of the WHS rat brain. In hindsight, this should have been created in early stages of the research, however the project has progressed with Eldens surface model and with the limitation that brings, see \autoref{chap:missingdataset}. Lastly, it is impossible not to mention the Covid-19 pandemic which, as the reader will know, has effected every phase of a project of this scale. Particularly, data gathering and testing has been quite limited as a result of the pandemic restrictions, limiting sample size both as an effect of fewer test session and reduction in participant count.
 
 \section{Results}
 
 While limited in quantity the results all in all hint to a highly usable system with promising value as a teaching tool. However the feedback on the collaboration features suggests that this is an area which needs improvement.
 
-The scores in the SUS questionnaire indicate that the test participants in general found the system easy to use. 
+The scores in the SUS questionnaire indicate that the test participants in general found the system easy to use. The researcher was personally surprised by how high the SUS score was, and is tempted to attribute it to good will from the participants, however the researcher has during development always taken steps to simplify the experience and the score could be a reflection of that.
 
-A problem with the results from this questionnaire is the fact that it's answers are gathered from two different user groups, one the medical student and the other being the two computer science students attending the test session. As it was the medical student which took part in the structured lecturing by the neurologist, while the CS student observed it through Device Portal. Another, issue which has limited the quantity of data is that of the five medical students present at the final test session only four returned the digital questionnaire, this was regrettably uncovered to late to pursuit the last participant, and therefore the results are even more limited than was called for.
+In the neuroanatomical test results the first session resulted in a average decline in correct answers in the users at the end of the session, while the complete opposite was true in the second session and with a more convincing difference. One could conclude that the improvements made based on the feedback from the session resulted in a much more educational artifact. However, as described in \autoref{chap:finaliter}, most improvements were on the networking and collaborative feature and other small tweaks that should not have such a meaningful effect on educational performance. Another more probable explanation of the differing results, is that the first group consisted of students in later years of study, while the second group were all first year students. In fact, it seems that the application results in greater learning the less prior knowledge the user possesses.
+
+As a collaboration tool the artifact was scored less favorably. The researcher is in agreement with the participants that this is a domain in which the application has a huge improvement potential. The core features for creating a collaboration feeling in the application is the avatar and pointer which are visible for other users, both were created or improved greatly in the final iteration of the development project. Both also had some critical unexpected behavior (read bugs) in the final test session, resulting in them not displaying correctly. These features are by nature difficult to test properly by a single developer and the solitude of the of the current pandemic situation has not improved this premise. The fact that the application has not been properly tested remotely where the participants would have to use the avatar as a stand in for human they interact with is a limitation of this research.
+
+% would not be able to use the actual other human as a 
+
+A limitation with the results from this questionnaire is the fact that it's answers are gathered from two different user groups, one the medical student and the other being the two computer science students attending the test session. As it was the medical student which took part in the structured lecturing by the neurologist, while the CS student observed, that part, through Device Portal. All participating testers got to use and familiarize them self with the HoloLens 2 application and all the medical students also tried the Android version.
+Another, issue which has limited the quantity of data is that of the five medical students present at the final test session only four returned the digital questionnaire, this was regrettably uncovered to late to pursuit the last participant, and therefore the results are even more limited than was called for.
 
 
 \section{Comparison}
@@ -52,14 +59,16 @@ Both HoloBrain and Nevrolens support MRI data, however the implementation in the
 
 Of note, every other system with collaboration features includes spatial anchoring, meaning that users in the same physical play space can se the model in the same physical space. This requires the synchronizing some physical attribute, either an object, a QR-code (or similar) or using AI systems like Microsoft's \textit{Azure Spatial Anchors}. None of these have been attempted in this research as the covid-19 pandemic has put a focus on remote collaboration, which naturally has no such need.
 
-\section{Contributions}
-In this section the contributions of this research project will be accessed based on the research question it set out to answer. 
-
+\section{Research Questions}
+In this section attempt to answer the research question of this study in light of the developed artifact and the results gathered.
+%  accessed based on the research question it set out to answer. 
 
 \begin{enumerate}[label=\textbf{RQ1:}, left=\parindent]
     \itshape
     \item How can AR support teaching of neuroanatomy and dissection for medical students?
 \end{enumerate}
+
+This research show that AR has the potential to be used for educational of neuroanatomy and dissections. By implementing an AR system with features for dissection and naming structures and textual information a student can interact with the system to attain knowledge of brain anatomy. While previous work uses the concept of dissection, this systems ability to cut the brain from any angle, with corresponding MRI data, can be used for more freedom in educational work. For this feature to work intuitively the concept of ball controlling the dissection / cutting plane was implement. While this could be seen as a oversimplified abstraction, for users with limited neuroanatomical priors or with little experience with AR devices such abstractions are called for. 
 
 \begin{enumerate}[label=\textbf{RQ2:}, left=\parindent]
     
@@ -67,10 +76,17 @@ In this section the contributions of this research project will be accessed base
     \item How should interaction in be implemented in AR to accommodate medical students and educators?
 \end{enumerate}
 
+Through user testing the system has demonstrated that interaction in AR can be made intuitive, even for complex feature-rich systems. The system uses a menu system which, on supported platforms, mounts virtually to the hand of the user such that interaction with the systems features can be executed with buttons located need the users hand. Additionally, to accommodate users inexperienced with AR system networking configuration required for collaboration is hidden for the the end user, this limits the systems feature set to some extent but removes overhead. 
+
 \begin{enumerate}[label=\textbf{RQ3:}, left=\parindent]
     \itshape
     \item How will a collaborative experience shared between an HMD and a smartphone compare to accommodate medical users?
 \end{enumerate}
+
+The system has shown promise as a collaboration tool, however feedback has also pointed to limitation in the current implementation. The system makes use of Photon PUN2 for networking features and uses a uniquely color coded avatar with a visible colored AR pointer to display intent and motion. The avatar also makes use of the concept of a nickname which the user can edit and will be displayed above the avatars head. A limitation with the avatar is that it comprises of primitive shapes, e.g. spheres and cubes, making them less recognizable as multiplayer characters. The system has also shown that collaboration between the platforms of HoloLens 2 and Android handsets is archivable, however being an AR system the HoloLens 2 has great advantages in usability. From this research the Android devices have demonstrated their use case as widely available observation tools in AR lecturing and thus definitively bring value to the study.
+
+\section{Contributions}
+
 
 
 \section{Hardware limitations}
@@ -98,7 +114,7 @@ As discussed in \autoref{chap:discussperformance}, the HoloLens 2 is remarkably 
 
 The main limitation of using Android in this project is that is simply not designed for the purpose. Android devices, like the Samsung Galaxy S8, are design for interaction through touch sensitive displays and not as a viewport for interaction with the wider world. From the test session with the Android application a common feedback was to just disable the AR and have it be more pure experience for Android interaction. This is quite sensible and should definitively be looked further into. The researcher sees to main problems with the approach taken when implementing AR on Android handsets. First, the spatial locking is very poor, resulting in the brain model and other objects moving from their places position during use of the application. This does not meet Microsoft's App quality criteria for holographic stability, rather as the failed criteria states; \textit{Primary content in frame shows unexpected movement}. This may be a device specific issue, as the application has only been tested at reasonable extent on the Samsung Galaxy S8.
 The second main problem with Android is that, as mentioned before, interaction on Android handsets is a completely different paradigm from the one of head mounted devices like  HoloLens 2. This means that all UI elements should be platform specific or at least optimized such that they bring good user experience to all platforms. This has not been done during this research project, as the application is now Android users have a considerably poorer experience when interacting with UI than what HoloLens 2 user have. 
-Both problems could in the future be solved with stereoscopic rendering, which splits the display in two distinct areas for each eye such that the smartphone when mounted to the head, with specials googles, could simulate the experience of using a HMD device. As current versions of Androids AR API do not support hand tracking, the addition of either third-party APIs like \href{https://www.manomotion.com}{ManoMotion}, or accessories like the Leap Motion controller should be explored. Stereoscopic rendering is as of the time or writing not supported in MRTK, hopefully this will change when Android support gets out of beta. This would however probably result in a VR application, as the camera feed will not be usable for head mounted AR.
+Both problems could in the future be solved with stereoscopic rendering, which splits the display in two distinct areas for each eye such that the smartphone when mounted to the head, with specials googles, could simulate the experience of using a HMD device. As current versions of Androids AR API do not support hand tracking, the addition of either third-party APIs like \href{https://www.manomotion.com}{\textit{ManoMotion}}, or accessories like the \href{https://www.ultraleap.com/product/leap-motion-controller/}{\textit{Leap Motion}} controller should be explored. Stereoscopic rendering is as of the time or writing not supported in MRTK, hopefully this will change when Android support gets out of beta. This would however probably result in a VR application, as the camera feed will not be usable for head mounted AR.
 
 
 \section{Missing data set}\label{chap:missingdataset}

@@ -1,7 +1,7 @@
 \chapter{Deployment}
 
 The application in this research has been development using Microsoft's Mixed Reality Toolkit and has followed the platforms best practices and recommendations, thus, any issues arising when going through the following section should be answered in Microsoft's \href{https://docs.microsoft.com/en-us/windows/mixed-reality/mrtk-unity}{MRTK documentation}. The deployment process for HoloLens devices are based on sideloading of the application compiled and built with Visual Studio Community 2019, this is the standard way of both building and deploying for HoloLens. For Android the principle of sideloading is also used, but here Unity is responsible for compilation and the build process. 
-The application as 
+% The application as 
 
 
 \section{Installation of Nevrolens}
@@ -33,7 +33,7 @@ By following the instructions for HoloLens 2, this should also work for HoloLens
 
     \item {
         \textbf{Open the Windows Device Portal for HoloLens}\\
-        Guide by Microsoft: \href{https://docs.microsoft.com/en-us/windows/mixed-reality/develop/platform-capabilities-and-apis/using-the-windows-device-portal}{Using the Windows Device Portal}
+        Guide by Microsoft: \href{https://docs.microsoft.com/en-us/windows/mixed-reality/develop/platform-capabilities-and-apis/using-the-windows-device-portal}{Using the Windows Device Portal}\footnote{https://docs.microsoft.com/en-us/windows/mixed-reality/develop/platform-capabilities-and-apis/using-the-windows-device-portal}
     }
     \item {
         \textbf{Install appxbundle}\\
@@ -94,5 +94,5 @@ $ git lfs fetch --all
     \caption{Unity build configurations for HoloLens 2.}
     \label{fig:unitybuildhololens}
 \end{wrapfigure}
-When this has completed, open Unity Hub and locate and add the \texttt{nevrolens} repository just cloned as a Unity project. Open it with Unity 2019.4, it is critical that this version is used for MRTK to work properly. First time opening this project will take some time, when it is done the project is ready. Deployment for HoloLens 2 can be done by building (ctrl+shift+b) the Unity project with the configurations in \autoref{fig:unitybuildhololens} and opening the outputted \texttt{Nevrolens.sln} solution in Visual Studio 2019 and running the solution for \texttt{Remote Machine} while the HoloLens 2 device is connected by USB. Refer to the MRTK documentation for OTA deployment through Wi-Fi. Android deployment is done by simply choosing Android in Unity's build configuration view and clicking \textit{Build And Run} while the Android device is connected by USB and is set to developer mode. Make sure to follow the MRTK documentation on which version of ARCore etc. that should be installed in the project, found \href{https://microsoft.github.io/MixedRealityToolkit-Unity/version/releases/2.5.1/Documentation/CrossPlatform/UsingARFoundation.html}{here}.
+When this has completed, open Unity Hub and locate and add the \texttt{nevrolens} repository just cloned as a Unity project. Open it with Unity 2019.4, it is critical that this version is used for MRTK to work properly. First time opening this project will take some time, when it is done the project is ready. Deployment for HoloLens 2 can be done by building (ctrl+shift+b) the Unity project with the configurations in \autoref{fig:unitybuildhololens} and opening the outputted \texttt{Nevrolens.sln} solution in Visual Studio 2019 and running the solution for \texttt{Remote Machine} while the HoloLens 2 device is connected by USB. Refer to the MRTK documentation for OTA deployment through Wi-Fi. Android deployment is done by simply choosing Android in Unity's build configuration view and clicking \textit{Build And Run} while the Android device is connected by USB and is set to developer mode. Make sure to follow the MRTK documentation on which version of ARCore etc. that should be installed in the project, check \href{https://microsoft.github.io/MixedRealityToolkit-Unity/version/releases/2.5.1/Documentation/CrossPlatform/UsingARFoundation.html}{\textit{MRTK for Android}} for reference.
 % The deployment process can be found in MRTK documentation 

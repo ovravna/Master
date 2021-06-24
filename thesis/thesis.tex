@@ -74,8 +74,18 @@ keywordstyle=\color{bluekeywords},
 stringstyle=\color{redstrings},
 }
 
+
+% \hypersetup{%
+%   colorlinks=false,% hyperlinks will be black
+%   urlbordercolor=gray,
+%   linkbordercolor={0 0 0},
+%   citebordercolor=gray,
+%   filebordercolor=gray,
+%   pdfborderstyle={/S/U/W 1}% border style will be underline of width 1pt
+% }
+
 \setlength{\marginparwidth}{3cm}
-\setlength{\parindent}{0pt}
+% \setlength{\parindent}{0pt}
 %%===================================
 %Write the various parts of your thesis as separate files and include them into the main file by the command \include{name of included file}. When you compile the LaTeX file, you may choose which subfiles to include by the command
 
@@ -111,6 +121,7 @@ stringstyle=\color{redstrings},
 \include{appendix-b}
 \include{appendix/knowtest}
 \include{appendix/questionair}
+\include{appendix/consentform.tex}
 % Include more appendices as required.
 %%=========================================
 \bibliographystyle{apa}
