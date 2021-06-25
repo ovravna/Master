@@ -18,7 +18,7 @@ Augmented Reality (AR) describes the use of computer technology to generate an a
 
 
 \subsection*{Disambiguation of some acronyms}\label{chap:armrxr}
-As a new field, this field suffers from naming disagreements. This is a confusing reality which needs to be addressed. There are differing view of what each acronym refers to, and even what they stand for. I will overlook most of this discussion, and simply explain what is meant by each acronym in the scope of this project.
+As a new field, this field suffers from naming disagreements. This is a confusing reality which needs to be addressed. There are differing view of what each acronym refers to, and even what they stand for. Most will be overlooked in this discussion, and a simple explanation of what is meant by each acronym in the scope of this project will be given.
 
 \paragraph*{VR}\label{para:vr} Virtual Reality, is enclosed experiences which completely surrounds the user within a computer generated world. This is a generally uncontroversial term and will be used for applications running on devices like the Oculus Rift and the HTC Vive.
 
@@ -38,7 +38,7 @@ Three dimensional data can be stored and visualized in a number of ways, and the
 
 The process of generating polygonal models from volumetric models is quite complex, \citet{Elden2017} writes about this process in some detail, which can be found in \autoref{chap:elden}. This is the model used in this research project though the model had to be simplified further to about 300,000 triangles, to run decently on the HoloLens 2.  
 
-This research also makes use of the medical data to visualize the brain segmentations inside the volume. The is three dimensional data captured from MRI with a resolution of 512x1024x512 voxels and a voxel size of 39 $\mu$m. This results in a 0.5GiB texture asset in the application memory, and rendering of 1024x1024 slices of the volume.
+This research also makes use of the medical data to visualize the brain segmentations inside the volume. The is three dimensional data captured from MRI with a resolution of 512x1024x512 voxels and a voxel size of 39 $\mu$m. This results in a 0.5GiB texture asset in the application memory, and rendering of 1024x1024 2D texture slices of the volume.
 
 \begin{figure}[ht]
     \centering
@@ -111,7 +111,7 @@ This project makes use of high-resolution 3D-models of a rat brain. This brain m
 \footnotetext[1]{Delineation refers to the process of clearly defining different structures in the brain into separate namable parts.}
 \footnotetext[2]{https://www.nitrc.org/projects/whs-sd-atlas}
 
-The model is referred to as \textit{The Waxholm Space Atlas of the Sprague Dawley Rat Brain}. That means a atlas of the \textit{Sprague Dawley} rat breed defined in Waxholm Space. I will briefly explain what a brain atlas is and what Waxholm space is. 
+The model is referred to as \textit{The Waxholm Space Atlas of the Sprague Dawley Rat Brain}. That means a atlas of the \textit{Sprague Dawley} rat breed defined in Waxholm Space. The following is a brief explanation of what a brain atlas is and what Waxholm space is. 
 
 
 \subsubsection*{Brain Atlas}\label{chap:atlas}
@@ -233,7 +233,7 @@ A good alternative to this use of Git is \textit{Unity Collab}, which is Unity's
 \subsection*{GitKraken}\label{chap:gitkraken}
 % Kanban and such \\
 % Used both / separately for Nevrolens and Project thesis.
-GitKraken is a graphical Git management tool. What's more relevant here is its Kanban feature, or GitKraken Boards as their called. This enables synchronization of Kanban tickets and feature branches in Git, and generally makes my life easier.
+GitKraken is a graphical Git management tool. What's more relevant here is its Kanban feature, or GitKraken Boards as their called. This enables synchronization of Kanban tickets and feature branches in Git, and generally makes development easier.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{fig/gitkraken}
@@ -341,6 +341,9 @@ The researchers are currently evaluating the systems performance as a teaching t
 \end{figure}
 VRVisualizer is the research product from the master thesis \citet{Elden2017} at the University of Oslo. It is a VR application running on the HTC Vive. Eldens research project was to develop universal guidelines for scientific visualization in VR and approached that by visualizing multiple scientific data sets among those the WHS rat brain. The system support selecting and dissection of the rat brain, but is quite limited as that was a minor part of research. Eldens research project has been inspirational to this very research and the data set created by Elden has been used in this project. However, the aims of the this and Eldens research are so dissimilar that it's appropriate to compare his system as related work. 
 
+\subsection*{Summary}
+
+These systems all bring novel and valuable ideas to the field of medical XR. The aim of this research project is to fill a gap left by these applications and others. This includes the ability to collaborate across mobile and HMD devices for a flexible solution for both widely found Android devices and more immersive, but expensive HoloLens 2 headsets. Additionally, the visualization of MRI data and the focus on the Waxholm Space rat brain model will make sure the new system is relevant for current and future medical students at NTNU.
 
 % The research did however result in 
 
